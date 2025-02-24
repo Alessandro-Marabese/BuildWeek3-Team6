@@ -1,10 +1,11 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import Informazioni from "./components/Informazioni";
-import Esperienza from "./components/Esperienza";
-import Activity from "./components/Activity";
-import Formazione from "./components/Formazione";
-import Competenze from "./components/Competenze";
+import Informazioni from "./component/Informazioni";
+import Esperienza from "./component/Esperienza";
+import Activity from "./component/Activity";
+import Formazione from "./component/Formazione";
+import Competenze from "./component/Competenze";
+import Contatti from "./component/Contatti";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Esperienza />
       <Formazione />
       <Competenze />
+      <Contatti />
     </>
   );
 }
