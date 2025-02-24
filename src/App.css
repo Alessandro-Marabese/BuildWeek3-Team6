@@ -1,0 +1,106 @@
+.imgCardProfile {
+  position: relative;
+  display: inline-block;
+}
+
+.imgCardProfile img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.imgCardProfile::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(255, 255, 255, 0));
+  pointer-events: none;
+}
+
+.icon {
+  fill: #666666;
+}
+
+.i12x12 {
+  width: 12px;
+}
+
+.i16x16 {
+  width: 16px;
+}
+
+.i24x24 {
+  width: 24px;
+}
+
+.actions-container {
+  height: 48px;
+  width: 96px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.linkSettings {
+  background-color: #ffffff;
+  color: #666666;
+  padding-inline: 0.5rem;
+  padding-block: 0.25rem;
+  border-radius: 50%;
+}
+
+.linkSettings svg {
+  width: 16px;
+  height: 16px;
+}
+
+.camIcon {
+  background-color: #ffffff;
+  position: relative;
+  border-radius: 50%;
+  padding: 1.9rem 2rem 3.6rem 2rem;
+}
+
+.camText {
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu,
+    Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-size: 0.75rem;
+  line-height: 1.25;
+  padding-top: 0.25rem;
+  position: absolute;
+  left: 20px;
+}
+
+.fw-500 {
+  font-weight: 500;
+}
+
+.text-link {
+  color: #0a66c2;
+}
+
+.iconBarProfile {
+  height: 48px;
+  align-items: self-end;
+}
+
+.body-small {
+  font-size: 0.9rem;
+}
+
+.info {
+  font-weight: 400;
+  line-height: 1.25;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.hide {
+  border: none;
+  background: transparent;
+  padding-inline: 8px;
+  padding-block: 4px;
+}
