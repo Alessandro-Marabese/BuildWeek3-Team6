@@ -17,9 +17,13 @@ const Formazione = () => {
           <Col xs={10}>
             <Col xs={12}>Percorso di studi</Col>
             <Row>
-              <Col xs={4}>Istituzione</Col>
-              <Col xs={1} className="dot-separator"></Col>
-              <Col xs={4}>Titolo</Col>
+              <Col xs={4} className="text-center">
+                Istituzione
+              </Col>
+              <Col xs={1} className="dot-separator text-center"></Col>
+              <Col xs={4} className="text-center">
+                Titolo
+              </Col>
               <Col xs={5} className="text-black-50">
                 Inzio
               </Col>
