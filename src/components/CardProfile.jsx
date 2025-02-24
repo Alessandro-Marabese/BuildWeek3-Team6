@@ -2,8 +2,10 @@ import Card from "react-bootstrap/Card";
 import { Link } from "react-router";
 import camIcon from "../assets/camicon.png";
 import { Image } from "react-bootstrap";
+import { useState } from "react";
 
 const CardProfile = () => {
+  const [visible, setVisible] = useState(true);
   return (
     <Card className="rounded-0 border-0">
       <div className="imgCardProfile">
@@ -37,19 +39,22 @@ const CardProfile = () => {
         <Card.Title className="mb-0">Lucia Trombin</Card.Title>
         <span style={{ lineHeight: "1" }}>--</span>
         <span className="info body-small">Torino, Piemonte, Italia</span>
-        <section className="mt-3 border border-tertiary d-flex justify-content-between">
-          <div className="body-small px-3 py-2">
-            Mostra ai recluter che sei disponibile a lavorare: decidi tu chi può vedere questa informazione
-            <span className="text-link d-block fw-500">Inizia</span>
-          </div>
-          <div>
-            <button className="hide">
-              <svg viewBox="0 0 16 16" data-supported-dps="16x16" fill="currentColor" className="icon i16x16">
-                <path d="M14 3.41L9.41 8 14 12.59 12.59 14 8 9.41 3.41 14 2 12.59 6.59 8 2 3.41 3.41 2 8 6.59 12.59 2z"></path>
-              </svg>
-            </button>
-          </div>
-        </section>
+        {visible && (
+          <section className="mt-3 border border-tertiary d-flex justify-content-between">
+            <div className="body-small px-3 py-2">
+              Mostra ai recluter che sei disponibile a lavorare: decidi tu chi può vedere questa informazione
+              <span className="text-link d-block fw-500">Inizia</span>
+            </div>
+
+            <div>
+              <button className="hide" onClick={() => setVisible(false)}>
+                <svg viewBox="0 0 16 16" data-supported-dps="16x16" fill="currentColor" className="icon i16x16">
+                  <path d="M14 3.41L9.41 8 14 12.59 12.59 14 8 9.41 3.41 14 2 12.59 6.59 8 2 3.41 3.41 2 8 6.59 12.59 2z"></path>
+                </svg>
+              </button>
+            </div>
+          </section>
+        )}
       </Card.Body>
     </Card>
   );
