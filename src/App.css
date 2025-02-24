@@ -1,0 +1,3 @@
+.dot-separator::before {
+  content: "\00b7\00a0";
+}
