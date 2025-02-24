@@ -44,7 +44,7 @@ const CardProfile = () => {
           </div>
 
           <Card.Body className="d-flex flex-column">
-            <Link to="settings" className="linkSettings m-3 position-absolute top-0 end-0">
+            <Link to="/settings" className="linkSettings m-3 position-absolute top-0 end-0">
               <svg viewBox="0 0 16 16" data-supported-dps="16x16" fill="currentColor" className="icon">
                 <path d="M6 1L3 2.76 4 5.2l-.36.63L1 6.22v3.52l2.55.39.38.66L3 13.22 6 15l1.6-2h.76L10 15l3-1.76-.94-2.43.38-.65L15 9.78V6.26l-2.58-.4-.36-.62 1-2.46L10 1 8.37 3.08h-.71zm2 5a2 2 0 11-2 2 2 2 0 012-2z"></path>
               </svg>
