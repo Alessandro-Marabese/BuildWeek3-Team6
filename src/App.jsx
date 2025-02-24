@@ -1,8 +1,13 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
+import React from "react";
+import SuggestedPeople from "./components/SuggestedPeople";
+import "./style/SuggestedPeople.css";
 
-function App() {
-  return;
-}
+const App = () => {
+  return (
+    <div>
+      <SuggestedPeople />
+    </div>
+  );
+};
 
 export default App;
