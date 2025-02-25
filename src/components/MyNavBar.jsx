@@ -40,7 +40,7 @@ const MyNavBar = () => {
 
       <Navbar id="primary-navbar" className="position-fixed position-md-sticky z-1 bottom-0 w-100 border-top border-bottom justify-content-around py-md-0">
         <Container className="text-center align-items-center mx-md-0 w-md-100">
-          <div className="d-flex align-items-center d-none d-md-flex">
+          <div className="d-flex align-items-center d-none d-lg-flex">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -93,7 +93,7 @@ const MyNavBar = () => {
               <p className="navbarParag mb-0 opacity-50">Rete</p>
             </a>
           </div>
-          <div className="me-2 d-none d-md-block">
+          <div className="me-2 d-none d-lg-block">
             <a href="#" className="text-decoration-none text-black">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -110,7 +110,7 @@ const MyNavBar = () => {
             </a>
           </div>
           <div>
-            <a href="#" className="text-decoration-none text-black d-md-none">
+            <a href="#" className="text-decoration-none text-black d-lg-none">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 height="25"
@@ -124,7 +124,7 @@ const MyNavBar = () => {
               </svg>
               <p className="navbarParag mb-0 opacity-50">Pubblica</p>
             </a>
-            <a href="#" className="d-none d-md-block text-decoration-none text-black">
+            <a href="#" className="d-none d-lg-block text-decoration-none text-black">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -156,7 +156,7 @@ const MyNavBar = () => {
               <p className="navbarParag mb-0 opacity-50">Notifiche</p>
             </a>
           </div>
-          <div className="me-2 d-md-none">
+          <div className="me-2 d-lg-none">
             <a href="" className="text-decoration-none text-black">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -172,7 +172,7 @@ const MyNavBar = () => {
               <p className="navbarParag mb-0 opacity-50">Lavoro</p>
             </a>
           </div>
-          <Dropdown className="d-none d-md-block">
+          <Dropdown className="d-none d-lg-block">
             <Dropdown.Toggle variant="success" id="dropdown-basic">
               <span>
                 <img id="profile-img-primary-navbar" src={userProfile.image} alt="profile-image" className="rounded-circle" />
@@ -240,7 +240,7 @@ const MyNavBar = () => {
             </Dropdown.Menu>
           </Dropdown>
 
-          <Dropdown className="border-start d-none d-md-block">
+          <Dropdown className="border-start d-none d-lg-block">
             <Dropdown.Toggle variant="success" id="dropdown-basic">
               <span>
                 <svg
@@ -384,7 +384,7 @@ const MyNavBar = () => {
               </Row>
             </Dropdown.Menu>
           </Dropdown>
-          <div id="navbar-premium" className="d-none d-md-block">
+          <div id="navbar-premium" className="d-none d-lg-block">
             <a href="#">Prova Premium per 0 EUR</a>
           </div>
         </Container>
