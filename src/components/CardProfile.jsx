@@ -29,8 +29,17 @@ const CardProfile = () => {
           </div>
           <div className="d-flex justify-content-between iconBarProfile">
             <div className="camIcon ms-3">
-              <Image src={camIcon} width={48} className="imgfluid" />
-              <p className="m-0 camText text-link fw-500">Aggiungi foto</p>
+              {userProfile.image === "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png" ? (
+                <>
+                  <Image src={camIcon} width={48} className="imgfluid" />
+                  <p className="m-0 camText text-link fw-500">Aggiungi foto</p>
+                </>
+              ) : (
+                <>
+                  <Image src={userProfile.image} width={48} className="imgfluid" />
+                  <p className="m-0 camText text-link fw-500">Aggiungi foto</p>
+                </>
+              )}
             </div>
             <div className="actions-container">
               <svg viewBox="0 0 24 24" data-supported-dps="24x24" fill="currentColor" className="icon i24x24">
