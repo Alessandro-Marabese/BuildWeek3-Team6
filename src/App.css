@@ -247,6 +247,13 @@ body {
 #top-margin {
   margin-top: 3.8rem;
 }
+
+@media screen and (max-width: 992px) {
+  #top-margin {
+    margin-top: 2.8rem;
+  }
+}
+
 .dot-separator::before {
   content: "\00b7\00a0";
   padding-left: 4px;
