@@ -4,7 +4,7 @@ import { Col, Container, Row } from "react-bootstrap";
 const Informazioni = () => {
   return (
     <Col>
-      <Container>
+      <Container className="mx-0">
         <h5>Informazioni</h5>
         <Row>
           <Col xs={10}>
@@ -25,7 +25,12 @@ const Informazioni = () => {
             </p>
           </Col>
           <Col xs={1}>
-            <svg viewBox="0 0 16 16" data-supported-dps="16x16" fill="currentColor" className="icon text-primary">
+            <svg
+              viewBox="0 0 16 16"
+              data-supported-dps="16x16"
+              fill="currentColor"
+              className="icon text-primary i16x16"
+            >
               <path d="M14 9H9v5H7V9H2V7h5V2h2v5h5z"></path>
             </svg>
           </Col>

@@ -4,6 +4,12 @@ import camIcon from "../assets/camicon.png";
 import { Image } from "react-bootstrap";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import Informazioni from "./Informazioni";
+import Activity from "./Activity";
+import Esperienza from "./Esperienza";
+import Formazione from "./Formazione";
+import Competenze from "./Competenze";
+import Contatti from "./Contatti";
 
 const CardProfile = () => {
   const [visible, setVisible] = useState(true);
@@ -15,7 +21,11 @@ const CardProfile = () => {
       {userProfile && (
         <Card id="top-margin" className=" rounded-0 border-0">
           <div className="imgCardProfile">
-            <Card.Img variant="top" src="https://static.licdn.com/aero-v1/sc/h/55k1z8997gh8dwtihm11aajyq" className="rounded-0" />
+            <Card.Img
+              variant="top"
+              src="https://static.licdn.com/aero-v1/sc/h/55k1z8997gh8dwtihm11aajyq"
+              className="rounded-0"
+            />
           </div>
           <div className="d-flex justify-content-between iconBarProfile">
             <div className="camIcon ms-3">
@@ -62,6 +72,13 @@ const CardProfile = () => {
           </Card.Body>
         </Card>
       )}
+
+      <Informazioni />
+      <Activity />
+      <Esperienza />
+      <Formazione />
+      <Competenze />
+      <Contatti />
     </>
   );
 };

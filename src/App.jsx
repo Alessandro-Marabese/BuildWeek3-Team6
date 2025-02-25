@@ -8,11 +8,11 @@ import SuggestedPeople from "./components/SuggestedPeople";
 import MyNavBar from "./components/MyNavBar";
 
 function App() {
-  const mylocation = useLocation(); // Correct use of useLocation
+  const mylocation = useLocation();
   return (
     <>
       {console.log(mylocation)}
-      {mylocation.pathname !== "/settings" && <MyNavBar />} {/* Conditionally render NavBar */}
+      {mylocation.pathname !== "/settings" && <MyNavBar />}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route
@@ -20,6 +20,7 @@ function App() {
           element={
             <>
               <CardProfile />
+
               <SuggestedPeople />
             </>
           }
@@ -33,7 +34,6 @@ function App() {
 export default function AppWrapper() {
   return (
     <BrowserRouter>
-      {/* Ensure the Router wraps the whole App */}
       <App />
     </BrowserRouter>
   );
