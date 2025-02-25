@@ -1,3 +1,110 @@
+/*Navbars */
+#secondary-navbar {
+  background-color: #ffffff;
+}
+#primary-navbar {
+  background-color: #ffffff;
+}
+#profile-img-sec-navbar {
+  width: 25px;
+  height: 25px;
+}
+#profile-img-primary-navbar {
+  width: 25px;
+  height: 25px;
+}
+.search-input-div {
+  background-color: #edf3f8;
+}
+#input-search {
+  background-color: #edf3f8;
+  height: 30px;
+}
+.navbarParag {
+  font-size: 0.7rem;
+}
+#dropdown-button-navbar {
+  --bs-btn-bg: #ffffff;
+  --bs-btn-border-color: #ffffff;
+  --bs-btn-hover-bg: #ffffff;
+  --bs-btn-hover-border-color: #ffffff;
+  --bs-btn-active-bg: #ffffff;
+  --bs-btn-active-border-color: #ffffff;
+  height: 40px;
+}
+#dropdown-button-navbar span {
+  font-size: 0.7rem;
+}
+#navbar-premium {
+  font-size: 0.8rem;
+}
+#navbar-premium a {
+  color: #b06031;
+}
+#aziende-dropdown {
+  width: 40rem;
+}
+.dropdown-menu a {
+  text-decoration: none;
+  color: black;
+}
+.dropdown-menu a:hover {
+  text-decoration: underline;
+}
+.dropdown-menu h4 {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+.dropdown-menu h5 {
+  font-size: 0.9rem;
+  color: grey;
+}
+.dropdown-menu h6 {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.dropdown-menu p {
+  font-size: 0.7rem;
+  opacity: 70%;
+}
+#dropdown-basic {
+  --bs-btn-bg: #ffffff;
+  --bs-btn-border-color: #ffffff;
+  --bs-btn-hover-bg: #ffffff;
+  --bs-btn-hover-border-color: #ffffff;
+  --bs-btn-active-bg: #ffffff;
+  --bs-btn-active-border-color: #ffffff;
+}
+#dropdown-basic span {
+  font-size: 0.7rem;
+}
+#profile-dropdown {
+  width: 18rem;
+}
+#profile-dropdown h4 {
+  font-size: 1.1rem;
+}
+#profile-dropdown p {
+  font-size: 0.9rem;
+}
+#profile-dropdown button {
+  color: #0d6efd;
+  --bs-btn-bg: white;
+  --bs-btn-hover-bg: #ffffff;
+  --bs-btn-active-bg: #ffffff;
+}
+.dropdown-toggle::after {
+  display: none;
+}
+@media only screen and (min-width: 768px) {
+  #secondary-navbar {
+    display: none !important;
+  }
+  #primary-navbar {
+    top: 0;
+    bottom: initial !important;
+  }
+}
 .imgCardProfile {
   position: relative;
   display: inline-block;
@@ -65,9 +172,8 @@
 }
 
 .camText {
-  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu,
-    Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Emoji",
-    "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell,
+    "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
   font-size: 0.75rem;
   line-height: 1.25;
   padding-top: 0.25rem;
