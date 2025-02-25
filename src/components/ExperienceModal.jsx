@@ -1,17 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Modal, Form, Button } from "react-bootstrap";
 
 const ExperienceModal = ({ show, handleClose, handleSubmit, experienceToEdit }) => {
-  const [formData, setFormData] = useState(
-    experienceToEdit || {
-      role: "",
-      company: "",
-      startDate: "",
-      endDate: "",
-      area: "",
-      description: "",
+  const [formData, setFormData] = useState({
+    role: "",
+    company: "",
+    startDate: "",
+    endDate: "",
+    area: "",
+    description: "",
+  });
+
+  useEffect(() => {
+    if (experienceToEdit) {
+      setFormData(experienceToEdit);
     }
-  );
+  }, [experienceToEdit]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });

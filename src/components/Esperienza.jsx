@@ -1,6 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Col, Container, Row, Button } from "react-bootstrap";
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchExperiences, addExperience, updateExperience, deleteExperience } from "../redux/actions/index";
 import ExperienceModal from "./ExperienceModal";
@@ -14,7 +13,7 @@ const Esperienza = () => {
   const [experienceToEdit, setExperienceToEdit] = useState(null);
 
   useEffect(() => {
-    if (userId !== undefined) {
+    if (userId) {
       dispatch(fetchExperiences(userId));
     }
   }, [dispatch, userId]);
@@ -31,17 +30,25 @@ const Esperienza = () => {
 
   const handleSubmit = (formData) => {
     if (experienceToEdit) {
-      dispatch(updateExperience(userId, experienceToEdit._id, formData));
+      dispatch(updateExperience(userId, experienceToEdit._id, formData)).then(() => {
+        dispatch(fetchExperiences(userId));
+      });
     } else {
-      dispatch(addExperience(userId, formData));
+      dispatch(addExperience(userId, formData)).then(() => {
+        dispatch(fetchExperiences(userId));
+      });
     }
+    setShowModal(false);
   };
 
   const handleDelete = (experienceId) => {
-    dispatch(deleteExperience(userId, experienceId));
+    dispatch(deleteExperience(userId, experienceId)).then(() => {
+      dispatch(fetchExperiences(userId));
+    });
   };
 
   if (loading) return <div>Loading...</div>;
+
   if (error) return <div>Error: {error}</div>;
 
   if (!experiences || experiences.length === 0) {
@@ -99,6 +106,7 @@ const Esperienza = () => {
               >
                 <path d="M21.13 2.86a3 3 0 00-4.17 0l-13 13L2 22l6.19-2L21.13 7a3 3 0 000-4.16zM6.77 18.57l-1.35-1.34L16.64 6 18 7.35z"></path>
               </svg>
+
               <svg
                 viewBox="0 0 24 24"
                 data-supported-dps="24x24"
@@ -127,7 +135,10 @@ const Esperienza = () => {
 
       <ExperienceModal
         show={showModal}
-        handleClose={() => setShowModal(false)}
+        handleClose={() => {
+          setShowModal(false);
+          setExperienceToEdit(null);
+        }}
         handleSubmit={handleSubmit}
         experienceToEdit={experienceToEdit}
       />

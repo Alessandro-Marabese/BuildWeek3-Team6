@@ -116,17 +116,27 @@ export const addExperience = (userId, experience) => async (dispatch) => {
 
 export const updateExperience = (userId, expId, experience) => async (dispatch) => {
   try {
-    const response = await fetch(`/api/users/${userId}/experiences/${expId}`, {
+    const response = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${expId}`, {
       method: "PUT",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        Authorization: API_TOKEN,
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify(experience),
     });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || "Errore durante l'aggiornamento dell'esperienza");
+    }
+
     const data = await response.json();
     dispatch({ type: UPDATE_EXPERIENCE, payload: data });
   } catch (error) {
-    console.error("Error updating experience:", error);
+    console.error("Errore durante l'aggiornamento dell'esperienza:", error);
   }
 };
+
 export const deleteExperience = (userId, expId) => async (dispatch) => {
   try {
     const response = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${expId}`, {
