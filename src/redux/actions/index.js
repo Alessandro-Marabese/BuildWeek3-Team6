@@ -76,7 +76,7 @@ export const editImageProfile = (imgProfile, idProfile) => {
       });
 
       if (!resp.ok) {
-        throw new Error(`Errore HTTP! Stato: ${resp.status}`);
+        throw new Error(`Errore PUT! ${resp.status}`);
       }
 
       let updatedProfile = await resp.json();
