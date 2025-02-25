@@ -220,3 +220,70 @@ body {
 .dot-separator::before {
   content: "\00b7\00a0";
 }
+
+/* Homepage */
+
+#homepage-container {
+  margin-top: 4.8rem;
+}
+#leftcolhomepage .card-img-top {
+  height: 90px;
+  object-fit: cover;
+}
+#leftcolhomepage .card:nth-child(1) {
+  font-size: 0.9rem;
+}
+#leftcolhomepage .card:nth-child(1) a {
+  text-decoration: none;
+  color: black;
+}
+#leftcolhomepage .card:nth-child(2) {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+#leftcolhomepage .card:nth-child(2) a {
+  text-decoration: none;
+  color: black;
+}
+#leftcolhomepage .card:nth-child(3) a {
+  text-decoration: none;
+  color: black;
+}
+#leftcolhomepage .card:nth-child(3) {
+  font-size: 0.9rem;
+}
+#leftcolhomepage .card:nth-child(4) a:hover {
+  text-decoration: underline;
+}
+#creation-post-button {
+  --bs-btn-bg: #ffffff;
+  --bs-btn-border-color: #ffffff;
+  --bs-btn-hover-bg: #f3f3f3;
+  --bs-btn-hover-border-color: #ffffff;
+  --bs-btn-active-bg: #f3f3f3;
+  --bs-btn-active-border-color: #ffffff;
+  font-weight: 600;
+}
+#div-bottom-post .btn {
+  --bs-btn-bg: #ffffff;
+  --bs-btn-border-color: #ffffff;
+  --bs-btn-hover-bg: #f3f3f3;
+  --bs-btn-hover-border-color: #ffffff;
+  --bs-btn-active-bg: #f3f3f3;
+  --bs-btn-active-border-color: #ffffff;
+  color: black;
+  font-weight: bold;
+  opacity: 50%;
+}
+.post-card .btn {
+  --bs-btn-bg: #ffffff;
+  --bs-btn-border-color: #ffffff;
+  --bs-btn-hover-bg: #f3f3f3;
+  --bs-btn-hover-border-color: #ffffff;
+  --bs-btn-active-bg: #f3f3f3;
+  --bs-btn-active-border-color: #ffffff;
+  color: black;
+}
+li::marker {
+  display: none;
+}

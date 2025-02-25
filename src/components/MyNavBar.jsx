@@ -62,7 +62,7 @@ const MyNavBar = () => {
           </div>
 
           <div className="ms-2">
-            <a href="#" className="text-decoration-none text-black">
+            <Link to="/" className="text-decoration-none text-black">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 height="25"
@@ -75,7 +75,7 @@ const MyNavBar = () => {
                 <path d="M23 9v2h-2v7a3 3 0 01-3 3h-4v-6h-4v6H6a3 3 0 01-3-3v-7H1V9l11-7z"></path>
               </svg>
               <p className="navbarParag mb-0 opacity-50">Home</p>
-            </a>
+            </Link>
           </div>
           <div>
             <a href="#" className="text-decoration-none text-black">
