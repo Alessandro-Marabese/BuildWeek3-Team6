@@ -1,4 +1,3 @@
-
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./Settings.css";
@@ -30,22 +29,22 @@ const SettingsFooter = () => {
           <Link to="/end-user-license-agreement" style={linkStyle}>End User License Agreement</Link>
         </li>
       </ul>
-      <Button variant="link" onClick={() => alert('Sign Out')}>Sign Out</Button>
+      <Button variant="link" onClick={() => alert('Sign Out')} style={{ color: "#6c757d", textAlign: "left", paddingLeft: "0" }}>
+        Sign Out
+      </Button>
     </div>
   );
 };
 
 const linkStyle = {
-    color: "#007bff",
-    textDecoration: "none",
-    display: "block",
-    padding: "5px 0",
-    transition: "color 0.3s ease",
-    ":hover": {
-      color: "#0056b3", 
-    },
-  };
+  color: "#6c757d",  
+  textDecoration: "none",
+  display: "block",
+  padding: "5px 0",
+  transition: "color 0.3s ease",
+  ":hover": {
+    color: "#5a6268", 
+  },
+};
 
-export default SettingsFooter; 
-
-
+export default SettingsFooter;
