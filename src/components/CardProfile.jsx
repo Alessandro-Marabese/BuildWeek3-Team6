@@ -39,7 +39,7 @@ const CardProfile = () => {
               </div>
             ) : (
               <>
-                <div className="profileIcon ms-3">
+                <div className="profileIcon ms-3 d-flex justify-content-center align-items-center">
                   <Image src={userProfile.image} width={150} className="imgfluid" />
                 </div>
               </>
