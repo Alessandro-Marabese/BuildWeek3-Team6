@@ -2,19 +2,19 @@ import Card from "react-bootstrap/Card";
 import { Link } from "react-router";
 import camIcon from "../assets/camicon.png";
 import { Image } from "react-bootstrap";
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Informazioni from "./Informazioni";
 import Activity from "./Activity";
 import Esperienza from "./Esperienza";
 import Formazione from "./Formazione";
 import Competenze from "./Competenze";
 import Contatti from "./Contatti";
+import { RECLUTER_VISIBLE } from "../redux/actions";
 
 const CardProfile = () => {
-  const [visible, setVisible] = useState(true);
-
+  const dispatch = useDispatch();
   const userProfile = useSelector((state) => state.profile.content);
+  const recluterVisible = useSelector((state) => state.profile.recluterVisible);
 
   return (
     <>
@@ -53,7 +53,7 @@ const CardProfile = () => {
             </Card.Title>
             <span style={{ lineHeight: "1" }}>{userProfile.title}</span>
             <span className="info body-small">{userProfile.area}</span>
-            {visible && (
+            {recluterVisible && (
               <section className="mt-3 border border-tertiary d-flex justify-content-between">
                 <div className="body-small px-3 py-2">
                   Mostra ai recluter che sei disponibile a lavorare: decidi tu chi può vedere questa informazione
@@ -61,7 +61,7 @@ const CardProfile = () => {
                 </div>
 
                 <div>
-                  <button className="hide" onClick={() => setVisible(false)}>
+                  <button className="hide" onClick={() => dispatch({ type: RECLUTER_VISIBLE })}>
                     <svg viewBox="0 0 16 16" data-supported-dps="16x16" fill="currentColor" className="icon i16x16">
                       <path d="M14 3.41L9.41 8 14 12.59 12.59 14 8 9.41 3.41 14 2 12.59 6.59 8 2 3.41 3.41 2 8 6.59 12.59 2z"></path>
                     </svg>
