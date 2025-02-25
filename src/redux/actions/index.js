@@ -61,8 +61,8 @@ export const getSuggestedPeople = () => {
   };
 };
 
-export const editImageProfile = (imgProfile) => {
-  let myUrl = "https://striveschool-api.herokuapp.com/api/profile/";
+export const editImageProfile = (imgProfile, idProfile) => {
+  let myUrl = "https://striveschool-api.herokuapp.com/api/profile/" + idProfile;
 
   return async (dispatch) => {
     try {
