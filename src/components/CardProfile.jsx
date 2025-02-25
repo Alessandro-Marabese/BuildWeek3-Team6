@@ -28,23 +28,27 @@ const CardProfile = () => {
             />
           </div>
           <div className="d-flex justify-content-between iconBarProfile">
-            <div className="camIcon ms-3">
-              {userProfile.image === "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png" ? (
+            {userProfile.image === "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png" ? (
+              <div className="camIcon ms-3">
                 <>
                   <Image src={camIcon} width={48} className="imgfluid" />
-                  <p className="m-0 camText text-link fw-500">Aggiungi foto</p>
+                  <Link to="/edit-profile-image" className="m-0 camText text-link fw-500 text-decoration-none">
+                    Aggiungi foto
+                  </Link>
                 </>
-              ) : (
-                <>
-                  <Image src={userProfile.image} className="imgfluid" />
-                </>
-              )}
-            </div>
+              </div>
+            ) : (
+              <>
+                <div className="profileIcon ms-3">
+                  <Image src={userProfile.image} width={112} className="imgfluid" />
+                </div>
+              </>
+            )}
             <div className="actions-container">
               <svg viewBox="0 0 24 24" data-supported-dps="24x24" fill="currentColor" className="icon i24x24">
                 <path d="M23 12l-4.61 7H16l4-6H8a3.92 3.92 0 00-4 3.84V17a4 4 0 00.19 1.24L5.12 21H3l-.73-2.22A6.4 6.4 0 012 16.94 6 6 0 018 11h12l-4-6h2.39z"></path>
               </svg>
-              <Link to="/editprofile">
+              <Link to="/edit-profile">
                 <svg viewBox="0 0 24 24" data-supported-dps="24x24" fill="currentColor" className="icon i24x24">
                   <path d="M21.13 2.86a3 3 0 00-4.17 0l-13 13L2 22l6.19-2L21.13 7a3 3 0 000-4.16zM6.77 18.57l-1.35-1.34L16.64 6 18 7.35z"></path>
                 </svg>

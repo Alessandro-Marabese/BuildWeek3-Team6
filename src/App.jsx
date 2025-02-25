@@ -6,12 +6,17 @@ import CardProfile from "./components/CardProfile";
 import "./App.css";
 import SuggestedPeople from "./components/SuggestedPeople";
 import MyNavBar from "./components/MyNavBar";
+import EditProfileImage from "./components/EditProfileImage";
 
 function App() {
   const mylocation = useLocation();
   return (
     <>
-      {mylocation.pathname === "/settings" || mylocation.pathname === "/editprofile" ? null : <MyNavBar />}
+      {mylocation.pathname === "/settings" ||
+      mylocation.pathname === "/edit-profile" ||
+      mylocation.pathname === "/edit-profile-image" ? null : (
+        <MyNavBar />
+      )}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route
@@ -24,6 +29,7 @@ function App() {
           }
         />
         <Route path="/settings" element={<SettingsPage />} />
+        <Route path="/edit-profile-image" element={<EditProfileImage />} />
       </Routes>
     </>
   );

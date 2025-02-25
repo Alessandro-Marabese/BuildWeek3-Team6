@@ -63,21 +63,23 @@ export const getSuggestedPeople = () => {
 };
 
 export const editImageProfile = (imgProfile, idProfile) => {
-  let myUrl = "https://striveschool-api.herokuapp.com/api/profile/" + idProfile;
+  let myUrl = `https://striveschool-api.herokuapp.com/api/profile/${idProfile}/picture`;
 
   return async (dispatch) => {
     try {
+      let formData = new FormData();
+      formData.append("profile", imgProfile);
+
       let resp = await fetch(myUrl, {
-        method: "PUT",
+        method: "POST",
         headers: {
           Authorization: API_TOKEN,
-          "Content-Type": "application/json",
         },
-        body: JSON.stringify(imgProfile),
+        body: formData,
       });
 
       if (!resp.ok) {
-        throw new Error(`Errore PUT! ${resp.status}`);
+        throw new Error(`Errore POST immagine! ${resp.status}`);
       }
 
       let updatedProfile = await resp.json();

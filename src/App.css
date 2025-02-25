@@ -175,14 +175,23 @@ body {
   padding: 1.9rem 2rem 3.6rem 2rem;
 }
 
+.profileIcon {
+  background-color: #ffffff;
+  position: relative;
+  border-radius: 50%;
+  padding: 0.25rem;
+}
+
 .camText {
-  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell,
-    "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu,
+    Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
   font-size: 0.75rem;
   line-height: 1.25;
   padding-top: 0.25rem;
   position: absolute;
   left: 20px;
+  top: 70px;
 }
 
 .fw-500 {
@@ -219,4 +228,21 @@ body {
 }
 .dot-separator::before {
   content: "\00b7\00a0";
+}
+
+.editImgProfile {
+  height: 100vh;
+}
+
+.h1Profile {
+  font-weight: 600;
+  font-size: 1.3rem;
+}
+
+.roundedAll {
+  border-radius: 100rem;
+}
+
+.imgPreview {
+  max-width: 300px;
 }
