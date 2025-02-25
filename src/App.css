@@ -135,6 +135,10 @@ body {
   fill: #666666;
 }
 
+.artdeco-button__icon {
+  fill: #0a66c2;
+}
+
 .i12x12 {
   width: 12px;
 }
@@ -153,6 +157,24 @@ body {
   display: flex;
   justify-content: space-around;
   align-items: center;
+}
+
+@media screen and (min-width: 993px) {
+  .actions-container {
+    width: 48px;
+  }
+}
+
+.linkArtDeco {
+  background-color: #ffffff;
+  color: #0a66c2;
+  border-radius: 50%;
+  height: 32px;
+  width: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
 }
 
 .linkSettings {
@@ -377,4 +399,18 @@ footer ul li::marker {
 .btnProfile {
   border: 1px solid #0a66c2;
   color: #0a66c2;
+}
+
+@media screen and (max-width: 992px) {
+  .rounded-from-lg {
+    border-radius: 0;
+  }
+}
+@media screen and (min-width: 993px) {
+  .rounded-from-lg {
+    border-radius: 10px;
+    overflow: hidden;
+    max-width: 804px;
+    background-color: #fff;
+  }
 }
