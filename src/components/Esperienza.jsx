@@ -4,35 +4,35 @@ import { Col, Container, Row, Button } from "react-bootstrap";
 const Esperienza = () => {
   return (
     <Col>
-      <Container fluid className="mx-0 ">
+      <Container fluid className="mx-0">
         <h5>Esperienza</h5>
-        <Row>
-          <Col xs={1}>
+        <div className="d-flex">
+          <div>
             <img
               src="https://static.licdn.com/aero-v1/sc/h/7t3cbtpanuobwuck7j8t5cpti"
               alt="lavoro"
               style={{ width: "30px" }}
             />
-          </Col>
-          <Col xs={10}>
+          </div>
+          <div>
             <span>Professione</span>
             <p>Azienda</p>
             <p>Durata</p>
             <p className="text-black-50">Luogo</p>
             <p className="text-black-50">Dettagli</p>
-          </Col>
-          <Col xs={1}>
+          </div>
+          <div className="icon-modifica">
             <svg
               viewBox="0 0 24 24"
               data-supported-dps="24x24"
               fill="currentColor"
-              className="icon i24x24"
+              className="icon i24x24 "
               style={{ width: "24px" }}
             >
               <path d="M21.13 2.86a3 3 0 00-4.17 0l-13 13L2 22l6.19-2L21.13 7a3 3 0 000-4.16zM6.77 18.57l-1.35-1.34L16.64 6 18 7.35z"></path>
             </svg>
-          </Col>
-        </Row>
+          </div>
+        </div>
         <Row>
           <h5>Hai altra esperienza?</h5>
           <p>
