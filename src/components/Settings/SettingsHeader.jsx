@@ -1,6 +1,7 @@
-import React from "react";
+
 import { Button } from "react-bootstrap"; 
 import { useNavigate } from "react-router-dom"; 
+import "./Settings.css";
 
 const SettingsHeader = () => {
   const navigate = useNavigate();

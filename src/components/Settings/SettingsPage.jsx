@@ -1,7 +1,8 @@
-import React from "react";
+
 import SettingsHeader from "./SettingsHeader";
 import SettingsList from "./SettingsList";
 import SettingsFooter from "./SettingsFooter"; 
+import "./Settings.css";
 
 const SettingsPage = () => {
   return (
