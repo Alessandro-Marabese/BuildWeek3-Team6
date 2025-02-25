@@ -1,8 +1,10 @@
-import { FETCH_PROFILE_OK, FETCH_SUGGESTED_PEOPLE_OK } from "../actions";
+import { FETCH_PROFILE_OK, FETCH_SUGGESTED_PEOPLE_OK, RECLUTER_VISIBLE, UPDATE_PROFILE_SUCCESS } from "../actions";
 
 const initialState = {
   content: [],
   suggestedPeople: [],
+  recluterVisible: true,
+  imageUpdate: false,
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -18,7 +20,16 @@ const profileReducer = (state = initialState, action) => {
         ...state,
         suggestedPeople: action.payload,
       };
-
+    case RECLUTER_VISIBLE:
+      return {
+        ...state,
+        recluterVisible: false,
+      };
+    case UPDATE_PROFILE_SUCCESS:
+      return {
+        ...state,
+        imageUpdate: true,
+      };
     default:
       return state;
   }

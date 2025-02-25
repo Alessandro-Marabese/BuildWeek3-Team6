@@ -163,6 +163,20 @@ body {
   border-radius: 50%;
 }
 
+.linkEditImg {
+  background-color: #ffffff;
+  color: #666666;
+  text-align: center;
+  padding-top: 2px;
+  border-radius: 50%;
+  border: 1px solid #cecece;
+  width: 32px;
+  height: 32px;
+  top: -35px;
+  left: 105px;
+  margin-bottom: -40px;
+}
+
 .linkSettings svg {
   width: 16px;
   height: 16px;
@@ -175,6 +189,17 @@ body {
   padding: 1.9rem 2rem 3.6rem 2rem;
 }
 
+.profileIcon {
+  background-color: #ffffff;
+  position: relative;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid #fff;
+  height: 128px;
+  width: 128px;
+  object-fit: cover;
+}
+
 .camText {
   font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell,
     "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -183,6 +208,7 @@ body {
   padding-top: 0.25rem;
   position: absolute;
   left: 20px;
+  top: 70px;
 }
 
 .fw-500 {
@@ -219,6 +245,23 @@ body {
 }
 .dot-separator::before {
   content: "\00b7\00a0";
+}
+
+.editImgProfile {
+  height: 100vh;
+}
+
+.h1Profile {
+  font-weight: 600;
+  font-size: 1.3rem;
+}
+
+.roundedAll {
+  border-radius: 100rem;
+}
+
+.imgPreview {
+  max-width: 300px;
 }
 
 /* Homepage */

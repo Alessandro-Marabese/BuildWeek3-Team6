@@ -1,0 +1,26 @@
+.settings-container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: "Roboto", sans-serif; 
+  }
+  
+  .settings-header {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: left;
+  }
+  
+  .settings-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .settings-footer {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+    color: gray;
+  }
+  
