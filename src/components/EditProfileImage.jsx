@@ -78,6 +78,7 @@ const EditProfileImage = () => {
         )}
       </header>
       {userProfile.image === "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png" ||
+      userProfile.image.slice(-10) === "delete.png" ||
       selectedFile ? (
         <>
           <div className="text-center">
@@ -94,19 +95,21 @@ const EditProfileImage = () => {
               />
               {selectedFile ? (
                 <>
-                  <div className="mt-3  d-flex flex-column align-items-center ">
-                    <div className="bg-black py-2 w-100 text-center">
-                      <Image src={URL.createObjectURL(selectedFile)} alt="Anteprima" className="imgPreview" />
+                  {isDelete === false ? (
+                    <div className="mt-3  d-flex flex-column align-items-center ">
+                      <div className="bg-black py-2 w-100 text-center">
+                        <Image src={URL.createObjectURL(selectedFile)} alt="Anteprima" className="imgPreview" />
+                      </div>
+                      <Button
+                        variant="outline-primary"
+                        type="submit"
+                        className="roundedAll mt-3"
+                        onClick={handleBtnClick}
+                      >
+                        Cambia foto
+                      </Button>
                     </div>
-                    <Button
-                      variant="outline-primary"
-                      type="submit"
-                      className="roundedAll mt-3"
-                      onClick={handleBtnClick}
-                    >
-                      Cambia foto
-                    </Button>
-                  </div>
+                  ) : null}
                 </>
               ) : (
                 <Button variant="outline-primary" type="submit" className="roundedAll" onClick={handleBtnClick}>

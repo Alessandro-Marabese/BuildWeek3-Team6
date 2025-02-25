@@ -28,7 +28,8 @@ const CardProfile = () => {
             />
           </div>
           <div className="d-flex justify-content-between iconBarProfile">
-            {userProfile.image === "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png" ? (
+            {userProfile.image === "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png" ||
+            userProfile.image.slice(-10) === "delete.png" ? (
               <div className="camIcon ms-3">
                 <>
                   <Image src={camIcon} width={48} className="imgfluid" />
@@ -58,11 +59,13 @@ const CardProfile = () => {
 
           {userProfile.image !== "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png" ? (
             <>
-              <Link className="linkEditImg position-relative" to="/edit-profile-image">
-                <svg viewBox="0 0 16 16" data-supported-dps="16x16" fill="currentColor" className="icon i16x16">
-                  <path d="M10 9a2 2 0 11-2-2 2 2 0 012 2zm5-2.5V14H1V6.5A2.5 2.5 0 013.5 4h.75L5 2h6l.75 2h.75A2.5 2.5 0 0115 6.5zM11 9a3 3 0 10-3 3 3 3 0 003-3z"></path>
-                </svg>
-              </Link>
+              {userProfile.image.slice(-10) !== "delete.png" && (
+                <Link className="linkEditImg position-relative" to="/edit-profile-image">
+                  <svg viewBox="0 0 16 16" data-supported-dps="16x16" fill="currentColor" className="icon i16x16">
+                    <path d="M10 9a2 2 0 11-2-2 2 2 0 012 2zm5-2.5V14H1V6.5A2.5 2.5 0 013.5 4h.75L5 2h6l.75 2h.75A2.5 2.5 0 0115 6.5zM11 9a3 3 0 10-3 3 3 3 0 003-3z"></path>
+                  </svg>
+                </Link>
+              )}
             </>
           ) : null}
 
