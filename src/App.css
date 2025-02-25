@@ -330,3 +330,24 @@ body {
 li::marker {
   display: none;
 }
+#vedi-altro-homepage-sidebar {
+  --bs-btn-bg: #ffffff;
+  --bs-btn-border-color: #ffffff;
+  --bs-btn-hover-bg: #f3f3f3;
+  --bs-btn-hover-border-color: #ffffff;
+  --bs-btn-active-bg: #f3f3f3;
+  --bs-btn-active-border-color: #ffffff;
+  color: black;
+  font-weight: 600;
+}
+.badge {
+  background-color: #fce3bc !important;
+  color: #584055 !important;
+}
+
+footer ul li {
+  font-size: 0.75rem;
+}
+footer ul li::marker {
+  display: none;
+}

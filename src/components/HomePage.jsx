@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Button, Card, Col, Container, Row } from "react-bootstrap";
+import { Badge, Button, Card, Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserProfile } from "../redux/actions";
 
@@ -248,12 +248,12 @@ const HomePage = () => {
           <Card>
             <Card.Body>
               <div className="d-flex justify-content-between">
-                <h4>In primo piano</h4>
+                <h4 className="mb-3">In primo piano</h4>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-info-square-fill mt-2" viewBox="0 0 16 16">
                   <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm8.93 4.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM8 5.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2" />
                 </svg>
               </div>
-              <h5 className="opacity-75">a cura di Linkedin Notizie</h5>
+              <h5 className="opacity-50 mb-4">a cura di Linkedin Notizie</h5>
               <ul id="homepage-sidebar-list">
                 <li>
                   <a href="#" className="text-decoration-none text-black">
@@ -286,8 +286,133 @@ const HomePage = () => {
                   </a>
                 </li>
               </ul>
+              <Button id="vedi-altro-homepage-sidebar">
+                Vedi altro
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                  <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                </svg>
+              </Button>
+              <h5 className="opacity-50 mt-2">I giochi di oggi</h5>
+              <div className="d-flex">
+                <img
+                  src="https://static.licdn.com/aero-v1/sc/h/im5l00imv9odauybfemlfxm6"
+                  alt="Tango"
+                  className="news-module__puzzle-icon mt-1 me-2"
+                  height="35"
+                />
+                <div>
+                  <h6 className="mb-0">Tango</h6>
+                  <p className="mb-0 opacity-50">Armonizza la griglia</p>
+                </div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  fill="currentColor"
+                  className="bi bi-caret-right-fill ms-auto mt-2"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
+                </svg>
+              </div>
+              <div className="d-flex mt-2">
+                <img
+                  src="https://static.licdn.com/aero-v1/sc/h/25itbd3dpc6ockbgvdhot9qp1"
+                  alt="Queens"
+                  className="news-module__puzzle-icon mt-1 me-2"
+                  height="35"
+                />
+                <div>
+                  <h6 className="mb-0">Queens</h6>
+                  <p className="mb-0 opacity-50">Incorona ogni regione</p>
+                </div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  fill="currentColor"
+                  className="bi bi-caret-right-fill ms-auto mt-2"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
+                </svg>
+              </div>
             </Card.Body>
           </Card>
+
+          <Card className="mt-2">
+            <a href="#">
+              <img
+                src="https://media.licdn.com/media/AAYABATPAAgAAQAAAAAAAKwYrfHUPkoBQGmwnaG71Ps_5Q.png"
+                alt="Advertise on LinkedIn"
+                border="0"
+                className="img-fluid"
+              />
+            </a>
+          </Card>
+
+          <Card className="mt-2">
+            <Card.Body>
+              <a href="#" className="text-decoration-none text-black">
+                <div className="d-flex align-items-center">
+                  <Badge className="h-25">SUGGERIMENTO</Badge>
+                  <h6 className="lh-lg">Prova Linkedin sull&apos;app per Windows</h6>
+                </div>
+              </a>
+            </Card.Body>
+          </Card>
+          <footer className="mt-2">
+            <ul className="d-flex flex-wrap m-4">
+              <li className="m-1">
+                <a href="#" className="text-decoration-none text-black opacity-50">
+                  Informazioni
+                </a>
+              </li>
+              <li className="m-1">
+                <a href="#" className="text-decoration-none text-black opacity-50">
+                  Accessibilità
+                </a>
+              </li>
+              <li className="m-1">
+                <a href="#" className="text-decoration-none text-black opacity-50">
+                  Centro Assistenza
+                </a>
+              </li>
+              <li className="m-1">
+                <a href="#" className="text-decoration-none text-black opacity-50">
+                  Privacy e condizioni
+                </a>
+              </li>
+              <li className="m-1">
+                <a href="#" className="text-decoration-none text-black opacity-50">
+                  Opzioni per gli annunci pubblicitari
+                </a>
+              </li>
+              <li className="m-1">
+                <a href="#" className="text-decoration-none text-black opacity-50">
+                  Pubblicità
+                </a>
+              </li>
+              <li className="m-1">
+                <a href="#" className="text-decoration-none text-black opacity-50">
+                  Servizi alle aziende
+                </a>
+              </li>
+              <li className="m-1">
+                <a href="#" className="text-decoration-none text-black opacity-50">
+                  Scarica l&apos;app Linkedin
+                </a>
+              </li>
+              <li className="m-1">
+                <a href="#" className="text-decoration-none text-black opacity-50">
+                  Altro
+                </a>
+              </li>
+            </ul>
+            <div className="m-4">
+              <p> LinkedIn Corporation © 2025</p>
+            </div>
+          </footer>
         </Col>
       </Row>
     </Container>
