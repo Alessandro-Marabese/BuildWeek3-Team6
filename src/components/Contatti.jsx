@@ -22,7 +22,7 @@ const Contatti = () => {
           </Col>
         </Row>
       </Container>
-      <Container>
+      <Container className="mx-0">
         <h5>Traguardi raggiunti</h5>
 
         <Row>
@@ -41,7 +41,7 @@ const Contatti = () => {
           </Col>
         </Row>
       </Container>
-      <Container>
+      <Container className="mx-0">
         <h5>Contatti</h5>
         <Row>
           <Col xs={1}>

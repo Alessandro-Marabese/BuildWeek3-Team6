@@ -4,7 +4,7 @@ import { Col, Container, Row, Button } from "react-bootstrap";
 const Esperienza = () => {
   return (
     <Col>
-      <Container>
+      <Container className="mx-0">
         <h5>Esperienza</h5>
         <Row>
           <Col xs={1}>
