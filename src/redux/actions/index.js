@@ -127,15 +127,23 @@ export const updateExperience = (userId, expId, experience) => async (dispatch) 
     console.error("Error updating experience:", error);
   }
 };
-
 export const deleteExperience = (userId, expId) => async (dispatch) => {
   try {
-    await fetch(`/api/users/${userId}/experiences/${expId}`, {
+    const response = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${expId}`, {
       method: "DELETE",
+      headers: {
+        Authorization: API_TOKEN,
+      },
     });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || "Errore durante l'eliminazione dell'esperienza");
+    }
+
     dispatch({ type: DELETE_EXPERIENCE, payload: expId });
   } catch (error) {
-    console.error("Error deleting experience:", error);
+    console.error("Errore durante l'eliminazione dell'esperienza:", error);
   }
 };
 
