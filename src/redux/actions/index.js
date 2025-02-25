@@ -8,9 +8,7 @@ const API_TOKEN =
 export const getUserProfile = () => {
   let myUrl = "https://striveschool-api.herokuapp.com/api/profile/me";
 
-  return async (dispatch, getState) => {
-    console.log("Fetching user profile...");
-
+  return async (dispatch) => {
     try {
       let resp = await fetch(myUrl, {
         method: "GET",
@@ -50,7 +48,7 @@ export const getSuggestedPeople = () => {
 
       if (resp.ok) {
         let suggestedPeople = await resp.json();
-        console.log("Suggested People:", suggestedPeople); // DEBUG
+        console.log("Suggested People:", suggestedPeople);
         dispatch({ type: FETCH_SUGGESTED_PEOPLE_OK, payload: suggestedPeople });
       } else {
         throw new Error("Errore durante la fetch dei suggerimenti");

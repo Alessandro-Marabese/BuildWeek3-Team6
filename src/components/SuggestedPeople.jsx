@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getSuggestedPeople } from "../redux/actions";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../style/SuggestedPeople.css";
+import { useEffect, useState } from "react";
 
 const SuggestedPeople = () => {
   const dispatch = useDispatch();
@@ -25,11 +25,7 @@ const SuggestedPeople = () => {
         <ul className="list-group">
           {suggestedPeople.slice(0, visibleCount).map((person) => (
             <li key={person._id} className="list-group-item suggested-item">
-              <img
-                src={person.image}
-                alt={person.name}
-                className="profile-image"
-              />
+              <img src={person.image} alt={person.name} className="profile-image" />
               <div className="profile-info">
                 <p className="profile-name">
                   {person.name} {person.surname}

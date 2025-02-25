@@ -20,7 +20,6 @@ function App() {
           element={
             <>
               <CardProfile />
-
               <SuggestedPeople />
             </>
           }
