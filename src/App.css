@@ -303,6 +303,9 @@ body {
 #leftcolhomepage .card:nth-child(4) a:hover {
   text-decoration: underline;
 }
+.elementi-salvati h6:hover {
+  text-decoration: underline;
+}
 #creation-post-button {
   --bs-btn-bg: #ffffff;
   --bs-btn-border-color: #ffffff;
@@ -351,7 +354,7 @@ li::marker {
 }
 
 footer ul li {
-  font-size: 0.75rem;
+  font-size: 0.8rem;
 }
 footer ul li::marker {
   display: none;

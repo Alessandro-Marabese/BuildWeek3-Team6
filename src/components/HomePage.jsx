@@ -55,7 +55,7 @@ const HomePage = () => {
           </Card>
           <Card>
             <Card.Body>
-              <a href="#" className="text-decoration-none text-black">
+              <a href="#" className="elementi-salvati text-decoration-none text-black">
                 <div className="d-flex align-items-baseline mb-3">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-bookmark-fill me-2" viewBox="0 0 16 16">
                     <path d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2" />
@@ -254,32 +254,32 @@ const HomePage = () => {
                 </svg>
               </div>
               <h5 className="opacity-50 mb-4">a cura di Linkedin Notizie</h5>
-              <ul id="homepage-sidebar-list">
-                <li>
+              <ul id="homepage-sidebar-list" className="ps-1">
+                <li className="d-inline-block">
                   <a href="#" className="text-decoration-none text-black">
                     <h6>Fusione tra Saipem e Subsea7</h6>
                     <p>1 giorno fa • 676 lettori</p>
                   </a>
                 </li>
-                <li>
+                <li className="d-inline-block">
                   <a href="#" className="text-decoration-none text-black">
                     <h6>Priorità benessere per i lavoratori</h6>
                     <p>1 giorno fa • 289 lettori</p>
                   </a>
                 </li>
-                <li>
+                <li className="d-inline-block">
                   <a href="#" className="text-decoration-none text-black">
                     <h6>Roma ospita la COP16 &quot;bis&quot;</h6>
                     <p>6 ore fa • 244 lettori</p>
                   </a>
                 </li>
-                <li>
+                <li className="d-inline-block">
                   <a href="#" className="text-decoration-none text-black">
                     <h6>Stipendi più bassi per le donne</h6>
                     <p>5 ore fa</p>
                   </a>
                 </li>
-                <li>
+                <li className="d-inline-block">
                   <a href="#" className="text-decoration-none text-black">
                     <h6>Droni che riprendono quota</h6>
                     <p>2 ore fa</p>
@@ -362,48 +362,48 @@ const HomePage = () => {
             </Card.Body>
           </Card>
           <footer className="mt-2">
-            <ul className="d-flex flex-wrap m-4">
-              <li className="m-1">
+            <ul className="d-flex flex-wrap justify-content-center align-items-center m-4 ps-0">
+              <li className="m-1 d-inline-block">
                 <a href="#" className="text-decoration-none text-black opacity-50">
                   Informazioni
                 </a>
               </li>
-              <li className="m-1">
+              <li className="m-2 d-inline-block">
                 <a href="#" className="text-decoration-none text-black opacity-50">
                   Accessibilità
                 </a>
               </li>
-              <li className="m-1">
+              <li className="m-2 d-inline-block">
                 <a href="#" className="text-decoration-none text-black opacity-50">
                   Centro Assistenza
                 </a>
               </li>
-              <li className="m-1">
+              <li className="m-2 d-inline-block">
                 <a href="#" className="text-decoration-none text-black opacity-50">
                   Privacy e condizioni
                 </a>
               </li>
-              <li className="m-1">
+              <li className="m-2 d-inline-block">
                 <a href="#" className="text-decoration-none text-black opacity-50">
                   Opzioni per gli annunci pubblicitari
                 </a>
               </li>
-              <li className="m-1">
+              <li className="m-2 d-inline-block">
                 <a href="#" className="text-decoration-none text-black opacity-50">
                   Pubblicità
                 </a>
               </li>
-              <li className="m-1">
+              <li className="m-2 d-inline-block">
                 <a href="#" className="text-decoration-none text-black opacity-50">
                   Servizi alle aziende
                 </a>
               </li>
-              <li className="m-1">
+              <li className="m-2 d-inline-block">
                 <a href="#" className="text-decoration-none text-black opacity-50">
                   Scarica l&apos;app Linkedin
                 </a>
               </li>
-              <li className="m-1">
+              <li className="m-2 d-inline-block">
                 <a href="#" className="text-decoration-none text-black opacity-50">
                   Altro
                 </a>
