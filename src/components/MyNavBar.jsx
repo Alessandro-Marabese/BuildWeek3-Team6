@@ -1,18 +1,23 @@
+import { useEffect } from "react";
 import { Button, Col, Container, Dropdown, Row } from "react-bootstrap";
 import { Navbar } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserProfile } from "../redux/actions";
+import { Link } from "react-router";
 
-const navBar = () => {
+const MyNavBar = () => {
+  const dispatch = useDispatch();
+  const userProfile = useSelector((state) => state.profile.content);
+
+  useEffect(() => {
+    dispatch(getUserProfile());
+  }, [dispatch]);
   return (
     <>
-      <section id="secondary-navbar" className=" w-100 position-fixed top-0 d-flex align-items-center px-3 py-2 border-bottom">
-        <a href="#">
-          <img
-            id="profile-img-sec-navbar"
-            src="https://images.unsplash.com/photo-1610056352054-a68fe4f998e1?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt="profile-image"
-            className="rounded-circle me-3"
-          />
-        </a>
+      <section id="secondary-navbar" className=" w-100 position-fixed top-0 z-1 d-flex align-items-center px-3 py-2 border-bottom">
+        <Link to="/profile">
+          <img id="profile-img-sec-navbar" src={userProfile.image} alt="profile-image" className="rounded-circle me-3" />
+        </Link>
         <div className="search-input-div d-flex align-items-center flex-grow-1">
           <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-search p-1 " viewBox="0 0 16 16">
             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
@@ -33,7 +38,7 @@ const navBar = () => {
         </svg>
       </section>
 
-      <Navbar id="primary-navbar" className="position-fixed bottom-0 w-100 border-top border-bottom justify-content-around py-md-0">
+      <Navbar id="primary-navbar" className="position-fixed position-md-sticky z-1 bottom-0 w-100 border-top border-bottom justify-content-around py-md-0">
         <Container className="text-center align-items-center mx-md-0 w-md-100">
           <div className="d-flex align-items-center d-none d-md-flex">
             <svg
@@ -170,12 +175,7 @@ const navBar = () => {
           <Dropdown className="d-none d-md-block">
             <Dropdown.Toggle variant="success" id="dropdown-basic">
               <span>
-                <img
-                  id="profile-img-primary-navbar"
-                  src="https://images.unsplash.com/photo-1610056352054-a68fe4f998e1?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                  alt="profile-image"
-                  className="rounded-circle"
-                />
+                <img id="profile-img-primary-navbar" src={userProfile.image} alt="profile-image" className="rounded-circle" />
               </span>
               <span className="d-block text-black opacity-50">
                 Tu
@@ -195,29 +195,27 @@ const navBar = () => {
             </Dropdown.Toggle>
 
             <Dropdown.Menu id="profile-dropdown" className="dropdown-menu-md-end">
-              <a href="#" className="text-decoration-none">
+              <Link to="/profile" className="text-decoration-none">
                 <Row className="border-bottom mx-1">
                   <Col className="ps-0 col-3">
-                    <img
-                      src="https://images.unsplash.com/photo-1610056352054-a68fe4f998e1?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                      alt="Immagine profilo"
-                      height="50"
-                      width="50"
-                      className="rounded-circle ms-2"
-                    />
+                    <img src={userProfile.image} alt="Immagine profilo" height="50" width="50" className="rounded-circle ms-2" />
                   </Col>
-                  <Col className="px-0 col-7">
-                    <h4>Nome Utente</h4>
-                    <p className="text-black">Titolo di studio</p>
-                  </Col>
+                  {userProfile && (
+                    <Col className="px-0 col-7">
+                      <h4>
+                        {userProfile.name} {userProfile.surname}
+                      </h4>
+                      <p className="text-black">{userProfile.title}</p>
+                    </Col>
+                  )}
                   <Button className="rounded-pill mb-2 py-1">Visualizza il profilo</Button>
                 </Row>
-              </a>
+              </Link>
               <div className="border-bottom mx-1">
                 <h4 className="pt-2 ps-2">Account</h4>
-                <a href="#">
+                <Link to="/settings">
                   <p className="ps-2">Impostazioni e privacy</p>
-                </a>
+                </Link>
                 <a href="#">
                   <p className="ps-2">Guida</p>
                 </a>
@@ -394,4 +392,4 @@ const navBar = () => {
     </>
   );
 };
-export default navBar;
+export default MyNavBar;

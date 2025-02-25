@@ -1,7 +1,6 @@
-import React from "react";
 import SettingsHeader from "./SettingsHeader";
 import SettingsList from "./SettingsList";
-import SettingsFooter from "./SettingsFooter"; 
+import SettingsFooter from "./SettingsFooter";
 
 const SettingsPage = () => {
   return (
@@ -9,7 +8,7 @@ const SettingsPage = () => {
       <SettingsHeader />
       <hr style={{ border: "1px solid #e0e0e0", margin: "10px 0" }} />
       <SettingsList />
-      <SettingsFooter /> 
+      <SettingsFooter />
     </div>
   );
 };

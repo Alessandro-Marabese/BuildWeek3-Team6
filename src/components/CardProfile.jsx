@@ -2,31 +2,20 @@ import Card from "react-bootstrap/Card";
 import { Link } from "react-router";
 import camIcon from "../assets/camicon.png";
 import { Image } from "react-bootstrap";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getUserProfile } from "../redux/actions";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 
 const CardProfile = () => {
   const [visible, setVisible] = useState(true);
-  const dispatch = useDispatch();
+
   const userProfile = useSelector((state) => state.profile.content);
-
-  console.log(userProfile);
-
-  useEffect(() => {
-    dispatch(getUserProfile());
-  }, [dispatch]);
 
   return (
     <>
       {userProfile && (
-        <Card className="rounded-0 border-0">
+        <Card id="top-margin" className=" rounded-0 border-0">
           <div className="imgCardProfile">
-            <Card.Img
-              variant="top"
-              src="https://static.licdn.com/aero-v1/sc/h/55k1z8997gh8dwtihm11aajyq"
-              className="rounded-0"
-            />
+            <Card.Img variant="top" src="https://static.licdn.com/aero-v1/sc/h/55k1z8997gh8dwtihm11aajyq" className="rounded-0" />
           </div>
           <div className="d-flex justify-content-between iconBarProfile">
             <div className="camIcon ms-3">
