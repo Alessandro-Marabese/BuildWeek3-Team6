@@ -7,55 +7,44 @@ const SettingsList = () => {
     { name: "Sign in & Security", icon: "bi-lock" },
     { name: "Visibility", icon: "bi-eye" },
     { name: "Data Privacy", icon: "bi-shield-lock" },
-    { name: "Advertising Data", icon: "bi-newspaper" }, 
+    { name: "Advertising Data", icon: "bi-newspaper" },
     { name: "Notifications", icon: "bi-bell" },
   ];
 
   return (
-    <div className="settings-container" style={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
-      <div className="profile-settings" style={{ display: "flex", alignItems: "center", marginBottom: "20px" }}>
-        <div className="profile-image" style={{ marginRight: "10px" }}>
-          <img src="path-to-linkedin-profile-image" alt="LinkedIn Profile" style={{ width: "20px", height: "20px", borderRadius: "50%" }} /> 
+    <div className="profile-settings-container" style={{ width: "100%", maxWidth: "400px", padding: "20px" }}>
+      <div style={{ display: "flex", alignItems: "center", marginBottom: "20px" }}>
+        <div className="profile-picture" style={{ marginRight: "10px" }}>
+          <Link to="/profile">
+            <img
+              src="https://marketplace.canva.com/EAGCMGvlKLM/1/0/1600w/canva-viola-neon-fotografo-immagine-profilo-linkedin-kSHjxNxHD6Q.jpg"
+              alt="Your profile photo"
+              style={{ width: "32px", height: "32px", borderRadius: "50%" }}
+            />
+          </Link>
         </div>
-        <Link
-          to="/settings"
-          style={{
-            textDecoration: "none",
-            color: "inherit",
-            fontWeight: "bold",
-            fontSize: "20px",  
-            display: "flex",
-            alignItems: "center",
-          }}
-        >
+        <div className="profile-settings-title" style={{ fontSize: "20px", fontWeight: "bold" }}>
           Settings
-        </Link>
+        </div>
       </div>
-      
+
       <ul style={{ listStyleType: "none", padding: 0 }}>
         {settingsItems.map((item, index) => (
-          <li
-            key={index}
-            style={{
-              padding: "10px 0",
-              fontWeight: "bold",
-              transition: "background-color 0.3s ease",
-              ":hover": {
-                backgroundColor: "#f5f5f5",
-              },
-            }}
-          >
+          <li key={index} style={{ padding: "10px 0", fontWeight: "bold" }}>
             <Link
               to={`/${item.name.toLowerCase().replace(/\s+/g, "-")}`}
               style={{
                 textDecoration: "none",
-                color: "inherit",
+                color: "#333",
                 display: "flex",
                 alignItems: "center",
-                padding: "5px 10px",
+                padding: "10px",
+                borderRadius: "6px",
+                transition: "background-color 0.3s ease",
               }}
+              className="settings-link"
             >
-              <i className={`bi ${item.icon}`} style={{ marginRight: "10px", fontSize: "18px" }}></i> {/* icona leggermente ingrandita */}
+              <i className={`bi ${item.icon}`} style={{ marginRight: "10px", fontSize: "18px", color: "#666" }}></i>
               {item.name}
             </Link>
           </li>
