@@ -1,8 +1,8 @@
 import { useRef, useState } from "react";
-import { Button, Container, Form } from "react-bootstrap";
+import { Button, Container, Form, Image } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import { editImageProfile } from "../redux/actions";
+import { editImageProfile, getUserProfile } from "../redux/actions";
 
 const EditProfileImage = () => {
   const dispatch = useDispatch();
@@ -21,11 +21,15 @@ const EditProfileImage = () => {
   };
 
   const handleUpload = () => {
-    if (selectedFile) {
-      dispatch(editImageProfile(selectedFile, userProfile._id));
-    } else {
+    if (!selectedFile) {
       alert("Seleziona un file prima di caricare!");
+      return;
     }
+
+    dispatch(editImageProfile(selectedFile, userProfile._id))
+      .then(() => dispatch(getUserProfile()))
+      .then(() => navigate(-1))
+      .catch((error) => console.error("Errore durante il caricamento dell'immagine:", error));
   };
 
   return (
@@ -54,32 +58,63 @@ const EditProfileImage = () => {
           </button>
         )}
       </header>
-      <div className="text-center">
-        <p className="py-3 px-5">Gli utenti con una foto ricevono fino a 21 volte più visualizzazioni del profilo</p>
-        <Container>
-          <Form.Control
-            type="file"
-            className="mb-3"
-            ref={fileInputRef}
-            onChange={handleFileUpdate}
-            style={{ display: "none" }}
-          />
-          {selectedFile ? (
-            <>
-              <div className="mt-3 d-flex flex-column align-items-center">
-                <img src={URL.createObjectURL(selectedFile)} alt="Anteprima" className="imgPreview" />
-                <Button variant="outline-primary" type="submit" className="roundedAll mt-3" onClick={handleBtnClick}>
-                  Cambia foto
+      {userProfile.image === "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png" ||
+      selectedFile ? (
+        <>
+          <div className="text-center">
+            <p className="py-3 px-5">
+              Gli utenti con una foto ricevono fino a 21 volte più visualizzazioni del profilo
+            </p>
+            <Container>
+              <Form.Control
+                type="file"
+                className="mb-3"
+                ref={fileInputRef}
+                onChange={handleFileUpdate}
+                style={{ display: "none" }}
+              />
+              {selectedFile ? (
+                <>
+                  <div className="mt-3 d-flex flex-column align-items-center">
+                    <Image src={URL.createObjectURL(selectedFile)} alt="Anteprima" className="imgPreview" />
+                    <Button
+                      variant="outline-primary"
+                      type="submit"
+                      className="roundedAll mt-3"
+                      onClick={handleBtnClick}
+                    >
+                      Cambia foto
+                    </Button>
+                  </div>
+                </>
+              ) : (
+                <Button variant="outline-primary" type="submit" className="roundedAll" onClick={handleBtnClick}>
+                  Aggiungi foto del profilo
                 </Button>
-              </div>
-            </>
-          ) : (
-            <Button variant="outline-primary" type="submit" className="roundedAll" onClick={handleBtnClick}>
-              Aggiungi foto del profilo
-            </Button>
-          )}
-        </Container>
-      </div>
+              )}
+            </Container>
+          </div>
+        </>
+      ) : (
+        <div className="mt-3 d-flex flex-column align-items-center">
+          {console.log(userProfile)}
+          <Container>
+            <Form.Control
+              type="file"
+              className="mb-3"
+              ref={fileInputRef}
+              onChange={handleFileUpdate}
+              style={{ display: "none" }}
+            />
+            <div className="mt-3 d-flex flex-column align-items-center">
+              <Image src={userProfile.image} alt="Anteprima" className="imgPreview" />
+              <Button variant="outline-primary" type="submit" className="roundedAll mt-3" onClick={handleBtnClick}>
+                Cambia foto
+              </Button>
+            </div>
+          </Container>
+        </div>
+      )}
     </div>
   );
 };
