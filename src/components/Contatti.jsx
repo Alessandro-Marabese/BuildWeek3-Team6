@@ -4,7 +4,7 @@ import { Col, Container, Row } from "react-bootstrap";
 const Contatti = () => {
   return (
     <Col>
-      <Container fluid className="mx-0">
+      <Container fluid className="mx-0  mt-2 cont">
         <h5>Referenze</h5>
         <Row>
           <Col xs={1}>
@@ -22,7 +22,7 @@ const Contatti = () => {
           </Col>
         </Row>
       </Container>
-      <Container fluid className="mx-0">
+      <Container fluid className="mx-0  mt-2 cont">
         <h5>Traguardi raggiunti</h5>
 
         <Row>
@@ -41,7 +41,7 @@ const Contatti = () => {
           </Col>
         </Row>
       </Container>
-      <Container fluid className="mx-0">
+      <Container fluid className="mx-0  mt-2 cont">
         <h5>Contatti</h5>
         <Row>
           <Col xs={1}>
