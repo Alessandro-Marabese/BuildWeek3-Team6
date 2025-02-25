@@ -1,6 +1,8 @@
 export const FETCH_PROFILE_OK = "FETCH_PROFILE_OK";
 export const FETCH_PROFILE_ERR = "FETCH_PROFILE_ERR";
 export const FETCH_SUGGESTED_PEOPLE_OK = "FETCH_SUGGESTED_PEOPLE_OK";
+export const UPDATE_PROFILE_SUCCESS = "UPDATE_PROFILE_SUCCESS";
+export const UPDATE_PROFILE_ERR = "UPDATE_PROFILE_ERR";
 
 const API_TOKEN =
   "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2JjNTVlYmU3MDMzNzAwMTUzMTZkYjYiLCJpYXQiOjE3NDAzOTYwMTEsImV4cCI6MTc0MTYwNTYxMX0.2CX2LA1vG2uZs-kBFld_nSXWKtHJ96OIIrejUMdhU2g";
@@ -55,6 +57,33 @@ export const getSuggestedPeople = () => {
       }
     } catch (error) {
       console.error("Errore nel recupero dei suggerimenti:", error);
+    }
+  };
+};
+
+export const editImageProfile = (imgProfile) => {
+  let myUrl = "https://striveschool-api.herokuapp.com/api/profile/";
+
+  return async (dispatch) => {
+    try {
+      let resp = await fetch(myUrl, {
+        method: "PUT",
+        headers: {
+          Authorization: API_TOKEN,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(imgProfile),
+      });
+
+      if (!resp.ok) {
+        throw new Error(`Errore HTTP! Stato: ${resp.status}`);
+      }
+
+      let updatedProfile = await resp.json();
+      dispatch({ type: UPDATE_PROFILE_SUCCESS, payload: updatedProfile });
+    } catch (error) {
+      console.error("Errore durante l'aggiornamento del profilo:", error);
+      dispatch({ type: UPDATE_PROFILE_ERR, payload: error.message });
     }
   };
 };
