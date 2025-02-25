@@ -21,7 +21,7 @@ const Esperienza = () => {
   if (!experiences || experiences.length === 0) {
     return (
       <Col>
-        <Container fluid className="mx-0">
+        <Container fluid className="mx-0 cont">
           <h5>Esperienza</h5>
           <p>No experiences found</p>
           <Row>
@@ -40,7 +40,7 @@ const Esperienza = () => {
 
   return (
     <Col>
-      <Container fluid className="mx-0">
+      <Container fluid className="mx-0 cont">
         <h5>Esperienza</h5>
         {experiences.map((exp) => (
           <div key={exp._id} className="d-flex mb-3">

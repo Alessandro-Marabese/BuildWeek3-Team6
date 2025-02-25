@@ -4,7 +4,7 @@ import { Col, Container, Row, Button } from "react-bootstrap";
 const Formazione = () => {
   return (
     <Col>
-      <Container fluid className="mx-0">
+      <Container fluid className="mx-0  mt-2 cont">
         <h5>Formazione</h5>
         <div className="d-flex">
           <div>
