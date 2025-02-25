@@ -11,7 +11,6 @@ function App() {
   const mylocation = useLocation();
   return (
     <>
-      {console.log(mylocation)}
       {mylocation.pathname !== "/settings" && <MyNavBar />}
       <Routes>
         <Route path="/" element={<HomePage />} />
