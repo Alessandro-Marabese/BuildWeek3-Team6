@@ -1,7 +1,8 @@
-import { FETCH_PROFILE_OK } from "../actions";
+import { FETCH_PROFILE_OK, FETCH_SUGGESTED_PEOPLE_OK } from "../actions";
 
 const initialState = {
   content: [],
+  suggestedPeople: [],
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -11,6 +12,13 @@ const profileReducer = (state = initialState, action) => {
         ...state,
         content: action.payload,
       };
+
+    case FETCH_SUGGESTED_PEOPLE_OK:
+      return {
+        ...state,
+        suggestedPeople: action.payload,
+      };
+
     default:
       return state;
   }

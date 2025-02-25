@@ -2,25 +2,24 @@ import Card from "react-bootstrap/Card";
 import { Link } from "react-router";
 import camIcon from "../assets/camicon.png";
 import { Image } from "react-bootstrap";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getUserProfile } from "../redux/actions";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import Informazioni from "./Informazioni";
+import Activity from "./Activity";
+import Esperienza from "./Esperienza";
+import Formazione from "./Formazione";
+import Competenze from "./Competenze";
+import Contatti from "./Contatti";
 
 const CardProfile = () => {
   const [visible, setVisible] = useState(true);
-  const dispatch = useDispatch();
+
   const userProfile = useSelector((state) => state.profile.content);
-
-  console.log(userProfile);
-
-  useEffect(() => {
-    dispatch(getUserProfile());
-  }, [dispatch]);
 
   return (
     <>
       {userProfile && (
-        <Card className="rounded-0 border-0">
+        <Card id="top-margin" className=" rounded-0 border-0">
           <div className="imgCardProfile">
             <Card.Img
               variant="top"
@@ -44,7 +43,7 @@ const CardProfile = () => {
           </div>
 
           <Card.Body className="d-flex flex-column">
-            <Link to="settings" className="linkSettings m-3 position-absolute top-0 end-0">
+            <Link to="/settings" className="linkSettings m-3 position-absolute top-0 end-0">
               <svg viewBox="0 0 16 16" data-supported-dps="16x16" fill="currentColor" className="icon">
                 <path d="M6 1L3 2.76 4 5.2l-.36.63L1 6.22v3.52l2.55.39.38.66L3 13.22 6 15l1.6-2h.76L10 15l3-1.76-.94-2.43.38-.65L15 9.78V6.26l-2.58-.4-.36-.62 1-2.46L10 1 8.37 3.08h-.71zm2 5a2 2 0 11-2 2 2 2 0 012-2z"></path>
               </svg>
@@ -73,6 +72,13 @@ const CardProfile = () => {
           </Card.Body>
         </Card>
       )}
+
+      <Informazioni />
+      <Activity />
+      <Esperienza />
+      <Formazione />
+      <Competenze />
+      <Contatti />
     </>
   );
 };
