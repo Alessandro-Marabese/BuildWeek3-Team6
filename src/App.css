@@ -245,6 +245,11 @@ body {
 }
 .dot-separator::before {
   content: "\00b7\00a0";
+  padding-left: 4px;
+}
+.icon-modifica {
+  position: absolute;
+  right: 1.5em;
 }
 
 .editImgProfile {

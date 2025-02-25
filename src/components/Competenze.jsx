@@ -23,28 +23,26 @@ const Competenze = () => {
         </Row>
       </Container>
       <Container fluid className="mx-0">
-        <Row className="text-center">
-          <Col xs={2} className="p-0 mx-2">
-            competenza1
-          </Col>
-          <Col xs={1} className="dot-separator p-0 mx-2"></Col>
-          <Col xs={2} className="p-0 mx-2">
-            competenza2
-          </Col>
-          <Col xs={1} className="dot-separator p-0 mx-2"></Col>
-          <Col xs={2} className="p-0 mx-2">
-            competenza3
-          </Col>
-          <Col xs={1} className="dot-separator p-0 mx-2"></Col>
-          <Col xs={2} className="p-0 mx-2">
-            competenza4
-          </Col>
-          <Col xs={1} className="dot-separator p-0 mx-2"></Col>
-          <Col xs={2} className="p-0 mx-2">
-            competenza5
-          </Col>
-          <Col xs={1} className="dot-separator p-0 mx-2"></Col>
-        </Row>
+        <div className=" d-flex flex-wrap text-center">
+          <div className="p-0 mx-2">competenza1</div>
+          <div className="dot-separator p-0 mx-2"></div>
+          <div className="p-0 mx-2">competenza2</div>
+          <div className="dot-separator p-0 mx-2"></div>
+          <div className="p-0 mx-2">competenza3</div>
+          <div className="dot-separator p-0 mx-2"></div>
+          <div className="p-0 mx-2">competenza4</div>
+          <div className="dot-separator p-0 mx-2"></div>
+          <div className="p-0 mx-2">competenza5</div>
+          <div className="dot-separator p-0 mx-2"></div>
+          <div className="p-0 mx-2">competenza5</div>
+          <div className="dot-separator p-0 mx-2"></div>
+          <div className="p-0 mx-2">competenza5</div>
+          <div className="dot-separator p-0 mx-2"></div>
+          <div className="p-0 mx-2">competenza5</div>
+          <div className="dot-separator p-0 mx-2"></div>
+          <div className="p-0 mx-2">competenza5</div>
+          <div className="dot-separator p-0 mx-2"></div>
+        </div>
       </Container>
     </Col>
   );
