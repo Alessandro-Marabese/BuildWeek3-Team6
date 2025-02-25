@@ -90,7 +90,7 @@ const Esperienza = () => {
               <span>{exp.role}</span>
               <p>{exp.company}</p>
               <p>
-                {exp.startDate} - {exp.endDate || "Presente"}
+                {exp.startDate.split("T")[0]} - {exp.endDate ? exp.endDate.split("T")[0] : "Presente"}
               </p>
               <p className="text-black-50">{exp.area}</p>
               <p className="text-black-50">{exp.description}</p>

@@ -13,7 +13,12 @@ const ExperienceModal = ({ show, handleClose, handleSubmit, experienceToEdit }) 
 
   useEffect(() => {
     if (experienceToEdit) {
-      setFormData(experienceToEdit);
+      const formattedExperience = {
+        ...experienceToEdit,
+        startDate: experienceToEdit.startDate ? experienceToEdit.startDate.split("T")[0] : "",
+        endDate: experienceToEdit.endDate ? experienceToEdit.endDate.split("T")[0] : "",
+      };
+      setFormData(formattedExperience);
     }
   }, [experienceToEdit]);
 
@@ -23,7 +28,12 @@ const ExperienceModal = ({ show, handleClose, handleSubmit, experienceToEdit }) 
 
   const onSubmit = (e) => {
     e.preventDefault();
-    handleSubmit(formData);
+    const formattedData = {
+      ...formData,
+      startDate: formData.startDate ? `${formData.startDate}T00:00:00.000Z` : null,
+      endDate: formData.endDate ? `${formData.endDate}T00:00:00.000Z` : null,
+    };
+    handleSubmit(formattedData);
     handleClose();
   };
 
