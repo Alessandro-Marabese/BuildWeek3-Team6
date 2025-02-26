@@ -19,6 +19,29 @@ const HomePage = () => {
     return <p>Caricamento in corso...</p>;
   }
 
+  const getTimePastDate = (date) => {
+    const now = new Date();
+    const postDate = new Date(date);
+    const secondsPast = Math.floor((now - postDate) / 1000);
+
+    const intervals = {
+      anno: 31536000,
+      mese: 2592000,
+      giorno: 86400,
+      ora: 3600,
+      minuto: 60,
+      secondo: 1,
+    };
+
+    for (const unit in intervals) {
+      const interval = intervals[unit];
+      if (secondsPast >= interval) {
+        const count = Math.floor(secondsPast / interval);
+        return count === 1 ? `1 ${unit}` : `${count} ${unit}i fa`;
+      }
+    }
+  };
+
   return (
     <Container id="homepage-container">
       <Row>
@@ -154,8 +177,8 @@ const HomePage = () => {
                         <p id="followers-card" className="mb-0 opacity-50">
                           {singlePost.user.title}
                         </p>
-                        <p id="date-creation-post" className="d-inline-block mb-0 opacity-50">
-                          1s •
+                        <p id="date-creation-post" className="d-inline-block mb-0 opacity-50 me-1">
+                          {getTimePastDate(singlePost.createdAt)} •
                         </p>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
