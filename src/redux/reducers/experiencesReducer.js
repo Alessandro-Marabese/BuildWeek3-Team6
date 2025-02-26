@@ -34,6 +34,7 @@ const experiencesReducer = (state = initialState, action) => {
         loading: false,
         error: null,
       };
+
     case UPDATE_EXPERIENCE:
       return {
         ...state,

@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { Modal, Form, Button } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { fetchExperiences, updateExperience, uploadExperienceImage } from "../redux/actions/index";
 
-const ExperienceModal = ({ show, handleClose, handleSubmit, experienceToEdit, handleDelete }) => {
+const ExperienceModal = ({ show, handleClose, experienceToEdit, handleDelete }) => {
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     role: "",
     company: "",
@@ -10,6 +13,9 @@ const ExperienceModal = ({ show, handleClose, handleSubmit, experienceToEdit, ha
     area: "",
     description: "",
   });
+  const [img, setImg] = useState(null);
+
+  const [imagePreview, setImagePreview] = useState(null);
 
   useEffect(() => {
     if (experienceToEdit) {
@@ -17,8 +23,10 @@ const ExperienceModal = ({ show, handleClose, handleSubmit, experienceToEdit, ha
         ...experienceToEdit,
         startDate: experienceToEdit.startDate ? experienceToEdit.startDate.split("T")[0] : "",
         endDate: experienceToEdit.endDate ? experienceToEdit.endDate.split("T")[0] : "",
+        image: experienceToEdit.image || null,
       };
       setFormData(formattedExperience);
+      setImagePreview(formattedExperience.image);
     }
   }, [experienceToEdit]);
 
@@ -26,9 +34,30 @@ const ExperienceModal = ({ show, handleClose, handleSubmit, experienceToEdit, ha
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setImg(file);
+      setImagePreview(URL.createObjectURL(file));
+    }
+  };
+
   const onSubmit = (e) => {
     e.preventDefault();
-    handleSubmit(formData);
+
+    if (img) {
+      console.log(img);
+      dispatch(uploadExperienceImage(experienceToEdit.user, experienceToEdit._id, img)).then(() =>
+        dispatch(updateExperience(experienceToEdit.user, experienceToEdit._id, formData)).then(() =>
+          dispatch(fetchExperiences(experienceToEdit.user))
+        )
+      );
+    } else {
+      dispatch(updateExperience(experienceToEdit.user, experienceToEdit._id, formData)).then(() =>
+        dispatch(fetchExperiences(experienceToEdit.user))
+      );
+    }
+
     handleClose();
   };
 
@@ -46,6 +75,13 @@ const ExperienceModal = ({ show, handleClose, handleSubmit, experienceToEdit, ha
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={onSubmit}>
+          <Form.Group>
+            <Form.Label>Immagine</Form.Label>
+            <Form.Control type="file" accept="image/*" onChange={handleImageChange} />
+            {imagePreview && (
+              <img src={imagePreview} alt="Anteprima immagine" style={{ width: "100px", marginTop: "10px" }} />
+            )}
+          </Form.Group>
           <Form.Group>
             <Form.Label>Ruolo</Form.Label>
             <Form.Control type="text" name="role" value={formData.role} onChange={handleChange} required />
