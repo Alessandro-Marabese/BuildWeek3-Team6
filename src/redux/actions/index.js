@@ -87,18 +87,20 @@ export const fetchExperiences = (userId) => {
 
       if (response.ok) {
         const data = await response.json();
-
-        dispatch({ type: FETCH_EXPERIENCES_OK, payload: data });
+        if (data && Array.isArray(data)) {
+          dispatch({ type: FETCH_EXPERIENCES_OK, payload: data });
+        } else {
+          throw new Error("La risposta non contiene un array di esperienze valido.");
+        }
       } else {
-        throw new Error("Errore durante il fetch delle esperienze");
+        throw new Error("Errore durante il fetch delle esperienze: " + response.statusText);
       }
     } catch (error) {
       dispatch({ type: FETCH_EXPERIENCES_ERR, payload: error.message });
-      console.error("Errore nel fetch delle esperienze:", error.status);
+      console.error("Errore nel fetch delle esperienze:", error);
     }
   };
 };
-
 export const addExperience = (userId, experience) => async (dispatch) => {
   console.log(userId, experience);
   try {

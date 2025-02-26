@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Modal, Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { addExperience, fetchExperiences, updateExperience, uploadExperienceImage } from "../redux/actions/index";
-import { data } from "react-router";
 
 const ExperienceModal = ({ show, handleClose, experienceToEdit, handleDelete }) => {
   const userId = useSelector((state) => state.profile.content._id);
@@ -16,7 +15,7 @@ const ExperienceModal = ({ show, handleClose, experienceToEdit, handleDelete }) 
     description: "",
   });
   const [img, setImg] = useState(null);
-
+  // const [idExp, setIdExp] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
 
   useEffect(() => {
@@ -70,8 +69,44 @@ const ExperienceModal = ({ show, handleClose, experienceToEdit, handleDelete }) 
         );
       }
     } else {
-      console.log(data);
-      dispatch(addExperience(userId, formData));
+      dispatch(addExperience(userId, formData))
+        .then(() => {
+          // Recupera le esperienze aggiornate
+          dispatch(fetchExperiences(userId))
+            .then((response) => {
+              const experiences = response.data; // Supponiamo che data contenga l'array di esperienze
+
+              // Trova l'ultima esperienza aggiunta
+              const newExperience = experiences.find(
+                (exp) => exp.company === formData.company && exp.role === formData.role
+              );
+
+              if (newExperience) {
+                const experienceId = newExperience._id;
+                console.log("Esperienza aggiunta con ID:", experienceId);
+
+                // Se è stato selezionato un file immagine, esegui l'upload
+                if (img) {
+                  dispatch(uploadExperienceImage(userId, experienceId, img))
+                    .then(() => {
+                      console.log("Immagine caricata con successo");
+                      handleClose(); // Chiudi il modale dopo l'upload
+                    })
+                    .catch((error) => {
+                      console.error("Errore nell'upload dell'immagine", error);
+                    });
+                } else {
+                  handleClose(); // Chiudi il modale se non c'è immagine
+                }
+              }
+            })
+            .catch((error) => {
+              console.error("Errore nel recuperare le esperienze", error);
+            });
+        })
+        .catch((error) => {
+          console.error("Errore nell'aggiungere l'esperienza", error);
+        });
     }
 
     handleClose();
@@ -93,7 +128,7 @@ const ExperienceModal = ({ show, handleClose, experienceToEdit, handleDelete }) 
         <Form onSubmit={onSubmit}>
           <Form.Group>
             <Form.Label>Immagine</Form.Label>
-            <Form.Control type="file" accept="image/*" onChange={experienceToEdit && handleImageChange} />
+            <Form.Control type="file" accept="image/*" onChange={handleImageChange} />
             {imagePreview && (
               <img src={imagePreview} alt="Anteprima immagine" style={{ width: "100px", marginTop: "10px" }} />
             )}
