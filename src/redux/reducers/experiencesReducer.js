@@ -4,6 +4,7 @@ import {
   ADD_EXPERIENCE,
   UPDATE_EXPERIENCE,
   DELETE_EXPERIENCE,
+  UPDATE_EXPERIENCE_IMAGE,
 } from "../actions";
 
 const initialState = {
@@ -48,6 +49,13 @@ const experiencesReducer = (state = initialState, action) => {
         experiences: state.experiences.filter((exp) => exp._id !== action.payload),
         loading: false,
         error: null,
+      };
+    case UPDATE_EXPERIENCE_IMAGE:
+      return {
+        ...state,
+        experiences: state.experiences.map((exp) =>
+          exp._id === action.payload._id ? { ...exp, image: action.payload.image } : exp
+        ),
       };
     default:
       return state;

@@ -56,8 +56,8 @@ const ExperienceModal = ({ show, handleClose, experienceToEdit, handleDelete }) 
     e.preventDefault();
     if (experienceToEdit) {
       if (img) {
-        dispatch(uploadExperienceImage(experienceToEdit.user, experienceToEdit._id, img)).then(() =>
-          dispatch(updateExperience(experienceToEdit.user, experienceToEdit._id, formData))
+        dispatch(updateExperience(experienceToEdit.user, experienceToEdit._id, formData)).then(() =>
+          dispatch(uploadExperienceImage(experienceToEdit.user, experienceToEdit._id, img))
         );
       } else {
         dispatch(updateExperience(experienceToEdit.user, experienceToEdit._id, formData));
