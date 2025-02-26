@@ -1,8 +1,10 @@
+import { Form } from "react-bootstrap";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 
 const EditProfile = () => {
   const navigate = useNavigate();
-
+  const userProfile = useSelector((state) => state.profile.content);
   const handleUpload = () => {};
 
   return (
@@ -29,6 +31,42 @@ const EditProfile = () => {
           Salva
         </button>
       </header>
+      <main>
+        {console.log(userProfile)}
+        <Form.Floating className="mb-3 mx-1 border border-black rounded">
+          <Form.Control id="floatingInput" type="text" value={userProfile && userProfile.name} />
+          <label htmlFor="floatingInput">Nome</label>
+        </Form.Floating>
+
+        <Form.Floating className="mb-3 mx-1 border border-black rounded">
+          <Form.Control id="floatingInput" type="text" value={userProfile && userProfile.surname} />
+          <label htmlFor="floatingInput">Cognome</label>
+        </Form.Floating>
+
+        <Form.Floating className="mb-3 mx-1 border border-black rounded">
+          <Form.Control id="floatingInput" type="text" value={userProfile && userProfile.title} />
+          <label htmlFor="floatingInput">Sommario</label>
+        </Form.Floating>
+
+        <Form.Floating className="mb-3 mx-1 border border-black rounded">
+          <Form.Control
+            id="floatingInput"
+            type="text"
+            value={userProfile && userProfile.bio === "" ? "--" : userProfile?.bio || ""}
+          />
+          <label htmlFor="floatingInput">Settore</label>
+        </Form.Floating>
+
+        <Form.Floating className="mb-3 mx-1 border border-black rounded">
+          <Form.Control id="floatingInput" type="text" value={userProfile && userProfile.area} />
+          <label htmlFor="floatingInput">Paese/Area geografica</label>
+        </Form.Floating>
+
+        <Form.Floating className="mb-3 mx-1 border border-black rounded">
+          <Form.Control id="floatingInput" type="text" value={"--"} />
+          <label htmlFor="floatingInput">CAP</label>
+        </Form.Floating>
+      </main>
     </div>
   );
 };
