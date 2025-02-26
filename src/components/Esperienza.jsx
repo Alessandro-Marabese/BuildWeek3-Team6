@@ -127,7 +127,10 @@ const Esperienza = () => {
 
       <ExperienceModal
         show={showModal}
-        handleClose={() => setShowModal(false)}
+        handleClose={() => {
+          setShowModal(false);
+          setExperienceToEdit(null);
+        }}
         experienceToEdit={experienceToEdit}
         handleDelete={handleDelete}
       />

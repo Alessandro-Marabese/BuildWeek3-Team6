@@ -63,6 +63,7 @@ const ExperienceModal = ({ show, handleClose, experienceToEdit, handleDelete }) 
       console.log(data);
       dispatch(addExperience(userId, formData));
     }
+
     handleClose();
   };
 
