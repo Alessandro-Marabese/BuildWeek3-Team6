@@ -201,9 +201,8 @@ body {
 }
 
 .camText {
-  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu,
-    Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Emoji",
-    "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell,
+    "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
   font-size: 0.75rem;
   line-height: 1.25;
   padding-top: 0.25rem;
@@ -297,6 +296,9 @@ body {
   text-decoration: none;
   color: black;
 }
+#leftcolhomepage .card:nth-child(2) a p:hover {
+  text-decoration: underline;
+}
 #leftcolhomepage .card:nth-child(3) a {
   text-decoration: none;
   color: black;
@@ -304,12 +306,13 @@ body {
 #leftcolhomepage .card:nth-child(3) {
   font-size: 0.9rem;
 }
-#leftcolhomepage .card:nth-child(4) a:hover {
+#leftcolhomepage .card:nth-child(3) a h6:hover {
+  color: #0d6efd;
+}
+#leftcolhomepage .card:nth-child(4) a h6:hover {
   text-decoration: underline;
 }
-.elementi-salvati h6:hover {
-  text-decoration: underline;
-}
+
 #creation-post-button {
   --bs-btn-bg: #ffffff;
   --bs-btn-border-color: #ffffff;
@@ -339,8 +342,8 @@ body {
   --bs-btn-active-border-color: #ffffff;
   color: black;
 }
-li::marker {
-  display: none;
+#homepage-sidebar-list li:hover {
+  background-color: #ebebeb;
 }
 #vedi-altro-homepage-sidebar {
   --bs-btn-bg: #ffffff;
@@ -352,6 +355,9 @@ li::marker {
   color: black;
   font-weight: 600;
 }
+.giochi-sidebar-homepage div:hover {
+  background-color: #ebebeb;
+}
 .badge {
   background-color: #fce3bc !important;
   color: #584055 !important;
@@ -360,6 +366,6 @@ li::marker {
 footer ul li {
   font-size: 0.8rem;
 }
-footer ul li::marker {
-  display: none;
+footer ul li a p:hover {
+  text-decoration: underline;
 }
