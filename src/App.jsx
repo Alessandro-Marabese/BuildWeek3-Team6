@@ -8,6 +8,7 @@ import SuggestedPeople from "./components/SuggestedPeople";
 import SuggestedPeopleDesktop from "./components/SuggestedPeopleDesktop";
 import MyNavBar from "./components/MyNavBar";
 import EditProfileImage from "./components/EditProfileImage";
+import EditProfile from "./components/EditProfle";
 
 function App() {
   const mylocation = useLocation();
@@ -46,6 +47,7 @@ function App() {
         />
         <Route path="/settings" element={<SettingsPage />} />
         <Route path="/edit-profile-image" element={<EditProfileImage />} />
+        <Route path="/edit-profile" element={<EditProfile />} />
       </Routes>
     </>
   );
