@@ -129,7 +129,7 @@ const Esperienza = () => {
         show={showModal}
         handleClose={() => {
           setShowModal(false);
-          setModalClosed(true);
+          setTimeout(() => setModalClosed(true), 500);
         }}
         experienceToEdit={experienceToEdit}
         handleDelete={handleDelete}
