@@ -47,11 +47,14 @@ const SuggestedPeopleDesktop = () => {
       <div className="suggested-card">
         <h3>Persone che potresti conoscere</h3>
         <div className="people-list">
-          {suggestedPeople.slice(0, visibleCount).map((person) => (
+          {suggestedPeople.slice(1, visibleCount + 1).map((person) => (
             <div key={person._id} className="person-item">
               <img src={person.image} alt={person.name} />
               <div className="person-info">
-                <p className="people-name">{person.name}</p>
+                <p className="people-name">
+                  {person.name} {person.surname}
+                </p>
+
                 <p className="people-title">{person.title}</p>
               </div>
               <button className="connect-button">
@@ -66,7 +69,7 @@ const SuggestedPeopleDesktop = () => {
           visibleCount < suggestedPeople.length &&
           visibleCount < 10 && (
             <button className="show-more-btn" onClick={handleShowMore}>
-              Mostra altro
+              Mostra Altro
             </button>
           )}
       </div>
