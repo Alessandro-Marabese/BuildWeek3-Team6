@@ -30,25 +30,17 @@ const Esperienza = () => {
 
   const handleSubmit = (formData) => {
     if (experienceToEdit) {
-      dispatch(updateExperience(userId, experienceToEdit._id, formData)).then(() => {
-        dispatch(fetchExperiences(userId));
-      });
+      dispatch(updateExperience(userId, experienceToEdit._id, formData));
     } else {
-      dispatch(addExperience(userId, formData)).then(() => {
-        dispatch(fetchExperiences(userId));
-      });
+      dispatch(addExperience(userId, formData));
     }
-    setShowModal(false);
   };
 
   const handleDelete = (experienceId) => {
-    dispatch(deleteExperience(userId, experienceId)).then(() => {
-      dispatch(fetchExperiences(userId));
-    });
+    dispatch(deleteExperience(userId, experienceId));
   };
 
   if (loading) return <div>Loading...</div>;
-
   if (error) return <div>Error: {error}</div>;
 
   if (!experiences || experiences.length === 0) {
@@ -106,17 +98,6 @@ const Esperienza = () => {
               >
                 <path d="M21.13 2.86a3 3 0 00-4.17 0l-13 13L2 22l6.19-2L21.13 7a3 3 0 000-4.16zM6.77 18.57l-1.35-1.34L16.64 6 18 7.35z"></path>
               </svg>
-
-              <svg
-                viewBox="0 0 24 24"
-                data-supported-dps="24x24"
-                fill="currentColor"
-                className="icon i24x24"
-                style={{ width: "24px" }}
-                onClick={() => handleDelete(exp._id)}
-              >
-                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
-              </svg>
             </div>
           </div>
         ))}
@@ -135,12 +116,10 @@ const Esperienza = () => {
 
       <ExperienceModal
         show={showModal}
-        handleClose={() => {
-          setShowModal(false);
-          setExperienceToEdit(null);
-        }}
+        handleClose={() => setShowModal(false)}
         handleSubmit={handleSubmit}
         experienceToEdit={experienceToEdit}
+        handleDelete={handleDelete}
       />
     </Col>
   );

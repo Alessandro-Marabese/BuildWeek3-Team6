@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Modal, Form, Button } from "react-bootstrap";
 
-const ExperienceModal = ({ show, handleClose, handleSubmit, experienceToEdit }) => {
+const ExperienceModal = ({ show, handleClose, handleSubmit, experienceToEdit, handleDelete }) => {
   const [formData, setFormData] = useState({
     role: "",
     company: "",
@@ -28,13 +28,15 @@ const ExperienceModal = ({ show, handleClose, handleSubmit, experienceToEdit }) 
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const formattedData = {
-      ...formData,
-      startDate: formData.startDate ? `${formData.startDate}T00:00:00.000Z` : null,
-      endDate: formData.endDate ? `${formData.endDate}T00:00:00.000Z` : null,
-    };
-    handleSubmit(formattedData);
+    handleSubmit(formData);
     handleClose();
+  };
+
+  const onDelete = () => {
+    if (experienceToEdit) {
+      handleDelete(experienceToEdit._id);
+      handleClose();
+    }
   };
 
   return (
@@ -68,9 +70,14 @@ const ExperienceModal = ({ show, handleClose, handleSubmit, experienceToEdit }) 
             <Form.Label>Descrizione</Form.Label>
             <Form.Control as="textarea" name="description" value={formData.description} onChange={handleChange} />
           </Form.Group>
-          <Button type="submit" variant="primary">
+          <Button type="submit" variant="primary" className="me-2">
             Salva
           </Button>
+          {experienceToEdit && (
+            <Button variant="outline-primary" onClick={onDelete}>
+              Elimina
+            </Button>
+          )}
         </Form>
       </Modal.Body>
     </Modal>
