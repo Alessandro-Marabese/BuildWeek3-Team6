@@ -47,7 +47,7 @@ const HomePage = () => {
   };
 
   return (
-    <Container id="homepage-container" className="mx-md-auto">
+    <Container id="homepage-container" className="mx-0 mx-md-auto">
       <Row>
         <Col id="leftcolhomepage" className="col-12 col-md-4 col-lg-3 d-none d-md-block ">
           <Card className="mb-2">
