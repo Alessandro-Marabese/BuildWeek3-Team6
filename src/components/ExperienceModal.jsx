@@ -29,6 +29,16 @@ const ExperienceModal = ({ show, handleClose, experienceToEdit, handleDelete }) 
       };
       setFormData(formattedExperience);
       setImagePreview(formattedExperience.image);
+    } else {
+      setFormData({
+        role: "",
+        company: "",
+        startDate: "",
+        endDate: "",
+        area: "",
+        description: "",
+      });
+      setImagePreview(null);
     }
   }, [experienceToEdit]);
 
