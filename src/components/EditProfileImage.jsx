@@ -1,8 +1,9 @@
-import { useRef, useState } from "react";
-import { Button, Container, Form, Image } from "react-bootstrap";
+import { useEffect, useRef, useState } from "react";
+import { Button, Col, Container, Form, Image, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { editImageProfile, getUserProfile } from "../redux/actions";
+import deleteImg from "../assets/delete.png";
 
 const EditProfileImage = () => {
   const dispatch = useDispatch();
@@ -10,9 +11,32 @@ const EditProfileImage = () => {
   const userProfile = useSelector((state) => state.profile.content);
 
   const [selectedFile, setSelectedFile] = useState(null);
+  const [isDelete, setIsDelete] = useState(false);
   const fileInputRef = useRef(null);
 
+  async function createFileFromImage() {
+    const response = await fetch(deleteImg);
+    const blob = await response.blob();
+    const imgDel = new File([blob], "delete.png", { type: "image/png" });
+    setIsDelete(true);
+    setSelectedFile(imgDel);
+  }
+
+  useEffect(() => {
+    if (isDelete) {
+      if (selectedFile) {
+        handleUpload(true);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isDelete, selectedFile]);
+
+  const handleBtnDelClick = () => {
+    createFileFromImage();
+  };
+
   const handleBtnClick = () => {
+    setIsDelete(false);
     fileInputRef.current.click();
   };
 
@@ -21,11 +45,6 @@ const EditProfileImage = () => {
   };
 
   const handleUpload = () => {
-    if (!selectedFile) {
-      alert("Seleziona un file prima di caricare!");
-      return;
-    }
-
     dispatch(editImageProfile(selectedFile, userProfile._id))
       .then(() => dispatch(getUserProfile()))
       .then(() => navigate(-1))
@@ -62,9 +81,11 @@ const EditProfileImage = () => {
       selectedFile ? (
         <>
           <div className="text-center">
-            <p className="py-3 px-5">
-              Gli utenti con una foto ricevono fino a 21 volte più visualizzazioni del profilo
-            </p>
+            {isDelete === false && (
+              <p className="py-3 px-5">
+                Gli utenti con una foto ricevono fino a 21 volte più visualizzazioni del profilo
+              </p>
+            )}
             <Container>
               <Form.Control
                 type="file"
@@ -75,17 +96,38 @@ const EditProfileImage = () => {
               />
               {selectedFile ? (
                 <>
-                  <div className="mt-3 d-flex flex-column align-items-center">
-                    <Image src={URL.createObjectURL(selectedFile)} alt="Anteprima" className="imgPreview" />
-                    <Button
-                      variant="outline-primary"
-                      type="submit"
-                      className="roundedAll mt-3"
-                      onClick={handleBtnClick}
-                    >
-                      Cambia foto
-                    </Button>
-                  </div>
+                  {isDelete === false ? (
+                    <div className="mt-3  d-flex flex-column align-items-center ">
+                      <div className="bg-black py-2 w-100 text-center">
+                        <Image src={URL.createObjectURL(selectedFile)} alt="Anteprima" className="imgPreview" />
+                      </div>
+                      <Container fluid>
+                        <Row>
+                          <Col className="d-flex">
+                            <Button
+                              variant="outline-primary"
+                              type="submit"
+                              className="roundedAll mt-3 w-100 btnProfile"
+                              onClick={handleBtnClick}
+                            >
+                              Cambia foto
+                            </Button>
+                          </Col>
+                          <Col>
+                            <Button
+                              variant="tertiary"
+                              type="submit"
+                              className="roundedAll mt-3 w-100 btnProfile "
+                              disabled
+                              style={{ background: "#c3c3c3", border: "1px solid #c3c3c3" }}
+                            >
+                              Elimina
+                            </Button>
+                          </Col>
+                        </Row>
+                      </Container>
+                    </div>
+                  ) : null}
                 </>
               ) : (
                 <Button variant="outline-primary" type="submit" className="roundedAll" onClick={handleBtnClick}>
@@ -96,24 +138,72 @@ const EditProfileImage = () => {
           </div>
         </>
       ) : (
-        <div className="mt-3 d-flex flex-column align-items-center">
-          {console.log(userProfile)}
-          <Container>
-            <Form.Control
-              type="file"
-              className="mb-3"
-              ref={fileInputRef}
-              onChange={handleFileUpdate}
-              style={{ display: "none" }}
-            />
+        <>
+          {userProfile.image.slice(-10) !== "delete.png" ? (
             <div className="mt-3 d-flex flex-column align-items-center">
-              <Image src={userProfile.image} alt="Anteprima" className="imgPreview" />
-              <Button variant="outline-primary" type="submit" className="roundedAll mt-3" onClick={handleBtnClick}>
-                Cambia foto
-              </Button>
+              <Container>
+                <Form.Control
+                  type="file"
+                  className="mb-3"
+                  ref={fileInputRef}
+                  onChange={handleFileUpdate}
+                  style={{ display: "none" }}
+                />
+                <div className="d-flex flex-column align-items-center ">
+                  <p className="d-flex w-100 justify-content-start">Trascina per riposizionare.</p>
+                  <div className="bg-black py-2 w-100 text-center">
+                    <Image src={userProfile.image} alt="Anteprima" className="imgPreview" />
+                  </div>
+                  <Container fluid>
+                    <Row>
+                      <Col className="d-flex">
+                        <Button
+                          variant="outline-primary"
+                          type="submit"
+                          className="roundedAll mt-3 w-100 btnProfile"
+                          onClick={handleBtnClick}
+                        >
+                          Cambia foto
+                        </Button>
+                      </Col>
+                      <Col className="d-flex">
+                        <Button
+                          variant="outline-primary"
+                          type="submit"
+                          className="roundedAll mt-3 w-100 btnProfile"
+                          onClick={handleBtnDelClick}
+                        >
+                          Elimina
+                        </Button>
+                      </Col>
+                    </Row>
+                  </Container>
+                </div>
+              </Container>
             </div>
-          </Container>
-        </div>
+          ) : (
+            <>
+              <div className="text-center">
+                <p className="py-3 px-5">
+                  Gli utenti con una foto ricevono fino a 21 volte più visualizzazioni del profilo
+                </p>
+                <Container>
+                  <Form.Control
+                    type="file"
+                    className="mb-3"
+                    ref={fileInputRef}
+                    onChange={handleFileUpdate}
+                    style={{ display: "none" }}
+                  />
+
+                  <Button variant="outline-primary" type="submit" className="roundedAll" onClick={handleBtnClick}>
+                    Aggiungi foto del profilo
+                  </Button>
+                </Container>
+              </div>
+            </>
+          )}
+        </>
       )}
     </div>
   );

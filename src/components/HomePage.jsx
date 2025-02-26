@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Badge, Button, Card, Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserProfile } from "../redux/actions";
+import { Link } from "react-router";
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -35,7 +36,9 @@ const HomePage = () => {
                 <a href="#">
                   <p>Visitatori del profilo</p>
                 </a>
-                <p>Numero</p>
+                <a href="#">
+                  <p>Numero</p>
+                </a>
               </div>
               <a href="#">
                 <p>Visualizza tutte le analisi</p>
@@ -87,7 +90,9 @@ const HomePage = () => {
           <Card>
             <Card.Body>
               <div className="d-flex">
-                <img src={userProfile.image} alt="profile-image" height="50" width="50" className="rounded-circle" />
+                <Link to="/profile">
+                  <img src={userProfile.image} alt="profile-image" height="50" width="50" className="rounded-circle" />
+                </Link>
                 <Button id="creation-post-button" className="rounded-pill ms-3 flex-grow-1 text-start text-black border-secondary">
                   Crea un post
                 </Button>
@@ -125,10 +130,14 @@ const HomePage = () => {
               <Row className="justify-content-between">
                 <Col className="col-4 d-flex align-items-center">
                   <div>
-                    <img src={userProfile.image} alt="" height="60" width="60" />
+                    <a href="#">
+                      <img src={userProfile.image} alt="" height="60" width="60" />
+                    </a>
                   </div>
                   <div className="ms-2">
-                    <h6>Autore post</h6>
+                    <a href="#" className="text-decoration-none text-black">
+                      <h6>Autore post</h6>
+                    </a>
                     <p className="mb-0 opacity-50">2000 followers</p>
                     <p className="d-inline-block mb-0 opacity-50">1s • </p>
                     <svg
@@ -246,97 +255,120 @@ const HomePage = () => {
 
         <Col>
           <Card>
-            <Card.Body>
-              <div className="d-flex justify-content-between">
+            <Card.Body className="px-0">
+              <div className="d-flex justify-content-between px-3">
                 <h4 className="mb-3">In primo piano</h4>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-info-square-fill mt-2" viewBox="0 0 16 16">
-                  <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm8.93 4.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM8 5.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2" />
-                </svg>
+                <a href="#" className="text-black">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    className="bi bi-info-square-fill mt-2"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm8.93 4.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM8 5.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2" />
+                  </svg>
+                </a>
               </div>
-              <h5 className="opacity-50 mb-4">a cura di Linkedin Notizie</h5>
-              <ul id="homepage-sidebar-list" className="ps-1">
-                <li className="d-inline-block">
+              <h5 className="opacity-50 mb-4 px-3">a cura di Linkedin Notizie</h5>
+              <ul id="homepage-sidebar-list" className="ps-0">
+                <li className="d-inline-block w-100">
                   <a href="#" className="text-decoration-none text-black">
-                    <h6>Fusione tra Saipem e Subsea7</h6>
-                    <p>1 giorno fa • 676 lettori</p>
+                    <div className=" px-3">
+                      <h6 className="mb-1">Fusione tra Saipem e Subsea7</h6>
+                      <p>1 giorno fa • 676 lettori</p>
+                    </div>
                   </a>
                 </li>
-                <li className="d-inline-block">
+                <li className="d-inline-block w-100">
                   <a href="#" className="text-decoration-none text-black">
-                    <h6>Priorità benessere per i lavoratori</h6>
-                    <p>1 giorno fa • 289 lettori</p>
+                    <div className=" px-3">
+                      <h6 className="mb-1">Priorità benessere per i lavoratori</h6>
+                      <p>1 giorno fa • 289 lettori</p>
+                    </div>
                   </a>
                 </li>
-                <li className="d-inline-block">
+                <li className="d-inline-block w-100">
                   <a href="#" className="text-decoration-none text-black">
-                    <h6>Roma ospita la COP16 &quot;bis&quot;</h6>
-                    <p>6 ore fa • 244 lettori</p>
+                    <div className=" px-3">
+                      <h6 className="mb-1">Roma ospita la COP16 &quot;bis&quot;</h6>
+                      <p>6 ore fa • 244 lettori</p>
+                    </div>
                   </a>
                 </li>
-                <li className="d-inline-block">
+                <li className="d-inline-block w-100">
                   <a href="#" className="text-decoration-none text-black">
-                    <h6>Stipendi più bassi per le donne</h6>
-                    <p>5 ore fa</p>
+                    <div className=" px-3">
+                      <h6 className="mb-1">Stipendi più bassi per le donne</h6>
+                      <p>5 ore fa</p>
+                    </div>
                   </a>
                 </li>
-                <li className="d-inline-block">
+                <li className="d-inline-block w-100">
                   <a href="#" className="text-decoration-none text-black">
-                    <h6>Droni che riprendono quota</h6>
-                    <p>2 ore fa</p>
+                    <div className=" px-3">
+                      <h6 className="mb-1">Droni che riprendono quota</h6>
+                      <p>2 ore fa</p>
+                    </div>
                   </a>
                 </li>
               </ul>
-              <Button id="vedi-altro-homepage-sidebar">
+              <Button id="vedi-altro-homepage-sidebar" className="ms-1">
                 Vedi altro
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-caret-down-fill" viewBox="0 0 16 16">
                   <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
                 </svg>
               </Button>
-              <h5 className="opacity-50 mt-2">I giochi di oggi</h5>
-              <div className="d-flex">
-                <img
-                  src="https://static.licdn.com/aero-v1/sc/h/im5l00imv9odauybfemlfxm6"
-                  alt="Tango"
-                  className="news-module__puzzle-icon mt-1 me-2"
-                  height="35"
-                />
-                <div>
-                  <h6 className="mb-0">Tango</h6>
-                  <p className="mb-0 opacity-50">Armonizza la griglia</p>
+              <h5 className="opacity-50 mt-2 mb-2 px-3">I giochi di oggi</h5>
+              <a href="#" className="giochi-sidebar-homepage text-decoration-none text-black">
+                <div className="d-flex px-3 ">
+                  <img
+                    src="https://static.licdn.com/aero-v1/sc/h/im5l00imv9odauybfemlfxm6"
+                    alt="Tango"
+                    className="news-module__puzzle-icon mt-1 me-2"
+                    height="35"
+                  />
+                  <div>
+                    <h6 className="mb-0">Tango</h6>
+                    <p className="mb-0 opacity-50">Armonizza la griglia</p>
+                  </div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    fill="currentColor"
+                    className="bi bi-caret-right-fill ms-auto mt-2"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
+                  </svg>
                 </div>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  fill="currentColor"
-                  className="bi bi-caret-right-fill ms-auto mt-2"
-                  viewBox="0 0 16 16"
-                >
-                  <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
-                </svg>
-              </div>
-              <div className="d-flex mt-2">
-                <img
-                  src="https://static.licdn.com/aero-v1/sc/h/25itbd3dpc6ockbgvdhot9qp1"
-                  alt="Queens"
-                  className="news-module__puzzle-icon mt-1 me-2"
-                  height="35"
-                />
-                <div>
-                  <h6 className="mb-0">Queens</h6>
-                  <p className="mb-0 opacity-50">Incorona ogni regione</p>
+              </a>
+              <a href="#" className="giochi-sidebar-homepage text-decoration-none text-black">
+                <div className="d-flex mt-2 px-3">
+                  <img
+                    src="https://static.licdn.com/aero-v1/sc/h/25itbd3dpc6ockbgvdhot9qp1"
+                    alt="Queens"
+                    className="news-module__puzzle-icon mt-1 me-2"
+                    height="35"
+                  />
+                  <div>
+                    <h6 className="mb-0">Queens</h6>
+                    <p className="mb-0 opacity-50">Incorona ogni regione</p>
+                  </div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    fill="currentColor"
+                    className="bi bi-caret-right-fill ms-auto mt-2"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
+                  </svg>
                 </div>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  fill="currentColor"
-                  className="bi bi-caret-right-fill ms-auto mt-2"
-                  viewBox="0 0 16 16"
-                >
-                  <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
-                </svg>
-              </div>
+              </a>
             </Card.Body>
           </Card>
 
@@ -365,47 +397,47 @@ const HomePage = () => {
             <ul className="d-flex flex-wrap justify-content-center align-items-center m-4 ps-0">
               <li className="m-1 d-inline-block">
                 <a href="#" className="text-decoration-none text-black opacity-50">
-                  Informazioni
+                  <p className="mb-0">Informazioni</p>
                 </a>
               </li>
               <li className="m-2 d-inline-block">
                 <a href="#" className="text-decoration-none text-black opacity-50">
-                  Accessibilità
+                  <p className="mb-0">Accessibilità</p>
                 </a>
               </li>
               <li className="m-2 d-inline-block">
                 <a href="#" className="text-decoration-none text-black opacity-50">
-                  Centro Assistenza
+                  <p className="mb-0">Centro Assistenza</p>
                 </a>
               </li>
               <li className="m-2 d-inline-block">
                 <a href="#" className="text-decoration-none text-black opacity-50">
-                  Privacy e condizioni
+                  <p className="mb-0">Privacy e condizioni</p>
                 </a>
               </li>
               <li className="m-2 d-inline-block">
                 <a href="#" className="text-decoration-none text-black opacity-50">
-                  Opzioni per gli annunci pubblicitari
+                  <p className="mb-0">Opzioni per gli annunci pubblicitari</p>
                 </a>
               </li>
               <li className="m-2 d-inline-block">
                 <a href="#" className="text-decoration-none text-black opacity-50">
-                  Pubblicità
+                  <p className="mb-0">Pubblicità</p>
                 </a>
               </li>
               <li className="m-2 d-inline-block">
                 <a href="#" className="text-decoration-none text-black opacity-50">
-                  Servizi alle aziende
+                  <p className="mb-0">Servizi alle aziende</p>
                 </a>
               </li>
               <li className="m-2 d-inline-block">
                 <a href="#" className="text-decoration-none text-black opacity-50">
-                  Scarica l&apos;app Linkedin
+                  <p className="mb-0">Scarica l&apos;app Linkedin</p>
                 </a>
               </li>
               <li className="m-2 d-inline-block">
                 <a href="#" className="text-decoration-none text-black opacity-50">
-                  Altro
+                  <p className="mb-0">Altro</p>
                 </a>
               </li>
             </ul>

@@ -139,6 +139,10 @@ body {
   fill: #666666;
 }
 
+.artdeco-button__icon {
+  fill: #0a66c2;
+}
+
 .i12x12 {
   width: 12px;
 }
@@ -159,23 +163,62 @@ body {
   align-items: center;
 }
 
+@media screen and (min-width: 993px) {
+  .actions-container {
+    width: 48px;
+  }
+  .imgCardProfile::before {
+    content: "";
+    background: transparent;
+  }
+  .info-contact {
+    text-decoration: none;
+    margin-left: 2px;
+  }
+  .position::after {
+    content: "\00b7\00a0";
+    fill: #0a66c2;
+    padding-left: 4px;
+    font-weight: 600;
+  }
+  .info-contact:hover {
+    text-decoration: underline;
+  }
+}
+
+.linkArtDeco {
+  background-color: #ffffff;
+  color: #0a66c2;
+  border-radius: 50%;
+  height: 32px;
+  width: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+}
+
 .linkSettings {
   background-color: #ffffff;
   color: #666666;
-  padding-inline: 0.5rem;
-  padding-block: 0.25rem;
   border-radius: 50%;
+  height: 32px;
+  width: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .linkEditImg {
   background-color: #ffffff;
   color: #666666;
-  text-align: center;
-  padding-top: 2px;
   border-radius: 50%;
   border: 1px solid #cecece;
-  width: 32px;
   height: 32px;
+  width: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   top: -35px;
   left: 105px;
   margin-bottom: -40px;
@@ -249,6 +292,13 @@ body {
 #top-margin {
   margin-top: 3.8rem;
 }
+
+@media screen and (max-width: 992px) {
+  #top-margin {
+    margin-top: 2.8rem;
+  }
+}
+
 .dot-separator::before {
   content: "\00b7\00a0";
   padding-left: 4px;
@@ -275,7 +325,7 @@ body {
 }
 
 .imgPreview {
-  max-width: 300px;
+  width: 300px;
 }
 
 /* Homepage */
@@ -302,6 +352,9 @@ body {
   text-decoration: none;
   color: black;
 }
+#leftcolhomepage .card:nth-child(2) a p:hover {
+  text-decoration: underline;
+}
 #leftcolhomepage .card:nth-child(3) a {
   text-decoration: none;
   color: black;
@@ -309,12 +362,13 @@ body {
 #leftcolhomepage .card:nth-child(3) {
   font-size: 0.9rem;
 }
-#leftcolhomepage .card:nth-child(4) a:hover {
+#leftcolhomepage .card:nth-child(3) a h6:hover {
+  color: #0d6efd;
+}
+#leftcolhomepage .card:nth-child(4) a h6:hover {
   text-decoration: underline;
 }
-.elementi-salvati h6:hover {
-  text-decoration: underline;
-}
+
 #creation-post-button {
   --bs-btn-bg: #ffffff;
   --bs-btn-border-color: #ffffff;
@@ -344,8 +398,8 @@ body {
   --bs-btn-active-border-color: #ffffff;
   color: black;
 }
-li::marker {
-  display: none;
+#homepage-sidebar-list li:hover {
+  background-color: #ebebeb;
 }
 #vedi-altro-homepage-sidebar {
   --bs-btn-bg: #ffffff;
@@ -357,6 +411,9 @@ li::marker {
   color: black;
   font-weight: 600;
 }
+.giochi-sidebar-homepage div:hover {
+  background-color: #ebebeb;
+}
 .badge {
   background-color: #fce3bc !important;
   color: #584055 !important;
@@ -365,10 +422,78 @@ li::marker {
 footer ul li {
   font-size: 0.8rem;
 }
-footer ul li::marker {
-  display: none;
+footer ul li a p:hover {
+  text-decoration: underline;
 }
-.profile-card {
-  
-  overflow: hidden; /
+
+.btnProfile {
+  border: 1px solid #0a66c2;
+  color: #0a66c2;
+}
+
+@media screen and (max-width: 992px) {
+  .rounded-from-lg {
+    border-radius: 0;
+  }
+}
+@media screen and (min-width: 993px) {
+  .rounded-from-lg {
+    border-radius: 10px;
+    overflow: hidden;
+    max-width: 804px;
+    background-color: #fff;
+  }
+  .d-h5-lg {
+    font-size: 2rem;
+  }
+}
+
+.badge-verifica {
+  font-size: 0.9rem;
+  vertical-align: middle;
+  border: 1px dashed #0a66c2;
+  border-radius: 50px;
+  color: #0a66c2;
+  background-color: #ffffff;
+  padding-block: 2px;
+  font-weight: 600;
+}
+
+.badge-verifica:hover {
+  background-color: #eaf4fd;
+}
+
+.btndisp {
+  background-color: #0a66c2;
+  color: #ffffff;
+  font-weight: 600;
+  border: 1px solid #0a66c2;
+}
+
+.btndisp:hover {
+  background-color: #034182;
+}
+
+.btnaddbet {
+  background-color: #ffffff;
+  border: 1px solid #0a66c2;
+  color: #0a66c2;
+  font-weight: 600;
+  box-shadow: 0 0 0 1px transparent;
+}
+
+.btnaddbet:hover {
+  background-color: #eaf4fd;
+  box-shadow: 0 0 0 1px #0a66c2;
+}
+
+.btnris {
+  background-color: #ffffff;
+  border: 1px solid black;
+  box-shadow: 0 0 0 1px transparent;
+}
+
+.btnris:hover {
+  background-color: #e9e9e9;
+  box-shadow: 0 0 0 1px black;
 }
