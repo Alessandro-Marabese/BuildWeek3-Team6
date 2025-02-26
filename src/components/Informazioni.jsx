@@ -7,7 +7,7 @@ const Informazioni = () => {
       <Container fluid className="mx-0 mt-2 cont">
         <h5>Informazioni</h5>
         <Row>
-          <Col xs={10}>
+          <Col xs={12}>
             <p>
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet enim dolore distinctio eum sint praesentium
               eaque vel obcaecati tempora, fuga nihil porro quas ipsam nisi ea esse incidunt fugit quaerat.
