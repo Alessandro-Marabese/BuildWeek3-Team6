@@ -3,7 +3,7 @@ import { Col, Container, Row, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchExperiences,
-  // addExperience,
+  //addExperience,
   // updateExperience,
   deleteExperience,
   /*   uploadExperienceImage, */
@@ -14,7 +14,7 @@ const Esperienza = () => {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.profile.content._id);
   const { experiences, loading, error } = useSelector((state) => state.experiences);
-
+  const [modalClosed, setModalClosed] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [experienceToEdit, setExperienceToEdit] = useState(null);
 
@@ -22,7 +22,7 @@ const Esperienza = () => {
     if (userId) {
       dispatch(fetchExperiences(userId));
     }
-  }, [dispatch, userId]);
+  }, [dispatch, userId, modalClosed]);
 
   const handleAddClick = () => {
     setExperienceToEdit(null);
@@ -56,8 +56,8 @@ const Esperienza = () => {
 
   if (!experiences || experiences.length === 0) {
     return (
-      <Col className="ps-lg-3">
-        <Container fluid className="mx-0 cont">
+      <Col className="ps-lg-3 mt-2">
+        <Container fluid className="mx-0 cont mt-2 pt-3 rounded-block">
           <h5>Esperienza</h5>
           <p>No experiences found</p>
           <Row>
@@ -72,6 +72,15 @@ const Esperienza = () => {
             </Button>
           </Row>
         </Container>
+        <ExperienceModal
+          show={showModal}
+          handleClose={() => {
+            setShowModal(false);
+            setTimeout(() => setModalClosed(true), 0);
+          }}
+          experienceToEdit={experienceToEdit}
+          handleDelete={handleDelete}
+        />
       </Col>
     );
   }
@@ -127,7 +136,10 @@ const Esperienza = () => {
 
       <ExperienceModal
         show={showModal}
-        handleClose={() => setShowModal(false)}
+        handleClose={() => {
+          setShowModal(false);
+          setTimeout(() => setModalClosed(true), 0);
+        }}
         experienceToEdit={experienceToEdit}
         handleDelete={handleDelete}
       />

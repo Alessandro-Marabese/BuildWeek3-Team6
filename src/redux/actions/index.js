@@ -87,18 +87,20 @@ export const fetchExperiences = (userId) => {
 
       if (response.ok) {
         const data = await response.json();
-
-        dispatch({ type: FETCH_EXPERIENCES_OK, payload: data });
+        if (data && Array.isArray(data)) {
+          dispatch({ type: FETCH_EXPERIENCES_OK, payload: data });
+        } else {
+          throw new Error("La risposta non contiene un array di esperienze valido.");
+        }
       } else {
-        throw new Error("Errore durante il fetch delle esperienze");
+        throw new Error("Errore durante il fetch delle esperienze: " + response.statusText);
       }
     } catch (error) {
       dispatch({ type: FETCH_EXPERIENCES_ERR, payload: error.message });
-      console.error("Errore nel fetch delle esperienze:", error.status);
+      console.error("Errore nel fetch delle esperienze:", error);
     }
   };
 };
-
 export const addExperience = (userId, experience) => async (dispatch) => {
   console.log(userId, experience);
   try {
@@ -111,7 +113,7 @@ export const addExperience = (userId, experience) => async (dispatch) => {
       area: experience.area,
     };
 
-    const response = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences`, {
+    const response = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/`, {
       method: "POST",
       headers: {
         Authorization: API_TOKEN,
@@ -127,6 +129,7 @@ export const addExperience = (userId, experience) => async (dispatch) => {
 
     const data = await response.json();
     dispatch({ type: ADD_EXPERIENCE, payload: data });
+    return data;
   } catch (error) {
     console.error("Errore durante l'aggiunta dell'esperienza:", error);
   }
@@ -155,6 +158,8 @@ export const uploadExperienceImage = (userId, expId, imageFile) => async (dispat
       const data = await response.json();
       console.log("Immagine dell'esperienza aggiornata", data);
       dispatch({ type: UPDATE_EXPERIENCE_IMAGE, payload: data });
+
+      return data;
     }
   } catch (error) {
     console.error("Errore durante il caricamento dell'immagine dell'esperienza:", error);
@@ -175,11 +180,11 @@ export const updateExperience = (userId, expId, experience) => async (dispatch) 
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(errorData.error || "Errore durante l'aggiornamento dell'esperienza");
+    } else {
+      const data = await response.json();
+      dispatch({ type: UPDATE_EXPERIENCE, payload: data });
+      console.log("Esperienza aggiornata", data);
     }
-
-    const data = await response.json();
-    dispatch({ type: UPDATE_EXPERIENCE, payload: data });
-    console.log("Esperienza aggiornata", data);
   } catch (error) {
     console.error("Errore durante l'aggiornamento dell'esperienza:", error);
   }
