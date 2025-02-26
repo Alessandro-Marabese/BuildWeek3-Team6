@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { Modal, Form, Button } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import { fetchExperiences, updateExperience, uploadExperienceImage } from "../redux/actions/index";
+import { useDispatch, useSelector } from "react-redux";
+import { addExperience, fetchExperiences, updateExperience, uploadExperienceImage } from "../redux/actions/index";
+import { data } from "react-router";
 
 const ExperienceModal = ({ show, handleClose, experienceToEdit, handleDelete }) => {
+  const userId = useSelector((state) => state.profile.content._id);
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     role: "",
@@ -44,20 +46,23 @@ const ExperienceModal = ({ show, handleClose, experienceToEdit, handleDelete }) 
 
   const onSubmit = (e) => {
     e.preventDefault();
-
-    if (img) {
-      console.log(img);
-      dispatch(uploadExperienceImage(experienceToEdit.user, experienceToEdit._id, img)).then(() =>
+    if (experienceToEdit) {
+      if (img) {
+        console.log(img);
+        dispatch(uploadExperienceImage(experienceToEdit.user, experienceToEdit._id, img)).then(() =>
+          dispatch(updateExperience(experienceToEdit.user, experienceToEdit._id, formData)).then(() =>
+            dispatch(fetchExperiences(experienceToEdit.user))
+          )
+        );
+      } else {
         dispatch(updateExperience(experienceToEdit.user, experienceToEdit._id, formData)).then(() =>
           dispatch(fetchExperiences(experienceToEdit.user))
-        )
-      );
+        );
+      }
     } else {
-      dispatch(updateExperience(experienceToEdit.user, experienceToEdit._id, formData)).then(() =>
-        dispatch(fetchExperiences(experienceToEdit.user))
-      );
+      console.log(data);
+      dispatch(addExperience(userId, formData));
     }
-
     handleClose();
   };
 
@@ -77,34 +82,40 @@ const ExperienceModal = ({ show, handleClose, experienceToEdit, handleDelete }) 
         <Form onSubmit={onSubmit}>
           <Form.Group>
             <Form.Label>Immagine</Form.Label>
-            <Form.Control type="file" accept="image/*" onChange={handleImageChange} />
+            <Form.Control type="file" accept="image/*" onChange={experienceToEdit && handleImageChange} />
             {imagePreview && (
               <img src={imagePreview} alt="Anteprima immagine" style={{ width: "100px", marginTop: "10px" }} />
             )}
           </Form.Group>
           <Form.Group>
             <Form.Label>Ruolo</Form.Label>
-            <Form.Control type="text" name="role" value={formData.role} onChange={handleChange} required />
+            <Form.Control type="text" name="role" value={formData.role || ""} onChange={handleChange} required />
           </Form.Group>
           <Form.Group>
             <Form.Label>Azienda</Form.Label>
-            <Form.Control type="text" name="company" value={formData.company} onChange={handleChange} required />
+            <Form.Control type="text" name="company" value={formData.company || ""} onChange={handleChange} required />
           </Form.Group>
           <Form.Group>
             <Form.Label>Data Inizio</Form.Label>
-            <Form.Control type="date" name="startDate" value={formData.startDate} onChange={handleChange} required />
+            <Form.Control
+              type="date"
+              name="startDate"
+              value={formData.startDate || ""}
+              onChange={handleChange}
+              required
+            />
           </Form.Group>
           <Form.Group>
             <Form.Label>Data Fine</Form.Label>
-            <Form.Control type="date" name="endDate" value={formData.endDate} onChange={handleChange} />
+            <Form.Control type="date" name="endDate" value={formData.endDate || ""} onChange={handleChange} />
           </Form.Group>
           <Form.Group>
             <Form.Label>Area</Form.Label>
-            <Form.Control type="text" name="area" value={formData.area} onChange={handleChange} />
+            <Form.Control type="text" name="area" value={formData.area || ""} onChange={handleChange} />
           </Form.Group>
           <Form.Group>
             <Form.Label>Descrizione</Form.Label>
-            <Form.Control as="textarea" name="description" value={formData.description} onChange={handleChange} />
+            <Form.Control as="textarea" name="description" value={formData.description || ""} onChange={handleChange} />
           </Form.Group>
           <Button type="submit" variant="primary" className="me-2">
             Salva
