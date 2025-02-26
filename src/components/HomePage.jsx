@@ -135,11 +135,11 @@ const HomePage = () => {
           {isLoading ? (
             <Spinner animation="border" variant="primary" />
           ) : (
-            allPosts.slice(200, 300).map((singlePost) => (
+            allPosts.slice(200, 220).map((singlePost) => (
               <Card key={singlePost._id} data={singlePost} className="post-card mt-2">
                 <Card.Body>
                   <Row className="justify-content-between">
-                    <Col className="col-4 d-flex align-items-center">
+                    <Col className="col-4 d-flex align-items-center flex-grow-1">
                       <div>
                         <a href="#">
                           <img src={singlePost.user.image} alt="" height="60" width="60" />
