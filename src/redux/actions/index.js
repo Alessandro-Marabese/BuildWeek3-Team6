@@ -59,7 +59,14 @@ export const getSuggestedPeople = () => {
       if (resp.ok) {
         let suggestedPeople = await resp.json();
 
-        dispatch({ type: FETCH_SUGGESTED_PEOPLE_OK, payload: suggestedPeople });
+        let filteredPeople = suggestedPeople.filter(
+          (person) =>
+            person.image &&
+            person.title &&
+            person.title.toLowerCase().includes("developer")
+        );
+
+        dispatch({ type: FETCH_SUGGESTED_PEOPLE_OK, payload: filteredPeople });
       } else {
         throw new Error("Errore durante la fetch dei suggerimenti");
       }
@@ -72,13 +79,16 @@ export const getSuggestedPeople = () => {
 export const fetchExperiences = (userId) => {
   return async (dispatch) => {
     try {
-      const response = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences`, {
-        method: "GET",
-        headers: {
-          Authorization: API_TOKEN,
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: API_TOKEN,
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       if (response.ok) {
         const data = await response.json();

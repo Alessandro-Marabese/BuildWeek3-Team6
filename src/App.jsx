@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import CardProfile from "./components/CardProfile";
 import "./App.css";
 import SuggestedPeople from "./components/SuggestedPeople";
+import SuggestedPeopleDesktop from "./components/SuggestedPeopleDesktop";
 import MyNavBar from "./components/MyNavBar";
 import EditProfileImage from "./components/EditProfileImage";
 
@@ -22,10 +23,25 @@ function App() {
         <Route
           path="/profile"
           element={
-            <>
-              <CardProfile />
-              <SuggestedPeople />
-            </>
+            <div className="container mt-4">
+              <div className="row">
+                <div className=" col-lg-8 col-md-10 col-12">
+                  <div className="profile-card mb-3">
+                    <CardProfile />
+                  </div>
+
+                  <div className="profile-card d-lg-none mb-3">
+                    <div className="suggested-container">
+                      <SuggestedPeople />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="col-lg-4 d-none d-lg-block">
+                  <SuggestedPeopleDesktop />
+                </div>
+              </div>
+            </div>
           }
         />
         <Route path="/settings" element={<SettingsPage />} />
