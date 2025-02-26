@@ -14,7 +14,7 @@ const Esperienza = () => {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.profile.content._id);
   const { experiences, loading, error } = useSelector((state) => state.experiences);
-
+  const [modalClosed, setModalClosed] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [experienceToEdit, setExperienceToEdit] = useState(null);
 
@@ -22,7 +22,7 @@ const Esperienza = () => {
     if (userId) {
       dispatch(fetchExperiences(userId));
     }
-  }, [dispatch, userId]);
+  }, [dispatch, userId, modalClosed]);
 
   const handleAddClick = () => {
     setExperienceToEdit(null);
@@ -129,7 +129,7 @@ const Esperienza = () => {
         show={showModal}
         handleClose={() => {
           setShowModal(false);
-          setExperienceToEdit(null);
+          setModalClosed(true);
         }}
         experienceToEdit={experienceToEdit}
         handleDelete={handleDelete}

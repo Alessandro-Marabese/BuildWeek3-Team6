@@ -129,6 +129,7 @@ export const addExperience = (userId, experience) => async (dispatch) => {
 
     const data = await response.json();
     dispatch({ type: ADD_EXPERIENCE, payload: data });
+    return data;
   } catch (error) {
     console.error("Errore durante l'aggiunta dell'esperienza:", error);
   }
@@ -153,11 +154,12 @@ export const uploadExperienceImage = (userId, expId, imageFile) => async (dispat
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(errorData.error || "Errore durante l'aggiornamento dell'immagine dell'esperienza");
-    } else {
-      const data = await response.json();
-      console.log("Immagine dell'esperienza aggiornata", data);
-      dispatch({ type: UPDATE_EXPERIENCE_IMAGE, payload: data });
     }
+    const data = await response.json();
+    console.log("Immagine dell'esperienza aggiornata", data);
+    dispatch({ type: UPDATE_EXPERIENCE_IMAGE, payload: data });
+
+    return data;
   } catch (error) {
     console.error("Errore durante il caricamento dell'immagine dell'esperienza:", error);
   }
