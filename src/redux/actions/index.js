@@ -9,6 +9,10 @@ export const DELETE_EXPERIENCE = "DELETE_EXPERIENCE";
 export const UPDATE_PROFILE_SUCCESS = "UPDATE_PROFILE_SUCCESS";
 export const RECLUTER_VISIBLE = "RECLUTER_VISIBLE";
 export const UPDATE_PROFILE_ERR = "UPDATE_PROFILE_ERR";
+export const FETCH_POST_OK = "FETCH_POST_OK";
+export const FETCH_POST_ERR = "FETCH_POST_ERR";
+export const IS_LOADING_ON = "IS_LOADING_ON";
+export const IS_LOADING_OFF = "IS_LOADING_OFF";
 
 const API_TOKEN =
   "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2JjNTU4YWU3MDMzNzAwMTUzMTZkYjMiLCJpYXQiOjE3NDA0OTI3NzMsImV4cCI6MTc0MTcwMjM3M30.ghEymY3a9sDb5HV-twEe3aU29Z6oNBtkTfwahoV1JtY";
@@ -182,6 +186,34 @@ export const editImageProfile = (imgProfile, idProfile) => {
     } catch (error) {
       console.error("Errore durante l'aggiornamento del profilo:", error);
       dispatch({ type: UPDATE_PROFILE_ERR, payload: error.message });
+    }
+  };
+};
+
+export const getPosts = () => {
+  let url = "https://striveschool-api.herokuapp.com/api/posts/";
+
+  return async (dispatch) => {
+    dispatch({ type: IS_LOADING_ON, payload: true });
+    try {
+      let response = await fetch(url, {
+        method: "GET",
+        headers: {
+          Authorization: API_TOKEN,
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.ok) {
+        let posts = await response.json();
+        dispatch({ type: FETCH_POST_OK, payload: posts });
+      } else {
+        throw new Error("Errore durante il caricamento dei post");
+      }
+    } catch (error) {
+      dispatch({ type: FETCH_POST_ERR, payload: error });
+      console.log("Errore nella fetch dei post:", error);
+    } finally {
+      dispatch({ type: IS_LOADING_OFF });
     }
   };
 };

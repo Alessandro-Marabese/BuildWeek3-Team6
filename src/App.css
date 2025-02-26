@@ -392,6 +392,12 @@ body {
   --bs-btn-active-border-color: #ffffff;
   color: black;
 }
+#followers-card {
+  font-size: 0.8rem;
+}
+#date-creation-post {
+  font-size: 0.8rem;
+}
 #homepage-sidebar-list li:hover {
   background-color: #ebebeb;
 }
