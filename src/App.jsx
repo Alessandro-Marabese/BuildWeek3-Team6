@@ -26,7 +26,7 @@ function App() {
           element={
             <div className="container-fluid container-lg px-0">
               <div className="row">
-                <div className=" col-lg-8 col-12">
+                <div className=" col-lg-8 col-12 pe-0">
                   <div className="profile-card mb-3">
                     <CardProfile />
                   </div>
