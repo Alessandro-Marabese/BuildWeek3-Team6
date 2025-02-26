@@ -163,6 +163,23 @@ body {
   .actions-container {
     width: 48px;
   }
+  .imgCardProfile::before {
+    content: "";
+    background: transparent;
+  }
+  .info-contact {
+    text-decoration: none;
+    margin-left: 2px;
+  }
+  .position::after {
+    content: "\00b7\00a0";
+    fill: #0a66c2;
+    padding-left: 4px;
+    font-weight: 600;
+  }
+  .info-contact:hover {
+    text-decoration: underline;
+  }
 }
 
 .linkArtDeco {
@@ -191,12 +208,13 @@ body {
 .linkEditImg {
   background-color: #ffffff;
   color: #666666;
-  text-align: center;
-  padding-top: 2px;
   border-radius: 50%;
   border: 1px solid #cecece;
-  width: 32px;
   height: 32px;
+  width: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   top: -35px;
   left: 105px;
   margin-bottom: -40px;
@@ -413,4 +431,57 @@ footer ul li::marker {
     max-width: 804px;
     background-color: #fff;
   }
+  .d-h5-lg {
+    font-size: 2rem;
+  }
+}
+
+.badge-verifica {
+  font-size: 0.9rem;
+  vertical-align: middle;
+  border: 1px dashed #0a66c2;
+  border-radius: 50px;
+  color: #0a66c2;
+  background-color: #ffffff;
+  padding-block: 2px;
+  font-weight: 600;
+}
+
+.badge-verifica:hover {
+  background-color: #eaf4fd;
+}
+
+.btndisp {
+  background-color: #0a66c2;
+  color: #ffffff;
+  font-weight: 600;
+  border: 1px solid #0a66c2;
+}
+
+.btndisp:hover {
+  background-color: #034182;
+}
+
+.btnaddbet {
+  background-color: #ffffff;
+  border: 1px solid #0a66c2;
+  color: #0a66c2;
+  font-weight: 600;
+  box-shadow: 0 0 0 1px transparent;
+}
+
+.btnaddbet:hover {
+  background-color: #eaf4fd;
+  box-shadow: 0 0 0 1px #0a66c2;
+}
+
+.btnris {
+  background-color: #ffffff;
+  border: 1px solid black;
+  box-shadow: 0 0 0 1px transparent;
+}
+
+.btnris:hover {
+  background-color: #e9e9e9;
+  box-shadow: 0 0 0 1px black;
 }
