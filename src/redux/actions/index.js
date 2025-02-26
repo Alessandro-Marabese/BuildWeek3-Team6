@@ -100,25 +100,28 @@ export const fetchExperiences = (userId) => {
 };
 
 export const addExperience = (userId, experience) => async (dispatch) => {
+  console.log(userId, experience);
   try {
-    let formData = new FormData();
-    formData.append("role", experience.role);
-    formData.append("company", experience.company);
-    formData.append("startDate", experience.startDate);
-    formData.append("endDate", experience.endDate);
-    formData.append("area", experience.area);
-    formData.append("description", experience.description);
+    const newExperience = {
+      role: experience.role,
+      company: experience.company,
+      startDate: experience.startDate,
+      endDate: experience.endDate,
+      description: experience.description,
+      area: experience.area,
+    };
 
-    const response = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/`, {
+    const response = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences`, {
       method: "POST",
       headers: {
         Authorization: API_TOKEN,
+        "Content-Type": "application/json",
       },
-      body: formData,
+      body: JSON.stringify(newExperience),
     });
 
     if (!response.ok) {
-      const errorData = await response.json();
+      const errorData = await response.text();
       throw new Error(errorData.error || "Errore durante l'aggiunta dell'esperienza");
     }
 

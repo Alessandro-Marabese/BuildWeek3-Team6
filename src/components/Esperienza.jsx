@@ -3,8 +3,8 @@ import { Col, Container, Row, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchExperiences,
-  addExperience,
-  updateExperience,
+  // addExperience,
+  // updateExperience,
   deleteExperience,
   /*   uploadExperienceImage, */
 } from "../redux/actions/index";
@@ -34,18 +34,18 @@ const Esperienza = () => {
     setShowModal(true);
   };
 
-  const handleSubmit = (formData) => {
-    if (!userId) {
-      alert("User ID non trovato!");
-      return;
-    }
+  // const handleSubmit = (formData) => {
+  //   if (!userId) {
+  //     alert("User ID non trovato!");
+  //     return;
+  //   }
 
-    if (experienceToEdit) {
-      dispatch(updateExperience(userId, experienceToEdit._id, formData));
-    } else {
-      dispatch(addExperience(userId, formData));
-    }
-  };
+  //   if (experienceToEdit) {
+  //     dispatch(updateExperience(userId, experienceToEdit._id, formData));
+  //   } else {
+  //     dispatch(addExperience(userId, formData));
+  //   }
+  // };
 
   const handleDelete = (experienceId) => {
     dispatch(deleteExperience(userId, experienceId));
@@ -128,7 +128,6 @@ const Esperienza = () => {
       <ExperienceModal
         show={showModal}
         handleClose={() => setShowModal(false)}
-        handleSubmit={handleSubmit}
         experienceToEdit={experienceToEdit}
         handleDelete={handleDelete}
       />
