@@ -10,22 +10,31 @@ const SuggestedPeople = () => {
 
   const [visibleCount, setVisibleCount] = useState(5);
 
+  const [hasClickedShowMore, setHasClickedShowMore] = useState(false);
+
   useEffect(() => {
     dispatch(getSuggestedPeople());
   }, [dispatch]);
 
   const handleShowMore = () => {
     setVisibleCount((prevCount) => prevCount + 5);
+
+    setHasClickedShowMore(true);
   };
 
   return (
-    <section className="suggested-wrapper d-md-none">
+    <div className="profile-card ">
       <div className="suggested-container">
         <h3 className="mb-3">Altri profili simili</h3>
+
         <ul className="list-group">
           {suggestedPeople.slice(0, visibleCount).map((person) => (
             <li key={person._id} className="list-group-item suggested-item">
-              <img src={person.image} alt={person.name} className="profile-image" />
+              <img
+                src={person.image}
+                alt={person.name}
+                className="profile-image"
+              />
               <div className="profile-info">
                 <p className="profile-name">
                   {person.name} {person.surname}
@@ -39,15 +48,18 @@ const SuggestedPeople = () => {
           ))}
         </ul>
 
-        {visibleCount < suggestedPeople.length && (
+        {!hasClickedShowMore && visibleCount < suggestedPeople.length && (
           <div className="text-center mt-3">
-            <button className="btn btn-primary" onClick={handleShowMore}>
+            <button
+              className="btn btn-primary show-more-btn"
+              onClick={handleShowMore}
+            >
               Mostra Altro
             </button>
           </div>
         )}
       </div>
-    </section>
+    </div>
   );
 };
 

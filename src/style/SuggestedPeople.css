@@ -1,9 +1,3 @@
-@media (min-width: 768px) {
-  .suggested-wrapper {
-    display: none;
-  }
-}
-
 .suggested-wrapper {
   width: 100vw;
   height: 100vh;
@@ -68,4 +62,7 @@
   color: #666;
   margin-left: auto;
   flex-shrink: 0;
+}
+.show-more-btn {
+  margin-bottom: 20px;
 }

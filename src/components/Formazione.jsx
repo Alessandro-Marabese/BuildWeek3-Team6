@@ -40,9 +40,10 @@ const Formazione = () => {
         <Row>
           <h5>Hai altri titoli di studio?</h5>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam consequuntur velit quae, eius temporibus
-            voluptate! Rerum placeat qui quo ratione labore rem at! Doloremque consequatur sequi iste eum earum.
-            Placeat.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam
+            consequuntur velit quae, eius temporibus voluptate! Rerum placeat
+            qui quo ratione labore rem at! Doloremque consequatur sequi iste eum
+            earum. Placeat.
           </p>
           <Button variant="outline-primary"> Aggiungi titolo di studio </Button>
         </Row>
