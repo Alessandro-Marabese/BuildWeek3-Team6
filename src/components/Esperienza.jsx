@@ -80,40 +80,37 @@ const Esperienza = () => {
     <Col className="ps-lg-3">
       <Container fluid className="mx-0 cont mt-2 pt-3 rounded-block">
         <h5>Esperienza</h5>
-        {console.log(experiences)}
         {experiences.map((exp) => (
-          <>
-            <div key={exp._id} className="d-flex mb-3">
-              <div>
-                <img
-                  src={exp.image || "https://static.licdn.com/aero-v1/sc/h/7t3cbtpanuobwuck7j8t5cpti"}
-                  alt="lavoro"
-                  style={{ width: "30px" }}
-                />
-              </div>
-              <div className="ms-3">
-                <span>{exp.role}</span>
-                <p>{exp.company}</p>
-                <p>
-                  {exp.startDate.split("T")[0]} - {exp.endDate ? exp.endDate.split("T")[0] : "Presente"}
-                </p>
-                <p className="text-black-50">{exp.area}</p>
-                <p className="text-black-50">{exp.description}</p>
-              </div>
-              <div className="icon-modifica ms-auto">
-                <svg
-                  viewBox="0 0 24 24"
-                  data-supported-dps="24x24"
-                  fill="currentColor"
-                  className="icon i24x24"
-                  style={{ width: "24px" }}
-                  onClick={() => handleEditClick(exp)}
-                >
-                  <path d="M21.13 2.86a3 3 0 00-4.17 0l-13 13L2 22l6.19-2L21.13 7a3 3 0 000-4.16zM6.77 18.57l-1.35-1.34L16.64 6 18 7.35z"></path>
-                </svg>
-              </div>
+          <div key={exp._id} className="d-flex mb-3">
+            <div>
+              <img
+                src={exp.image || "https://static.licdn.com/aero-v1/sc/h/7t3cbtpanuobwuck7j8t5cpti"}
+                alt="lavoro"
+                style={{ width: "30px" }}
+              />
             </div>
-          </>
+            <div className="ms-3">
+              <span>{exp.role}</span>
+              <p>{exp.company}</p>
+              <p>
+                {exp.startDate.split("T")[0]} - {exp.endDate ? exp.endDate.split("T")[0] : "Presente"}
+              </p>
+              <p className="text-black-50">{exp.area}</p>
+              <p className="text-black-50">{exp.description}</p>
+            </div>
+            <div className="icon-modifica ms-auto">
+              <svg
+                viewBox="0 0 24 24"
+                data-supported-dps="24x24"
+                fill="currentColor"
+                className="icon i24x24"
+                style={{ width: "24px" }}
+                onClick={() => handleEditClick(exp)}
+              >
+                <path d="M21.13 2.86a3 3 0 00-4.17 0l-13 13L2 22l6.19-2L21.13 7a3 3 0 000-4.16zM6.77 18.57l-1.35-1.34L16.64 6 18 7.35z"></path>
+              </svg>
+            </div>
+          </div>
         ))}
         <Row>
           <h5>Hai altra esperienza?</h5>
