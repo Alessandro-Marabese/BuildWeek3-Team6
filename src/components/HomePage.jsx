@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Badge, Button, Card, Col, Container, Row, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getPosts, getUserProfile } from "../redux/actions";
@@ -9,7 +9,11 @@ const HomePage = () => {
   const userProfile = useSelector((state) => state.profile.content);
   const isLoading = useSelector((state) => state.posts.isLoading);
   const allPosts = useSelector((state) => state.posts.content);
-  console.log(allPosts);
+  const [loadedPosts, setLoadedPosts] = useState(210);
+
+  const loadOtherPosts = () => {
+    setLoadedPosts((loadedPosts) => loadedPosts + 10);
+  };
 
   useEffect(() => {
     dispatch(getPosts());
@@ -43,25 +47,33 @@ const HomePage = () => {
   };
 
   return (
-    <Container id="homepage-container">
+    <Container id="homepage-container" className="mx-md-auto">
       <Row>
-        <Col id="leftcolhomepage" className="col-3">
+        <Col id="leftcolhomepage" className="col-12 col-md-4 col-lg-3 d-none d-md-block ">
           <Card className="mb-2">
             <Card.Img variant="top" src={userProfile.image} />
-            <Card.Body>
-              <a href="#">
-                <Card.Title>
+            <Card.Body className="position-relative">
+              <Link to="/profile">
+                <img
+                  id="homepage-profile-image-rounded-left-col"
+                  src={userProfile.image}
+                  alt="profile-image"
+                  className="rounded-circle position-absolute"
+                  height="50"
+                  width="50"
+                />
+              </Link>
+              <Link to="/profile">
+                <Card.Title className="mt-2">
                   {userProfile.name} {userProfile.surname}
                 </Card.Title>
                 <h6>{userProfile.title}</h6>
-                <p>Località</p>
-              </a>
-              <a href="#">
-                <p>Nome azienda</p>
-              </a>
+                <p className="mb-1">{userProfile.area}</p>
+              </Link>
             </Card.Body>
           </Card>
-          <Card className="mb-2">
+
+          <Card className="d-none d-md-block mb-2">
             <Card.Body>
               <div className="d-flex justify-content-between mt-2">
                 <a href="#">
@@ -77,7 +89,7 @@ const HomePage = () => {
             </Card.Body>
           </Card>
 
-          <Card className="mb-2">
+          <Card className="d-none d-md-block mb-2">
             <Card.Body>
               <a href="#">
                 <p className="opacity-75 mb-1">Fai crescere la tua carriera o il tuo business con Premium</p>
@@ -87,7 +99,7 @@ const HomePage = () => {
               </a>
             </Card.Body>
           </Card>
-          <Card>
+          <Card className="d-none d-md-block">
             <Card.Body>
               <a href="#" className="elementi-salvati text-decoration-none text-black">
                 <div className="d-flex align-items-baseline mb-3">
@@ -117,8 +129,8 @@ const HomePage = () => {
             </Card.Body>
           </Card>
         </Col>
-        <Col className="col-6">
-          <Card>
+        <Col className="col-12 col-md-8 col-lg-5 col-xl-6 ">
+          <Card className="d-none d-md-block">
             <Card.Body>
               <div className="d-flex">
                 <Link to="/profile">
@@ -158,7 +170,7 @@ const HomePage = () => {
           {isLoading ? (
             <Spinner animation="border" variant="primary" />
           ) : (
-            allPosts.slice(200, 220).map((singlePost) => (
+            allPosts.slice(200, loadedPosts).map((singlePost) => (
               <Card key={singlePost._id} data={singlePost} className="post-card mt-2">
                 <Card.Body>
                   <Row className="justify-content-between">
@@ -170,13 +182,13 @@ const HomePage = () => {
                       </div>
                       <div className="ms-2">
                         <a href="#" className="text-decoration-none text-black">
-                          <h6 className="mb-1">
+                          <h6 id="nome-autore-post" className="mb-1">
                             {singlePost.user.name} {singlePost.user.surname}
                           </h6>
+                          <p id="followers-card" className="mb-0 opacity-50">
+                            {singlePost.user.title}
+                          </p>
                         </a>
-                        <p id="followers-card" className="mb-0 opacity-50">
-                          {singlePost.user.title}
-                        </p>
                         <p id="date-creation-post" className="d-inline-block mb-0 opacity-50 me-1">
                           {getTimePastDate(singlePost.createdAt)} •
                         </p>
@@ -213,36 +225,40 @@ const HomePage = () => {
                   <Row>
                     <Col className="border-bottom">
                       <p>{singlePost.text}</p>
-                      <img src={singlePost.user.image} alt="post-image" className="img-fluid" />
-                      <div className="mb-2 mt-2">
-                        <img
-                          className="align-middle reactions-icon social-detail-social-counts__count-icon social-detail-social-counts__count-icon--0 reactions-icon__consumption--small data-test-reactions-icon-type-LIKE data-test-reactions-icon-theme-light"
-                          src="https://static.licdn.com/aero-v1/sc/h/8ekq8gho1ruaf8i7f86vd1ftt"
-                          alt="like"
-                          data-test-reactions-icon-type="LIKE"
-                          data-test-reactions-icon-theme="light"
-                          data-test-reactions-icon-style="consumption"
-                          data-test-reactions-icon-size="small"
-                        />
-                        <img
-                          className="align-middle reactions-icon social-detail-social-counts__count-icon social-detail-social-counts__count-icon--1 reactions-icon__consumption--small reactions-icon--stacked data-test-reactions-icon-type-PRAISE data-test-reactions-icon-theme-light"
-                          src="https://static.licdn.com/aero-v1/sc/h/b1dl5jk88euc7e9ri50xy5qo8"
-                          alt="celebrate"
-                          data-test-reactions-icon-type="PRAISE"
-                          data-test-reactions-icon-theme="light"
-                          data-test-reactions-icon-style="consumption"
-                          data-test-reactions-icon-size="small"
-                        />
-                        <img
-                          className="align-middle reactions-icon social-detail-social-counts__count-icon social-detail-social-counts__count-icon--2 reactions-icon__consumption--small reactions-icon--stacked data-test-reactions-icon-type-EMPATHY data-test-reactions-icon-theme-light"
-                          src="https://static.licdn.com/aero-v1/sc/h/cpho5fghnpme8epox8rdcds22"
-                          alt="love"
-                          data-test-reactions-icon-type="EMPATHY"
-                          data-test-reactions-icon-theme="light"
-                          data-test-reactions-icon-style="consumption"
-                          data-test-reactions-icon-size="small"
-                        />
-                        <span className="align-middle opacity-50 ms-2">Giuseppe Todino e altre 65 persone</span>
+                      <a href="#">
+                        <img src={singlePost.user.image} alt="post-image" className="img-fluid" />
+                      </a>
+                      <div id="like-card" className="mb-2 mt-2">
+                        <a href="#">
+                          <img
+                            className="align-middle reactions-icon social-detail-social-counts__count-icon social-detail-social-counts__count-icon--0 reactions-icon__consumption--small data-test-reactions-icon-type-LIKE data-test-reactions-icon-theme-light"
+                            src="https://static.licdn.com/aero-v1/sc/h/8ekq8gho1ruaf8i7f86vd1ftt"
+                            alt="like"
+                            data-test-reactions-icon-type="LIKE"
+                            data-test-reactions-icon-theme="light"
+                            data-test-reactions-icon-style="consumption"
+                            data-test-reactions-icon-size="small"
+                          />
+                          <img
+                            className="align-middle reactions-icon social-detail-social-counts__count-icon social-detail-social-counts__count-icon--1 reactions-icon__consumption--small reactions-icon--stacked data-test-reactions-icon-type-PRAISE data-test-reactions-icon-theme-light"
+                            src="https://static.licdn.com/aero-v1/sc/h/b1dl5jk88euc7e9ri50xy5qo8"
+                            alt="celebrate"
+                            data-test-reactions-icon-type="PRAISE"
+                            data-test-reactions-icon-theme="light"
+                            data-test-reactions-icon-style="consumption"
+                            data-test-reactions-icon-size="small"
+                          />
+                          <img
+                            className="align-middle reactions-icon social-detail-social-counts__count-icon social-detail-social-counts__count-icon--2 reactions-icon__consumption--small reactions-icon--stacked data-test-reactions-icon-type-EMPATHY data-test-reactions-icon-theme-light"
+                            src="https://static.licdn.com/aero-v1/sc/h/cpho5fghnpme8epox8rdcds22"
+                            alt="love"
+                            data-test-reactions-icon-type="EMPATHY"
+                            data-test-reactions-icon-theme="light"
+                            data-test-reactions-icon-style="consumption"
+                            data-test-reactions-icon-size="small"
+                          />
+                          <span className="d-inline-block align-middle opacity-50 ms-2">Giuseppe Todino e altre 65 persone</span>
+                        </a>
                       </div>
                     </Col>
                   </Row>
@@ -293,9 +309,14 @@ const HomePage = () => {
               </Card>
             ))
           )}
+          <div className="text-end mt-3 mb-5 mb-md-3">
+            <Button id="carica-post-btn" className="mb-4 mb-md-0" onClick={loadOtherPosts}>
+              Carica altri post
+            </Button>
+          </div>
         </Col>
 
-        <Col>
+        <Col className="col-12 col-md-8 col-lg-4 col-xl-3 ms-md-auto d-none d-md-block">
           <Card>
             <Card.Body className="px-0">
               <div className="d-flex justify-content-between px-3">
@@ -414,7 +435,7 @@ const HomePage = () => {
             </Card.Body>
           </Card>
 
-          <Card className="mt-2">
+          <Card id="homepage-sidebar-image-card" className="mt-2 position-sticky">
             <a href="#">
               <img
                 src="https://media.licdn.com/media/AAYABATPAAgAAQAAAAAAAKwYrfHUPkoBQGmwnaG71Ps_5Q.png"
@@ -425,7 +446,7 @@ const HomePage = () => {
             </a>
           </Card>
 
-          <Card className="mt-2">
+          <Card id="homepage-sidebar-suggest-card" className="mt-2 position-sticky">
             <Card.Body>
               <a href="#" className="text-decoration-none text-black">
                 <div className="d-flex align-items-center">
@@ -435,7 +456,7 @@ const HomePage = () => {
               </a>
             </Card.Body>
           </Card>
-          <footer className="mt-2">
+          <footer id="homepage-footer" className="mt-2 position-sticky">
             <ul className="d-flex flex-wrap justify-content-center align-items-center m-4 ps-0">
               <li className="m-1 d-inline-block">
                 <a href="#" className="text-decoration-none text-black opacity-50">
@@ -483,7 +504,7 @@ const HomePage = () => {
                 </a>
               </li>
             </ul>
-            <div className="m-4">
+            <div className="m-4 text-center">
               <p> LinkedIn Corporation © 2025</p>
             </div>
           </footer>

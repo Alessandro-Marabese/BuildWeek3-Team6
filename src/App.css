@@ -245,9 +245,8 @@ body {
 }
 
 .camText {
-  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu,
-    Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Emoji",
-    "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell,
+    "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
   font-size: 0.75rem;
   line-height: 1.25;
   padding-top: 0.25rem;
@@ -329,6 +328,10 @@ body {
 #homepage-container {
   margin-top: 4.8rem;
 }
+#homepage-profile-image-rounded-left-col {
+  top: -26px;
+  border: 2px solid white;
+}
 #leftcolhomepage .card-img-top {
   height: 90px;
   object-fit: cover;
@@ -364,6 +367,15 @@ body {
 #leftcolhomepage .card:nth-child(4) a h6:hover {
   text-decoration: underline;
 }
+#vedi-altro-homepage-btn {
+  --bs-btn-bg: #f4f2ee;
+  --bs-btn-border-color: #f4f2ee;
+  --bs-btn-hover-bg: #f3f3f3;
+  --bs-btn-hover-border-color: #ffffff;
+  --bs-btn-active-bg: #f3f3f3;
+  --bs-btn-active-border-color: #ffffff;
+  color: black;
+}
 
 #creation-post-button {
   --bs-btn-bg: #ffffff;
@@ -394,9 +406,22 @@ body {
   --bs-btn-active-border-color: #ffffff;
   color: black;
 }
+#nome-autore-post:hover {
+  text-decoration: underline;
+  color: blue;
+}
 #followers-card {
   font-size: 0.8rem;
 }
+#like-card span {
+  text-decoration: none;
+  color: black;
+}
+#like-card span:hover {
+  text-decoration: underline;
+  color: blue;
+}
+
 #date-creation-post {
   font-size: 0.8rem;
 }
@@ -416,6 +441,27 @@ body {
 .giochi-sidebar-homepage div:hover {
   background-color: #ebebeb;
 }
+#homepage-sidebar-image-card {
+  top: 4.8rem;
+}
+#homepage-sidebar-suggest-card {
+  top: 21.5rem;
+}
+#homepage-footer {
+  top: 29rem;
+}
+#carica-post-btn {
+  --bs-btn-bg: #f4f2ee;
+  --bs-btn-border-color: black;
+  --bs-btn-hover-bg: #f3f3f3;
+  --bs-btn-hover-border-color: black;
+  --bs-btn-active-bg: #f3f3f3;
+  --bs-btn-active-border-color: black;
+  color: black;
+  font-weight: 600;
+  width: 100%;
+}
+
 .badge {
   background-color: #fce3bc !important;
   color: #584055 !important;
