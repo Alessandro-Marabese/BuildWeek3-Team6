@@ -3,8 +3,8 @@ import { Col, Container, Row, Button } from "react-bootstrap";
 
 const Formazione = () => {
   return (
-    <Col>
-      <Container fluid className="mx-0  mt-2 cont">
+    <Col className="ps-lg-3">
+      <Container fluid className="mx-0  mt-2 cont  pt-3 rounded-block">
         <h5>Formazione</h5>
         <div className="d-flex">
           <div>
@@ -40,10 +40,9 @@ const Formazione = () => {
         <Row>
           <h5>Hai altri titoli di studio?</h5>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam
-            consequuntur velit quae, eius temporibus voluptate! Rerum placeat
-            qui quo ratione labore rem at! Doloremque consequatur sequi iste eum
-            earum. Placeat.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam consequuntur velit quae, eius temporibus
+            voluptate! Rerum placeat qui quo ratione labore rem at! Doloremque consequatur sequi iste eum earum.
+            Placeat.
           </p>
           <Button variant="outline-primary"> Aggiungi titolo di studio </Button>
         </Row>

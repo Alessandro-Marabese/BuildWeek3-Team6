@@ -127,11 +127,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.6),
-    rgba(255, 255, 255, 0)
-  );
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(255, 255, 255, 0));
   pointer-events: none;
 }
 
@@ -249,9 +245,8 @@ body {
 }
 
 .camText {
-  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell,
-    "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Emoji",
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu,
+    Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Emoji",
     "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
   font-size: 0.75rem;
   line-height: 1.25;
@@ -438,17 +433,19 @@ footer ul li a p:hover {
   color: #0a66c2;
 }
 
-@media screen and (max-width: 992px) {
-  .rounded-from-lg {
-    border-radius: 0;
-  }
+.rounded-block {
+  border: none;
+  border-radius: 0;
 }
+
 @media screen and (min-width: 993px) {
-  .rounded-from-lg {
-    border-radius: 10px;
+  .rounded-overflow {
     overflow: hidden;
-    max-width: 804px;
     background-color: #fff;
+  }
+  .rounded-block {
+    border-radius: 10px;
+    border: 1px solid #dddddd;
   }
   .d-h5-lg {
     font-size: 2rem;

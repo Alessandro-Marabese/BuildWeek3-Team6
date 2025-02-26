@@ -6,7 +6,7 @@ import {
   addExperience,
   updateExperience,
   deleteExperience,
-  uploadExperienceImage,
+  /*   uploadExperienceImage, */
 } from "../redux/actions/index";
 import ExperienceModal from "./ExperienceModal";
 
@@ -40,12 +40,11 @@ const Esperienza = () => {
       return;
     }
 
-    // if (experienceToEdit) {
-    //   dispatch(updateExperience(userId, experienceToEdit._id, formData));
-    // } else {
-    //   dispatch(addExperience(userId, formData));
-    // }
-    // dispatch(uploadExperienceImage(userId, experienceToEdit._id, formData.imageFile));
+    if (experienceToEdit) {
+      dispatch(updateExperience(userId, experienceToEdit._id, formData));
+    } else {
+      dispatch(addExperience(userId, formData));
+    }
   };
 
   const handleDelete = (experienceId) => {
@@ -57,7 +56,7 @@ const Esperienza = () => {
 
   if (!experiences || experiences.length === 0) {
     return (
-      <Col>
+      <Col className="ps-lg-3">
         <Container fluid className="mx-0 cont">
           <h5>Esperienza</h5>
           <p>No experiences found</p>
@@ -78,8 +77,8 @@ const Esperienza = () => {
   }
 
   return (
-    <Col>
-      <Container fluid className="mx-0 cont">
+    <Col className="ps-lg-3">
+      <Container fluid className="mx-0 cont mt-2 pt-3 rounded-block">
         <h5>Esperienza</h5>
         {console.log(experiences)}
         {experiences.map((exp) => (

@@ -3,8 +3,8 @@ import { Col, Container, Row } from "react-bootstrap";
 
 const Informazioni = () => {
   return (
-    <Col>
-      <Container fluid className="mx-0 mt-2 cont">
+    <Col className="ps-lg-3">
+      <Container fluid className="mx-0 mt-2 cont pt-3 rounded-block">
         <h5>Informazioni</h5>
         <Row>
           <Col xs={12}>
@@ -15,7 +15,7 @@ const Informazioni = () => {
           </Col>
         </Row>
       </Container>
-      <Container fluid className="mx-0 mt-2 cont">
+      <Container fluid className="mx-0 mt-2 cont pt-3 rounded-block">
         <h5>In primo piano</h5>
         <Row>
           <Col xs={12}>
@@ -39,7 +39,7 @@ const Informazioni = () => {
           </Col>
         </Row>
       </Container>
-      <Container fluid className="mx-0 mt-2 cont ">
+      <Container fluid className="mx-0 mt-2 cont pt-3 rounded-block">
         <h5 className="fw-light fst-italic ">Solo per te </h5>
         <Row>
           <Col xs={6}>

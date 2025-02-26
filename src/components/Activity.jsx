@@ -3,8 +3,8 @@ import { Col, Container, Row } from "react-bootstrap";
 
 const Activity = () => {
   return (
-    <Col>
-      <Container fluid className="mx-0  mt-2 cont">
+    <Col className="ps-lg-3">
+      <Container fluid className="mx-0  mt-2 cont pt-3 rounded-block">
         <h5>Attività</h5>
         <Row>
           <Col xs={12}>

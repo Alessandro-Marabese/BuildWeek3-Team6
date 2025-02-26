@@ -23,8 +23,8 @@ const CardProfile = () => {
   return (
     <>
       {userProfile && (
-        <div className="container-fluid px-0 px-lg-3 container-lg pt-lg-4">
-          <Card id="top-margin" className="rounded-from-lg">
+        <div className="container-fluid px-0 ps-lg-3 container-lg pt-lg-4">
+          <Card id="top-margin" className="rounded-overflow rounded-block">
             <div className="imgCardProfile">
               <Card.Img variant="top" src="https://static.licdn.com/aero-v1/sc/h/55k1z8997gh8dwtihm11aajyq" />
             </div>
