@@ -59,6 +59,18 @@ const Esperienza = () => {
       <Container fluid className="mx-0 cont mt-2 pt-3 rounded-block">
         <div className="d-flex align-items-center justify-content-between mb-3">
           <h5 className="mb-0">Esperienza</h5>
+          {!isMobile && (
+            <svg
+              viewBox="0 0 24 24"
+              data-supported-dps="24x24"
+              fill="currentColor"
+              className="icon i24x24 me-2"
+              style={{ width: "24px", cursor: "pointer" }}
+              onClick={handleAddClick}
+            >
+              <path d="M21 13h-8v8h-2v-8H3v-2h8V3h2v8h8z"></path>
+            </svg>
+          )}
         </div>
 
         {isMobile && !showAddExperienceRow && (

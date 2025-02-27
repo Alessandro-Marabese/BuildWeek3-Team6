@@ -138,20 +138,22 @@ export const uploadExperienceImage = (userId, expId, imageFile) => async (dispat
     let formData = new FormData();
     formData.append("experience", imageFile);
 
-    const response = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${expId}/picture`, {
-      method: "POST",
-      headers: {
-        Authorization: API_TOKEN,
-      },
-      body: formData,
-    });
+    const response = await fetch(
+      `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${expId}/picture`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: API_TOKEN,
+        },
+        body: formData,
+      }
+    );
 
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(errorData.error || "Errore durante l'aggiornamento dell'immagine dell'esperienza");
     } else {
       const data = await response.json();
-      console.log("Immagine dell'esperienza aggiornata", data);
       dispatch({ type: UPDATE_EXPERIENCE_IMAGE, payload: data });
 
       return data;
@@ -178,7 +180,6 @@ export const updateExperience = (userId, expId, experience) => async (dispatch) 
     } else {
       const data = await response.json();
       dispatch({ type: UPDATE_EXPERIENCE, payload: data });
-      console.log("Esperienza aggiornata", data);
     }
   } catch (error) {
     console.error("Errore durante l'aggiornamento dell'esperienza:", error);
