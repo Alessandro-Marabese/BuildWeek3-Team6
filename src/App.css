@@ -494,6 +494,10 @@ footer ul li a p:hover {
   .d-h5-lg {
     font-size: 2rem;
   }
+  .profileIcon {
+    width: 152px;
+    height: 152px;
+  }
 }
 
 .badge-verifica {
