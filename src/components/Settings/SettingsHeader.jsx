@@ -17,7 +17,12 @@ const SettingsHeader = () => {
           </svg>
         </button>
 
-        <img src={userprofile.image} alt="LinkedIn Logo" className="linkedin-logo" />
+        <img
+          src="https://store-images.s-microsoft.com/image/apps.1719.9007199266245564.44dc7699-748d-4c34-ba5e-d04eb48f7960.abf46174-2d32-4f53-a6cd-644d5b2be452"
+          alt="LinkedIn Logo"
+          className="linkedin-logo"
+          onClick={() => navigate('/')} 
+        />
 
         <div className="profile-section">
           <img src={userprofile && userprofile.image} alt="Profile" className="profile-image" />
