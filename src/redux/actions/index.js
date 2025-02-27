@@ -10,9 +10,9 @@ export const UPDATE_PROFILE_SUCCESS = "UPDATE_PROFILE_SUCCESS";
 export const RECLUTER_VISIBLE = "RECLUTER_VISIBLE";
 export const UPDATE_PROFILE_ERR = "UPDATE_PROFILE_ERR";
 export const FETCH_POST_OK = "FETCH_POST_OK";
-export const FETCH_POST_ERR = "FETCH_POST_ERR";
 export const IS_LOADING_ON = "IS_LOADING_ON";
 export const IS_LOADING_OFF = "IS_LOADING_OFF";
+export const ADD_POST = "ADD_POST";
 export const UPDATE_EXPERIENCE_IMAGE = "UPDATE_EXPERIENCE_IMAGE";
 
 const API_TOKEN =
@@ -60,9 +60,7 @@ export const getSuggestedPeople = () => {
       if (resp.ok) {
         let suggestedPeople = await resp.json();
 
-        let filteredPeople = suggestedPeople.filter(
-          (person) => person.image && person.title && person.title.toLowerCase().includes("developer")
-        );
+        let filteredPeople = suggestedPeople.filter((person) => person.image && person.title && person.title.toLowerCase().includes("developer"));
 
         dispatch({ type: FETCH_SUGGESTED_PEOPLE_OK, payload: filteredPeople });
       } else {
@@ -140,16 +138,13 @@ export const uploadExperienceImage = (userId, expId, imageFile) => async (dispat
     let formData = new FormData();
     formData.append("experience", imageFile);
 
-    const response = await fetch(
-      `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${expId}/picture`,
-      {
-        method: "POST",
-        headers: {
-          Authorization: API_TOKEN,
-        },
-        body: formData,
-      }
-    );
+    const response = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${expId}/picture`, {
+      method: "POST",
+      headers: {
+        Authorization: API_TOKEN,
+      },
+      body: formData,
+    });
 
     if (!response.ok) {
       const errorData = await response.json();
@@ -259,10 +254,37 @@ export const getPosts = () => {
         throw new Error("Errore durante il caricamento dei post");
       }
     } catch (error) {
-      dispatch({ type: FETCH_POST_ERR, payload: error });
       console.log("Errore nella fetch dei post:", error);
     } finally {
       dispatch({ type: IS_LOADING_OFF });
+    }
+  };
+};
+
+export const addPosts = (post) => {
+  return async (dispatch) => {
+    console.log(post);
+    try {
+      const newPost = {
+        text: post.description,
+      };
+      const response = await fetch("https://striveschool-api.herokuapp.com/api/posts/", {
+        method: "POST",
+        headers: {
+          Authorization: API_TOKEN,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newPost),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        dispatch({ type: ADD_POST, payload: data });
+      } else {
+        throw new Error("Errore durante la creazione del post");
+      }
+    } catch (error) {
+      console.log("Errore nella la creazione del post", error);
     }
   };
 };

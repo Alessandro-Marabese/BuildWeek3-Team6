@@ -322,9 +322,6 @@ body {
 
 /* Homepage */
 
-#homepage-container {
-  margin-top: 4.8rem;
-}
 #homepage-profile-image-rounded-left-col {
   top: -26px;
   border: 2px solid white;
@@ -444,9 +441,28 @@ body {
 #homepage-sidebar-suggest-card {
   top: 21.5rem;
 }
-#homepage-footer {
-  top: 29rem;
+@media (max-width: 1399px) {
+  #homepage-sidebar-suggest-card {
+    top: 19rem;
+  }
+  #homepage-footer {
+    top: 28rem;
+  }
 }
+@media (max-width: 1199px) {
+  #homepage-sidebar-suggest-card {
+    top: 21rem;
+  }
+  #homepage-footer {
+    top: 30rem;
+  }
+}
+@media (min-width: 1400px) {
+  #homepage-footer {
+    top: 29rem;
+  }
+}
+
 #carica-post-btn {
   --bs-btn-bg: #f4f2ee;
   --bs-btn-border-color: black;
