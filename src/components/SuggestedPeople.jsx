@@ -28,7 +28,7 @@ const SuggestedPeople = () => {
         <h3 className="mb-3">Altri profili simili</h3>
 
         <ul className="list-group">
-          {suggestedPeople.slice(1, visibleCount + 1).map((person) => (
+          {suggestedPeople.slice(20, visibleCount + 20).map((person) => (
             <li key={person._id} className="list-group-item suggested-item">
               <img
                 src={person.image}
