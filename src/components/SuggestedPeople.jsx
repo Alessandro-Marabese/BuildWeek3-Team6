@@ -28,7 +28,7 @@ const SuggestedPeople = () => {
         <h3 className="mb-3">Altri profili simili</h3>
 
         <ul className="list-group">
-          {suggestedPeople.slice(0, visibleCount).map((person) => (
+          {suggestedPeople.slice(1, visibleCount + 1).map((person) => (
             <li key={person._id} className="list-group-item suggested-item">
               <img
                 src={person.image}
@@ -50,10 +50,7 @@ const SuggestedPeople = () => {
 
         {!hasClickedShowMore && visibleCount < suggestedPeople.length && (
           <div className="text-center mt-3">
-            <button
-              className="btn btn-primary show-more-btn"
-              onClick={handleShowMore}
-            >
+            <button className="show-more-btn1" onClick={handleShowMore}>
               Mostra Altro
             </button>
           </div>

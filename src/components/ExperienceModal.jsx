@@ -81,7 +81,7 @@ const ExperienceModal = ({ show, handleClose, experienceToEdit, handleDelete }) 
   };
 
   return (
-    <Modal show={show} onHide={handleClose}>
+    <Modal show={show} onHide={handleClose} size="lg">
       <Modal.Header closeButton>
         <Modal.Title>{experienceToEdit ? "Modifica Esperienza" : "Aggiungi Esperienza"}</Modal.Title>
       </Modal.Header>
