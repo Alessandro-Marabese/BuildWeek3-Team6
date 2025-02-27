@@ -3,6 +3,7 @@ import SettingsHeader from "./SettingsHeader";
 import SettingsList from "./SettingsList";
 import SettingsFooter from "./SettingsFooter";
 import "./Settings.css";
+import { Container } from "react-bootstrap";
 
 const SettingsPage = () => {
   const [selectedSetting, setSelectedSetting] = useState("Account Preferences");
@@ -333,17 +334,19 @@ const SettingsPage = () => {
   };
 
   return (
-    <div className="settings-container">
-      <div className="settings-sidebar">
-        <SettingsHeader />
-        <hr className="settings-divider" />
-        <SettingsList onSelectSetting={setSelectedSetting} />
+    <Container fluid className="m-0 p-0 containerSettings">
+      <div className="settings-container">
+        <div className="settings-sidebar">
+          <SettingsHeader />
+          <hr className="settings-divider" />
+          <SettingsList onSelectSetting={setSelectedSetting} />
+        </div>
+        <div className="settings-content">
+          {renderContent()}
+          <SettingsFooter />
+        </div>
       </div>
-      <div className="settings-content">
-        {renderContent()}
-        <SettingsFooter />
-      </div>
-    </div>
+    </Container>
   );
 };
 

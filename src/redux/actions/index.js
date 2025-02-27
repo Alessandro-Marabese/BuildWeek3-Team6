@@ -60,7 +60,7 @@ export const getSuggestedPeople = () => {
       if (resp.ok) {
         let suggestedPeople = await resp.json();
 
-        let filteredPeople = suggestedPeople.filter((person) => person.image && person.title && person.title.toLowerCase().includes("developer"));
+        let filteredPeople = suggestedPeople.filter((person) => person.image && person.title);
 
         dispatch({ type: FETCH_SUGGESTED_PEOPLE_OK, payload: filteredPeople });
       } else {
