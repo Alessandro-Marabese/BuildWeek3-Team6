@@ -88,7 +88,7 @@ const SuggestedPeopleDesktop = () => {
               </p>
               <p className="people-title">{person.title}</p>
             </div>
-            <button className="connect-button">Messaggio</button>
+            <button className="connect-button2">Messaggio</button>
           </div>
         ))}
 
