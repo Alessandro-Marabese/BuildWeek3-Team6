@@ -326,6 +326,12 @@ body {
   top: -26px;
   border: 2px solid white;
 }
+
+@media (max-width: 767px) {
+  #top-margin {
+    max-width: 100%;
+  }
+}
 #leftcolhomepage .card-img-top {
   height: 90px;
   object-fit: cover;
