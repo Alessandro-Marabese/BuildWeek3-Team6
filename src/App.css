@@ -545,6 +545,10 @@ footer ul li a p:hover {
   box-shadow: 0 0 0 1px black;
 }
 
+.body-xs {
+  font-size: 0.8rem;
+}
+
 #modal-header h2 {
   font-size: 1.5rem;
   font-weight: 600;

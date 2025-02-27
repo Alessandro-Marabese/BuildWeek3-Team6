@@ -34,17 +34,32 @@ const EditProfile = () => {
       <main>
         {console.log(userProfile)}
         <Form.Floating className="mb-3 mx-1 border border-black rounded">
-          <Form.Control id="floatingInput" type="text" value={userProfile && userProfile.name} />
+          <Form.Control
+            id="floatingInput"
+            type="text"
+            value={userProfile && userProfile.name}
+            onChange={handleUpload}
+          />
           <label htmlFor="floatingInput">Nome</label>
         </Form.Floating>
 
         <Form.Floating className="mb-3 mx-1 border border-black rounded">
-          <Form.Control id="floatingInput" type="text" value={userProfile && userProfile.surname} />
+          <Form.Control
+            id="floatingInput"
+            type="text"
+            value={userProfile && userProfile.surname}
+            onChange={handleUpload}
+          />
           <label htmlFor="floatingInput">Cognome</label>
         </Form.Floating>
 
         <Form.Floating className="mb-3 mx-1 border border-black rounded">
-          <Form.Control id="floatingInput" type="text" value={userProfile && userProfile.title} />
+          <Form.Control
+            id="floatingInput"
+            type="text"
+            value={userProfile && userProfile.title}
+            onChange={handleUpload}
+          />
           <label htmlFor="floatingInput">Sommario</label>
         </Form.Floating>
 
@@ -53,17 +68,23 @@ const EditProfile = () => {
             id="floatingInput"
             type="text"
             value={userProfile && userProfile.bio === "" ? "--" : userProfile?.bio || ""}
+            onChange={handleUpload}
           />
           <label htmlFor="floatingInput">Settore</label>
         </Form.Floating>
 
         <Form.Floating className="mb-3 mx-1 border border-black rounded">
-          <Form.Control id="floatingInput" type="text" value={userProfile && userProfile.area} />
+          <Form.Control
+            id="floatingInput"
+            type="text"
+            value={userProfile && userProfile.area}
+            onChange={handleUpload}
+          />
           <label htmlFor="floatingInput">Paese/Area geografica</label>
         </Form.Floating>
 
         <Form.Floating className="mb-3 mx-1 border border-black rounded">
-          <Form.Control id="floatingInput" type="text" value={"--"} />
+          <Form.Control id="floatingInput" type="text" value={"--"} onChange={handleUpload} />
           <label htmlFor="floatingInput">CAP</label>
         </Form.Floating>
       </main>
