@@ -14,6 +14,7 @@ export const IS_LOADING_ON = "IS_LOADING_ON";
 export const IS_LOADING_OFF = "IS_LOADING_OFF";
 export const ADD_POST = "ADD_POST";
 export const UPDATE_EXPERIENCE_IMAGE = "UPDATE_EXPERIENCE_IMAGE";
+export const UPDATE_POST_IMAGE = "UPDATE_POST_IMAGE";
 
 const API_TOKEN =
   "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2JjNTU4YWU3MDMzNzAwMTUzMTZkYjMiLCJpYXQiOjE3NDA0OTI3NzMsImV4cCI6MTc0MTcwMjM3M30.ghEymY3a9sDb5HV-twEe3aU29Z6oNBtkTfwahoV1JtY";
@@ -280,11 +281,38 @@ export const addPosts = (post) => {
         const data = await response.json();
         console.log(data);
         dispatch({ type: ADD_POST, payload: data });
+        return data;
       } else {
         throw new Error("Errore durante la creazione del post");
       }
     } catch (error) {
       console.log("Errore nella la creazione del post", error);
+    }
+  };
+};
+
+export const uploadPostImage = (postId, imageFile) => {
+  return async (dispatch) => {
+    try {
+      let form = new FormData();
+      form.append("post", imageFile);
+
+      const response = await fetch(`https://striveschool-api.herokuapp.com/api/posts/${postId}/picture`, {
+        method: "POST",
+        headers: {
+          Authorization: API_TOKEN,
+        },
+        body: form,
+      });
+      if (response.ok) {
+        const data = await response.json();
+        dispatch({ type: UPDATE_POST_IMAGE, payload: data });
+        return data;
+      } else {
+        throw new Error("Errore nel caricamento dell'immagine");
+      }
+    } catch (error) {
+      console.log("errore durante il caricamento dell'immagine del post", error);
     }
   };
 };

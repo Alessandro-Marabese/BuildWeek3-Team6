@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { addPosts } from "../redux/actions";
+import { addPosts, uploadPostImage } from "../redux/actions";
 
 const PostModal = ({ show, onHide }) => {
   const userProfile = useSelector((state) => state.profile.content);
@@ -9,12 +9,27 @@ const PostModal = ({ show, onHide }) => {
     description: "",
   });
   const dispatch = useDispatch();
+  const [postImg, setPostImg] = useState(null);
+  const [postImgPreview, setPostImagePreview] = useState(null);
+
   const handleChange = (e) => {
     setPostDescription({ [e.target.name]: e.target.value });
   };
+
+  const handlePostImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setPostImg(file);
+      setPostImagePreview(URL.createObjectURL(file));
+    }
+  };
   const onSubmit = (e) => {
     e.preventDefault();
-    dispatch(addPosts(postDescription));
+    dispatch(addPosts(postDescription)).then((post) => {
+      if (postImg && post?._id) {
+        dispatch(uploadPostImage(post._id, postImg));
+      }
+    });
   };
 
   return (
@@ -60,12 +75,8 @@ const PostModal = ({ show, onHide }) => {
               </svg>
             </Button>
           </div>
-          <a href="#" className="text-black opacity-50 ms-3">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-card-image" viewBox="0 0 16 16">
-              <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
-              <path d="M1.5 2A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2zm13 1a.5.5 0 0 1 .5.5v6l-3.775-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12v.54L1 12.5v-9a.5.5 0 0 1 .5-.5z" />
-            </svg>
-          </a>
+          <Form.Control type="file" accept="image/*" onChange={handlePostImageChange} />
+          {postImgPreview && <img src={postImgPreview} alt="anteprima immagine post" style={{ width: "100px", marginTop: "10px" }} />}
           <a href="#" className="text-black opacity-50 ms-4">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-calendar-event" viewBox="0 0 16 16">
               <path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z" />
