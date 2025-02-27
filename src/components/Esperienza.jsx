@@ -14,7 +14,7 @@ const Esperienza = () => {
   const [experienceToEdit, setExperienceToEdit] = useState(null);
   const [showAllExperiences, setShowAllExperiences] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-  const [showAddExperienceRow, setShowAddExperienceRow] = useState(true); // Stato per mostrare/nascondere la Row
+  const [showAddExperienceRow, setShowAddExperienceRow] = useState(true);
 
   useEffect(() => {
     if (userId) {
@@ -61,7 +61,6 @@ const Esperienza = () => {
           <h5 className="mb-0">Esperienza</h5>
         </div>
 
-        {/* Link "+ Aggiungi Esperienza" (visibile solo in mobile e quando la Row è chiusa) */}
         {isMobile && !showAddExperienceRow && (
           <Button
             variant="link"
@@ -125,10 +124,10 @@ const Esperienza = () => {
             <p className="text-center text-black-50">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam consequuntur
             </p>
-            <Button variant="outline-primary" onClick={handleAddClick} className="px-0 rounded-pill w-100">
+            <Button variant="outline-primary" onClick={handleAddClick} className="px-0 rounded-pill w-100 mb-3">
               Aggiungi Esperienza
             </Button>
-            {/* Icona "X" per chiudere la Row */}
+
             <svg
               viewBox="0 0 16 16"
               data-supported-dps="16x16"
@@ -140,7 +139,7 @@ const Esperienza = () => {
                 position: "absolute",
                 top: "0.5rem",
                 right: "0.5rem",
-                color: "black", // Colore contrastante
+                color: "black",
               }}
               onClick={() => setShowAddExperienceRow(false)}
             >
