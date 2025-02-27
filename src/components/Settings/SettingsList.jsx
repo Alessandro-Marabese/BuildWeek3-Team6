@@ -1,52 +1,54 @@
 import { Link } from "react-router-dom";
 import "./Settings.css";
+import { useSelector } from "react-redux";
+import { useState } from "react";
 
-const SettingsList = () => {
+const SettingsList = ({ onSelectSetting }) => {
   const settingsItems = [
-    { name: "Account Preferences", icon: "bi-person" },
-    { name: "Sign in & Security", icon: "bi-lock" },
-    { name: "Visibility", icon: "bi-eye" },
-    { name: "Data Privacy", icon: "bi-shield-lock" },
-    { name: "Advertising Data", icon: "bi-newspaper" },
-    { name: "Notifications", icon: "bi-bell" },
+    { name: "Account Preferences", icon: "bi-person", visibleOnMobile: true },
+    { name: "Sign in & Security", icon: "bi-lock", visibleOnMobile: true },
+    { name: "Visibility", icon: "bi-eye", visibleOnMobile: true },
+    { name: "Data Privacy", icon: "bi-shield-lock", visibleOnMobile: false },
+    { name: "Advertising Data", icon: "bi-newspaper", visibleOnMobile: false },
+    { name: "Notifications", icon: "bi-bell", visibleOnMobile: true },
   ];
 
+  const [selectedSetting, setSelectedSetting] = useState(""); // Stato per la selezione
+  const userprofile = useSelector((state) => state.profile.content);
+
+  const handleSettingClick = (setting) => {
+    setSelectedSetting(setting);
+    onSelectSetting(setting);
+  };
+
   return (
-    <div className="profile-settings-container" style={{ width: "100%", maxWidth: "400px", padding: "20px" }}>
-      <div style={{ display: "flex", alignItems: "center", marginBottom: "20px" }}>
-        <div className="profile-picture" style={{ marginRight: "10px" }}>
+    <div className="profile-settings-container">
+      <div className="profile-settings-header">
+        <div className="profile-picture">
           <Link to="/profile">
             <img
-              src="https://marketplace.canva.com/EAGCMGvlKLM/1/0/1600w/canva-viola-neon-fotografo-immagine-profilo-linkedin-kSHjxNxHD6Q.jpg"
+              src={userprofile.image}
               alt="Your profile photo"
-              style={{ width: "32px", height: "32px", borderRadius: "50%" }}
+              className="profile-image"
             />
           </Link>
         </div>
-        <div className="profile-settings-title" style={{ fontSize: "20px", fontWeight: "bold" }}>
-          Settings
-        </div>
+        <div className="profile-settings-title">Settings</div>
       </div>
 
-      <ul style={{ listStyleType: "none", padding: 0 }}>
+      <ul className="settings-items-list">
         {settingsItems.map((item, index) => (
-          <li key={index} style={{ padding: "10px 0", fontWeight: "bold" }}>
-            <Link
-              to={`/${item.name.toLowerCase().replace(/\s+/g, "-")}`}
-              style={{
-                textDecoration: "none",
-                color: "#333",
-                display: "flex",
-                alignItems: "center",
-                padding: "10px",
-                borderRadius: "6px",
-                transition: "background-color 0.3s ease",
-              }}
-              className="settings-link"
+          <li
+            key={index}
+            className={`settings-item ${item.visibleOnMobile ? "settings-visible" : ""}`}
+          >
+            <div
+              onClick={() => handleSettingClick(item.name)} // Cambia lo stato al click
+              className={`settings-link ${selectedSetting === item.name ? "selected" : ""}`} // Aggiungi la classe "selected" se è selezionato
             >
-              <i className={`bi ${item.icon}`} style={{ marginRight: "10px", fontSize: "18px", color: "#666" }}></i>
+              <i className={`bi ${item.icon} settings-icon`}></i>
               {item.name}
-            </Link>
+            </div>
           </li>
         ))}
       </ul>

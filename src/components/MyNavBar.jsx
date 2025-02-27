@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Button, Col, Container, Dropdown, Row } from "react-bootstrap";
 import { Navbar } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,6 +8,10 @@ import { Link } from "react-router";
 const MyNavBar = () => {
   const dispatch = useDispatch();
   const userProfile = useSelector((state) => state.profile.content);
+
+  const [showDropdown, setShowDropdown] = useState(false);
+  const handleToggle = () => setShowDropdown(!showDropdown);
+  const handleProfileClick = () => setShowDropdown(false);
 
   useEffect(() => {
     dispatch(getUserProfile());
@@ -172,7 +176,7 @@ const MyNavBar = () => {
               <p className="navbarParag mb-0 opacity-50">Lavoro</p>
             </a>
           </div>
-          <Dropdown className="d-none d-lg-block">
+          <Dropdown show={showDropdown} onToggle={handleToggle} className="d-none d-lg-block">
             <Dropdown.Toggle variant="success" id="dropdown-basic">
               <span>
                 <img id="profile-img-primary-navbar" src={userProfile.image} alt="profile-image" className="rounded-circle" />
@@ -195,7 +199,7 @@ const MyNavBar = () => {
             </Dropdown.Toggle>
 
             <Dropdown.Menu id="profile-dropdown" className="dropdown-menu-md-end">
-              <Link to="/profile" className="text-decoration-none">
+              <Link to="/profile" className="text-decoration-none" onClick={handleProfileClick}>
                 <Row className="border-bottom mx-1">
                   <Col className="ps-0 col-3">
                     <img src={userProfile.image} alt="Immagine profilo" height="50" width="50" className="rounded-circle ms-2" />

@@ -13,12 +13,16 @@ import { RECLUTER_VISIBLE } from "../redux/actions";
 import iconVerified from "../assets/verified.png";
 import ModalEditProfile from "./ModalEditProfile";
 import { useState } from "react";
+import btnNoPhoto from "../assets/btnnophoto.png";
+import ModalEditProfileImage from "./ModalEditProfileImage";
 
 const CardProfile = () => {
   const dispatch = useDispatch();
   const userProfile = useSelector((state) => state.profile.content);
   const recluterVisible = useSelector((state) => state.profile.recluterVisible);
   const [showModalEditProfile, setShowModalEditProfile] = useState(false);
+  const [showModalEditProfileImage, setShowModalEditProfileImage] = useState(false);
+  const [imgProfile, setImgProfile] = useState(null);
 
   return (
     <>
@@ -45,19 +49,37 @@ const CardProfile = () => {
                   ) : (
                     <>
                       {userProfile.image.slice(-10) !== "delete.png" ? (
-                        <div className="profileIcon ms-3 d-flex justify-content-center align-items-center">
-                          <Image src={userProfile.image} width={150} className="imgfluid" />
-                        </div>
+                        <>
+                          <div className="profileIcon ms-3 d-flex d-lg-none justify-content-center align-items-center">
+                            <Image src={userProfile.image} width={150} className="imgfluid" />
+                          </div>
+                          <div className="profileIcon d-none ms-lg-4 d-lg-flex justify-content-center align-items-center">
+                            <Image
+                              src={userProfile.image}
+                              width={150}
+                              className="imgfluid"
+                              onClick={() => {
+                                setImgProfile(userProfile.image);
+                                setShowModalEditProfileImage(true);
+                              }}
+                            />
+                          </div>
+                        </>
                       ) : (
                         <>
-                          <div className="camIcon ms-3">
-                            <Image src={camIcon} width={48} className="imgfluid" />
+                          <div className="camIcon ms-3 d-lg-none">
+                            <Image src={camIcon} width={48} className="imgfluid " />
                             <Link
                               to="/edit-profile-image"
                               className="m-0 camText text-link fw-500 text-decoration-none"
                             >
                               Aggiungi foto
                             </Link>
+                          </div>
+                          <div className="d-none d-lg-flex" style={{ zIndex: 1, marginLeft: "15px" }}>
+                            <button className="hide" onClick={() => setShowModalEditProfileImage(true)}>
+                              <Image src={btnNoPhoto} />
+                            </button>
                           </div>
                         </>
                       )}
@@ -94,7 +116,7 @@ const CardProfile = () => {
                 ) : (
                   <>
                     {userProfile.image.slice(-10) !== "delete.png" && (
-                      <Link className="linkEditImg position-relative" to="/edit-profile-image">
+                      <Link className="linkEditImg position-relative d-lg-none" to="/edit-profile-image">
                         <svg viewBox="0 0 16 16" data-supported-dps="16x16" fill="currentColor" className="icon i16x16">
                           <path d="M10 9a2 2 0 11-2-2 2 2 0 012 2zm5-2.5V14H1V6.5A2.5 2.5 0 013.5 4h.75L5 2h6l.75 2h.75A2.5 2.5 0 0115 6.5zM11 9a3 3 0 10-3 3 3 3 0 003-3z"></path>
                         </svg>
@@ -171,6 +193,13 @@ const CardProfile = () => {
       <Contatti />
       {showModalEditProfile && (
         <ModalEditProfile show={showModalEditProfile} onHide={() => setShowModalEditProfile(false)} />
+      )}
+      {showModalEditProfileImage && (
+        <ModalEditProfileImage
+          show={showModalEditProfileImage}
+          onHide={() => setShowModalEditProfileImage(false)}
+          imgProfile={imgProfile}
+        />
       )}
     </>
   );
