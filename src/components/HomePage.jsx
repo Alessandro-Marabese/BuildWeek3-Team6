@@ -10,8 +10,8 @@ const HomePage = () => {
   const userProfile = useSelector((state) => state.profile.content);
   const isLoading = useSelector((state) => state.posts.isLoading);
   const allPostsReverse = useSelector((state) => state.posts.content);
-  const allPosts = allPostsReverse.reverse();
-  console.log(allPosts);
+  const allPosts = [...allPostsReverse].reverse();
+
   const [loadedPosts, setLoadedPosts] = useState(10);
   const [modalShow, setModalShow] = useState(false);
 

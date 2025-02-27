@@ -245,8 +245,9 @@ body {
 }
 
 .camText {
-  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell,
-    "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu,
+    Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
   font-size: 0.75rem;
   line-height: 1.25;
   padding-top: 0.25rem;
@@ -325,6 +326,12 @@ body {
 #homepage-profile-image-rounded-left-col {
   top: -26px;
   border: 2px solid white;
+}
+
+@media (max-width: 767px) {
+  #top-margin {
+    max-width: 100%;
+  }
 }
 #leftcolhomepage .card-img-top {
   height: 90px;
@@ -624,4 +631,14 @@ footer ul li a p:hover {
   --bs-btn-active-border-color: #ffffff;
   color: black;
   border-radius: 10px;
+}
+
+.vediAltro {
+  color: #00000086;
+  text-decoration: none;
+}
+.icona-profile {
+  height: 50px;
+  width: auto;
+  margin-inline: auto;
 }
