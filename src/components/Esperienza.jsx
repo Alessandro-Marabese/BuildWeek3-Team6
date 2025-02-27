@@ -115,7 +115,7 @@ const Esperienza = () => {
           </div>
         )}
 
-        <Row className="d-md-none border-top">
+        <Row className="d-md-none border-top px-3">
           <img src={Valigia} alt="foto" className="icona-profile mt-3" />
           <h5 className="text-center">Hai altra esperienza?</h5>
           <p className="text-center text-black-50">
