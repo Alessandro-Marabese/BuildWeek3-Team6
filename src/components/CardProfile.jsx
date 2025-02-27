@@ -170,11 +170,7 @@ const CardProfile = () => {
       <Competenze />
       <Contatti />
       {showModalEditProfile && (
-        <ModalEditProfile
-          onClose={() => setShowModalEditProfile(false)}
-          show={showModalEditProfile}
-          onHide={() => setShowModalEditProfile(false)}
-        />
+        <ModalEditProfile show={showModalEditProfile} onHide={() => setShowModalEditProfile(false)} />
       )}
     </>
   );
