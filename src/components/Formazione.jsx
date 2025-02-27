@@ -68,7 +68,7 @@ const Formazione = () => {
           <p className="text-center text-black-50">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam consequuntur
           </p>
-          <Button variant="outline-primary" className=" px-0 rounded-pill" onClick={handleAddClick}>
+          <Button variant="outline-primary" className=" px-0 rounded-pill mb-3" onClick={handleAddClick}>
             Aggiungi titolo di studio
           </Button>
         </Row>

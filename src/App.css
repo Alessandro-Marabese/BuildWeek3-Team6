@@ -642,3 +642,13 @@ footer ul li a p:hover {
   width: auto;
   margin-inline: auto;
 }
+.modal-body {
+  background-color: white;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+.icon-x {
+  position: absolute;
+  left: 46, 5%;
+  padding: 0;
+}
