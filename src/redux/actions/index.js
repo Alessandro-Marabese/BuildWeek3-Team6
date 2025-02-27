@@ -10,9 +10,9 @@ export const UPDATE_PROFILE_SUCCESS = "UPDATE_PROFILE_SUCCESS";
 export const RECLUTER_VISIBLE = "RECLUTER_VISIBLE";
 export const UPDATE_PROFILE_ERR = "UPDATE_PROFILE_ERR";
 export const FETCH_POST_OK = "FETCH_POST_OK";
-export const FETCH_POST_ERR = "FETCH_POST_ERR";
 export const IS_LOADING_ON = "IS_LOADING_ON";
 export const IS_LOADING_OFF = "IS_LOADING_OFF";
+export const ADD_POST = "ADD_POST";
 export const UPDATE_EXPERIENCE_IMAGE = "UPDATE_EXPERIENCE_IMAGE";
 
 const API_TOKEN =
@@ -60,9 +60,7 @@ export const getSuggestedPeople = () => {
       if (resp.ok) {
         let suggestedPeople = await resp.json();
 
-        let filteredPeople = suggestedPeople.filter(
-          (person) => person.image && person.title
-        );
+        let filteredPeople = suggestedPeople.filter((person) => person.image && person.title);
 
         dispatch({ type: FETCH_SUGGESTED_PEOPLE_OK, payload: filteredPeople });
       } else {
@@ -77,30 +75,23 @@ export const getSuggestedPeople = () => {
 export const fetchExperiences = (userId) => {
   return async (dispatch) => {
     try {
-      const response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences`,
-        {
-          method: "GET",
-          headers: {
-            Authorization: API_TOKEN,
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences`, {
+        method: "GET",
+        headers: {
+          Authorization: API_TOKEN,
+          "Content-Type": "application/json",
+        },
+      });
 
       if (response.ok) {
         const data = await response.json();
         if (data && Array.isArray(data)) {
           dispatch({ type: FETCH_EXPERIENCES_OK, payload: data });
         } else {
-          throw new Error(
-            "La risposta non contiene un array di esperienze valido."
-          );
+          throw new Error("La risposta non contiene un array di esperienze valido.");
         }
       } else {
-        throw new Error(
-          "Errore durante il fetch delle esperienze: " + response.statusText
-        );
+        throw new Error("Errore durante il fetch delle esperienze: " + response.statusText);
       }
     } catch (error) {
       dispatch({ type: FETCH_EXPERIENCES_ERR, payload: error.message });
@@ -120,23 +111,18 @@ export const addExperience = (userId, experience) => async (dispatch) => {
       area: experience.area,
     };
 
-    const response = await fetch(
-      `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/`,
-      {
-        method: "POST",
-        headers: {
-          Authorization: API_TOKEN,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newExperience),
-      }
-    );
+    const response = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/`, {
+      method: "POST",
+      headers: {
+        Authorization: API_TOKEN,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newExperience),
+    });
 
     if (!response.ok) {
       const errorData = await response.text();
-      throw new Error(
-        errorData.error || "Errore durante l'aggiunta dell'esperienza"
-      );
+      throw new Error(errorData.error || "Errore durante l'aggiunta dell'esperienza");
     }
 
     const data = await response.json();
@@ -147,91 +133,70 @@ export const addExperience = (userId, experience) => async (dispatch) => {
   }
 };
 
-export const uploadExperienceImage =
-  (userId, expId, imageFile) => async (dispatch) => {
-    try {
-      let formData = new FormData();
-      formData.append("experience", imageFile);
-
-      const response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${expId}/picture`,
-        {
-          method: "POST",
-          headers: {
-            Authorization: API_TOKEN,
-          },
-          body: formData,
-        }
-      );
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(
-          errorData.error ||
-            "Errore durante l'aggiornamento dell'immagine dell'esperienza"
-        );
-      } else {
-        const data = await response.json();
-        console.log("Immagine dell'esperienza aggiornata", data);
-        dispatch({ type: UPDATE_EXPERIENCE_IMAGE, payload: data });
-
-        return data;
-      }
-    } catch (error) {
-      console.error(
-        "Errore durante il caricamento dell'immagine dell'esperienza:",
-        error
-      );
-    }
-  };
-
-export const updateExperience =
-  (userId, expId, experience) => async (dispatch) => {
-    try {
-      const response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${expId}/`,
-        {
-          method: "PUT",
-          headers: {
-            Authorization: API_TOKEN,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(experience),
-        }
-      );
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(
-          errorData.error || "Errore durante l'aggiornamento dell'esperienza"
-        );
-      } else {
-        const data = await response.json();
-        dispatch({ type: UPDATE_EXPERIENCE, payload: data });
-        console.log("Esperienza aggiornata", data);
-      }
-    } catch (error) {
-      console.error("Errore durante l'aggiornamento dell'esperienza:", error);
-    }
-  };
-
-export const deleteExperience = (userId, expId) => async (dispatch) => {
+export const uploadExperienceImage = (userId, expId, imageFile) => async (dispatch) => {
   try {
-    const response = await fetch(
-      `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${expId}`,
-      {
-        method: "DELETE",
-        headers: {
-          Authorization: API_TOKEN,
-        },
-      }
-    );
+    let formData = new FormData();
+    formData.append("experience", imageFile);
+
+    const response = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${expId}/picture`, {
+      method: "POST",
+      headers: {
+        Authorization: API_TOKEN,
+      },
+      body: formData,
+    });
 
     if (!response.ok) {
       const errorData = await response.json();
-      throw new Error(
-        errorData.error || "Errore durante l'eliminazione dell'esperienza"
-      );
+      throw new Error(errorData.error || "Errore durante l'aggiornamento dell'immagine dell'esperienza");
+    } else {
+      const data = await response.json();
+      console.log("Immagine dell'esperienza aggiornata", data);
+      dispatch({ type: UPDATE_EXPERIENCE_IMAGE, payload: data });
+
+      return data;
+    }
+  } catch (error) {
+    console.error("Errore durante il caricamento dell'immagine dell'esperienza:", error);
+  }
+};
+
+export const updateExperience = (userId, expId, experience) => async (dispatch) => {
+  try {
+    const response = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${expId}/`, {
+      method: "PUT",
+      headers: {
+        Authorization: API_TOKEN,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(experience),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || "Errore durante l'aggiornamento dell'esperienza");
+    } else {
+      const data = await response.json();
+      dispatch({ type: UPDATE_EXPERIENCE, payload: data });
+      console.log("Esperienza aggiornata", data);
+    }
+  } catch (error) {
+    console.error("Errore durante l'aggiornamento dell'esperienza:", error);
+  }
+};
+
+export const deleteExperience = (userId, expId) => async (dispatch) => {
+  try {
+    const response = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${expId}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: API_TOKEN,
+      },
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || "Errore durante l'eliminazione dell'esperienza");
     }
 
     dispatch({ type: DELETE_EXPERIENCE, payload: expId });
@@ -289,10 +254,37 @@ export const getPosts = () => {
         throw new Error("Errore durante il caricamento dei post");
       }
     } catch (error) {
-      dispatch({ type: FETCH_POST_ERR, payload: error });
       console.log("Errore nella fetch dei post:", error);
     } finally {
       dispatch({ type: IS_LOADING_OFF });
+    }
+  };
+};
+
+export const addPosts = (post) => {
+  return async (dispatch) => {
+    console.log(post);
+    try {
+      const newPost = {
+        text: post.description,
+      };
+      const response = await fetch("https://striveschool-api.herokuapp.com/api/posts/", {
+        method: "POST",
+        headers: {
+          Authorization: API_TOKEN,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newPost),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        dispatch({ type: ADD_POST, payload: data });
+      } else {
+        throw new Error("Errore durante la creazione del post");
+      }
+    } catch (error) {
+      console.log("Errore nella la creazione del post", error);
     }
   };
 };

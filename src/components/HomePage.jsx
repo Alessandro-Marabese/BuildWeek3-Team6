@@ -9,8 +9,10 @@ const HomePage = () => {
   const dispatch = useDispatch();
   const userProfile = useSelector((state) => state.profile.content);
   const isLoading = useSelector((state) => state.posts.isLoading);
-  const allPosts = useSelector((state) => state.posts.content);
-  const [loadedPosts, setLoadedPosts] = useState(210);
+  const allPostsReverse = useSelector((state) => state.posts.content);
+  const allPosts = [...allPostsReverse].reverse();
+
+  const [loadedPosts, setLoadedPosts] = useState(10);
   const [modalShow, setModalShow] = useState(false);
 
   const handleModalShow = () => setModalShow(true);
@@ -49,7 +51,7 @@ const HomePage = () => {
   };
 
   return (
-    <Container id="homepage-container" className="mx-0 mx-md-auto">
+    <Container id="top-margin" className="mx-0 mx-md-auto pt-md-4">
       <Row>
         <Col id="leftcolhomepage" className="col-12 col-md-4 col-lg-3 d-none d-md-block ">
           <Card className="mb-2">
@@ -172,7 +174,7 @@ const HomePage = () => {
           {isLoading ? (
             <Spinner className="text-center mt-2" animation="border" variant="primary" />
           ) : (
-            allPosts.slice(200, loadedPosts).map((singlePost) => (
+            allPosts.slice(0, loadedPosts).map((singlePost) => (
               <Card key={singlePost._id} data={singlePost} className="post-card mt-2">
                 <Card.Body>
                   <Row className="justify-content-between">

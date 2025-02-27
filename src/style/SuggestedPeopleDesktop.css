@@ -192,3 +192,6 @@
 .profile-settings div:last-child {
   border-top: none;
 }
+.people-name {
+  font-weight: bold;
+}

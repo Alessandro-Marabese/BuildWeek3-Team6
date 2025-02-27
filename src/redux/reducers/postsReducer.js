@@ -1,4 +1,4 @@
-import { FETCH_POST_ERR, FETCH_POST_OK, IS_LOADING_OFF, IS_LOADING_ON } from "../actions";
+import { ADD_POST, FETCH_POST_OK, IS_LOADING_OFF, IS_LOADING_ON } from "../actions";
 
 const initialState = {
   content: [],
@@ -23,11 +23,11 @@ const postsReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
       };
-    case FETCH_POST_ERR:
+
+    case ADD_POST:
       return {
         ...state,
-        isLoading: action.payload,
-        isError: true,
+        content: [...state.content, action.payload],
       };
     default:
       return state;
