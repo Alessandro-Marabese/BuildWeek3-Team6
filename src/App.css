@@ -497,6 +497,7 @@ footer ul li a p:hover {
   .profileIcon {
     width: 152px;
     height: 152px;
+    cursor: pointer;
   }
 }
 

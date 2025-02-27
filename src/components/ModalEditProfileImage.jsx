@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { editImageProfile, getUserProfile } from "../redux/actions";
 import deleteImg from "../assets/delete.png";
 
-function ModalEditProfileImage({ show, onHide }) {
+function ModalEditProfileImage({ show, onHide, imgPropPreview }) {
   const userProfile = useSelector((state) => state.profile.content);
   const [imgPreview, setImgPreview] = useState(false);
 
@@ -62,7 +62,7 @@ function ModalEditProfileImage({ show, onHide }) {
         <Modal.Header closeButton>
           <Modal.Title className="fw-bold">Aggiungi foto</Modal.Title>
         </Modal.Header>
-        {!imgPreview ? (
+        {!imgPreview || imgPropPreview !== null ? (
           <Modal.Body style={{ maxHeight: "600px", overflowY: "auto" }}>
             <Container className="text-center mt-4" style={{ width: "450px" }}>
               <h4>
@@ -83,13 +83,25 @@ function ModalEditProfileImage({ show, onHide }) {
             </Container>
           </Modal.Body>
         ) : (
-          <Container>
-            <div className="mt-3  d-flex flex-column align-items-center ">
-              <div className="bg-black py-2 w-100 text-center">
-                <Image src={URL.createObjectURL(selectedFile)} alt="Anteprima" className="imgPreview" />
-              </div>
-            </div>
-          </Container>
+          <>
+            {imgPropPreview ? (
+              <Container>
+                <div className="mt-3  d-flex flex-column align-items-center ">
+                  <div className="bg-black py-2 w-100 text-center">
+                    <Image src={imgPropPreview} alt="Anteprima" className="imgPreview" />
+                  </div>
+                </div>
+              </Container>
+            ) : (
+              <Container>
+                <div className="mt-3  d-flex flex-column align-items-center ">
+                  <div className="bg-black py-2 w-100 text-center">
+                    <Image src={URL.createObjectURL(selectedFile)} alt="Anteprima" className="imgPreview" />
+                  </div>
+                </div>
+              </Container>
+            )}
+          </>
         )}
 
         <Modal.Footer>
