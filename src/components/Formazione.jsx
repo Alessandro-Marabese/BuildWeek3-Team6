@@ -2,10 +2,44 @@ import "../App.css";
 import { Col, Container, Row, Button } from "react-bootstrap";
 
 const Formazione = () => {
+  const handleAddClick = () => {
+    console.log("Aggiungi titolo di studio");
+  };
+
+  const handleEditClick = () => {
+    console.log("Modifica titolo di studio");
+  };
+
   return (
     <Col className="ps-lg-3">
       <Container fluid className="mx-0 mt-2 cont pt-3 rounded-block">
-        <h5>Formazione</h5>
+        <div className="d-flex align-items-center justify-content-between mb-3">
+          <h5 className="mb-0">Formazione</h5>
+          <div className="d-flex align-items-start">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              data-supported-dps="24x24"
+              fill="currentColor"
+              className="icon i24x24 me-2 d-none d-md-block"
+              style={{ width: "24px", cursor: "pointer" }}
+              onClick={handleAddClick}
+            >
+              <path d="M21 13h-8v8h-2v-8H3v-2h8V3h2v8h8z"></path>
+            </svg>
+            <svg
+              viewBox="0 0 24 24"
+              data-supported-dps="24x24"
+              fill="currentColor"
+              className="icon i24x24"
+              style={{ width: "24px", cursor: "pointer" }}
+              onClick={handleEditClick}
+            >
+              <path d="M21.13 2.86a3 3 0 00-4.17 0l-13 13L2 22l6.19-2L21.13 7a3 3 0 000-4.16zM6.77 18.57l-1.35-1.34L16.64 6 18 7.35z"></path>
+            </svg>
+          </div>
+        </div>
+
         <div className="d-flex">
           <div>
             <img
@@ -25,28 +59,8 @@ const Formazione = () => {
               <div className="text-black-50">Inizio e fine</div>
             </div>
           </div>
-          <div className="icon-modifica ms-auto d-flex align-items-start">
-            <svg
-              viewBox="0 0 24 24"
-              data-supported-dps="24x24"
-              fill="currentColor"
-              className="icon i24x24 me-2"
-              style={{ width: "24px", cursor: "pointer" }}
-            >
-              <path d="M21.13 2.86a3 3 0 00-4.17 0l-13 13L2 22l6.19-2L21.13 7a3 3 0 000-4.16zM6.77 18.57l-1.35-1.34L16.64 6 18 7.35z"></path>
-            </svg>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              data-supported-dps="24x24"
-              fill="currentColor"
-              className="icon i24x24 d-none d-md-block"
-              style={{ width: "24px", cursor: "pointer" }}
-            >
-              <path d="M21 13h-8v8h-2v-8H3v-2h8V3h2v8h8z"></path>
-            </svg>
-          </div>
         </div>
+
         <Row className="d-md-none">
           <h5>Hai altri titoli di studio?</h5>
           <p>
@@ -54,7 +68,9 @@ const Formazione = () => {
             voluptate! Rerum placeat qui quo ratione labore rem at! Doloremque consequatur sequi iste eum earum.
             Placeat.
           </p>
-          <Button variant="outline-primary">Aggiungi titolo di studio</Button>
+          <Button variant="outline-primary" onClick={handleAddClick}>
+            Aggiungi titolo di studio
+          </Button>
         </Row>
       </Container>
     </Col>

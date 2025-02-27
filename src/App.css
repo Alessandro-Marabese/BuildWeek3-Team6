@@ -549,3 +549,8 @@ footer ul li a p:hover {
 .body-xs {
   font-size: 0.8rem;
 }
+
+.vediAltro {
+  color: #00000086;
+  text-decoration: none;
+}
