@@ -297,7 +297,7 @@ export const uploadPostImage = (postId, imageFile) => {
       let form = new FormData();
       form.append("post", imageFile);
 
-      const response = await fetch(`https://striveschool-api.herokuapp.com/api/posts/${postId}/picture`, {
+      let response = await fetch(`https://striveschool-api.herokuapp.com/api/posts/${postId}`, {
         method: "POST",
         headers: {
           Authorization: API_TOKEN,
@@ -305,7 +305,7 @@ export const uploadPostImage = (postId, imageFile) => {
         body: form,
       });
       if (response.ok) {
-        const data = await response.json();
+        let data = await response.json();
         dispatch({ type: UPDATE_POST_IMAGE, payload: data });
         return data;
       } else {

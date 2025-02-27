@@ -45,7 +45,24 @@ const HomePage = () => {
       const interval = intervals[unit];
       if (secondsPast >= interval) {
         const count = Math.floor(secondsPast / interval);
-        return count === 1 ? `1 ${unit}` : `${count} ${unit}i fa`;
+        if (unit === "anno") {
+          return count === 1 ? `1 anno ` : `${count} anni `;
+        }
+        if (unit === "mese") {
+          return count === 1 ? `1 mese ` : `${count} mesi `;
+        }
+        if (unit === "giorno") {
+          return count === 1 ? `1 giorno ` : `${count} giorni `;
+        }
+        if (unit === "ora") {
+          return count === 1 ? `1 ora` : `${count} ore`;
+        }
+        if (unit === "minuto") {
+          return count === 1 ? `1 minuto` : `${count} minuti`;
+        }
+        if (unit === "secondo") {
+          return count === 1 ? `1 secondo` : `${count} secondi`;
+        }
       }
     }
   };
@@ -230,7 +247,7 @@ const HomePage = () => {
                     <Col className="border-bottom">
                       <p>{singlePost.text}</p>
                       <a href="#">
-                        <img src={singlePost.user.image} alt="post-image" className="img-fluid" />
+                        <img src={singlePost.image} alt="post-image" className="img-fluid" />
                       </a>
                       <div id="like-card" className="mb-2 mt-2">
                         <a href="#">
