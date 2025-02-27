@@ -62,7 +62,7 @@ function ModalEditProfileImage({ show, onHide, imgPropPreview }) {
         <Modal.Header closeButton>
           <Modal.Title className="fw-bold">Aggiungi foto</Modal.Title>
         </Modal.Header>
-        {!imgPreview || imgPropPreview !== null ? (
+        {!imgPreview ? (
           <Modal.Body style={{ maxHeight: "600px", overflowY: "auto" }}>
             <Container className="text-center mt-4" style={{ width: "450px" }}>
               <h4>
