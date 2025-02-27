@@ -14,6 +14,7 @@ const Esperienza = () => {
   const [experienceToEdit, setExperienceToEdit] = useState(null);
   const [showAllExperiences, setShowAllExperiences] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [showAddExperienceRow, setShowAddExperienceRow] = useState(true); // Stato per mostrare/nascondere la Row
 
   useEffect(() => {
     if (userId) {
@@ -58,19 +59,19 @@ const Esperienza = () => {
       <Container fluid className="mx-0 cont mt-2 pt-3 rounded-block">
         <div className="d-flex align-items-center justify-content-between mb-3">
           <h5 className="mb-0">Esperienza</h5>
-          <div className="d-flex align-items-center">
-            <svg
-              viewBox="0 0 24 24"
-              data-supported-dps="24x24"
-              fill="currentColor"
-              className="icon i24x24 me-2 d-none d-md-block"
-              style={{ width: "24px", cursor: "pointer" }}
-              onClick={handleAddClick}
-            >
-              <path d="M21 13h-8v8h-2v-8H3v-2h8V3h2v8h8z"></path>
-            </svg>
-          </div>
         </div>
+
+        {/* Link "+ Aggiungi Esperienza" (visibile solo in mobile e quando la Row è chiusa) */}
+        {isMobile && !showAddExperienceRow && (
+          <Button
+            variant="link"
+            className="p-0 text-decoration-none mb-3"
+            onClick={handleAddClick}
+            style={{ fontSize: "0.9rem", fontWeight: "500" }}
+          >
+            + Aggiungi Esperienza
+          </Button>
+        )}
 
         {visibleExperiences.map((exp) => (
           <div key={exp._id} className="d-flex align-items-start">
@@ -117,16 +118,36 @@ const Esperienza = () => {
           </div>
         )}
 
-        <Row className="d-md-none border-top px-3">
-          <img src={Valigia} alt="foto" className="icona-profile mt-3" />
-          <h5 className="text-center">Hai altra esperienza?</h5>
-          <p className="text-center text-black-50">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam consequuntur
-          </p>
-          <Button variant="outline-primary" onClick={handleAddClick} className="px-0 rounded-pill w-100">
-            Aggiungi Esperienza
-          </Button>
-        </Row>
+        {showAddExperienceRow && (
+          <Row className="d-md-none border-top px-3 position-relative">
+            <img src={Valigia} alt="foto" className="icona-profile mt-3" />
+            <h5 className="text-center">Hai altra esperienza?</h5>
+            <p className="text-center text-black-50">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam consequuntur
+            </p>
+            <Button variant="outline-primary" onClick={handleAddClick} className="px-0 rounded-pill w-100">
+              Aggiungi Esperienza
+            </Button>
+            {/* Icona "X" per chiudere la Row */}
+            <svg
+              viewBox="0 0 16 16"
+              data-supported-dps="16x16"
+              fill="currentColor"
+              className="icon icon-x"
+              style={{
+                width: "24px",
+                cursor: "pointer",
+                position: "absolute",
+                top: "0.5rem",
+                right: "0.5rem",
+                color: "black", // Colore contrastante
+              }}
+              onClick={() => setShowAddExperienceRow(false)}
+            >
+              <path d="M14 3.41L9.41 8 14 12.59 12.59 14 8 9.41 3.41 14 2 12.59 6.59 8 2 3.41 3.41 2 8 6.59 12.59 2z"></path>
+            </svg>
+          </Row>
+        )}
       </Container>
 
       <ExperienceModal
