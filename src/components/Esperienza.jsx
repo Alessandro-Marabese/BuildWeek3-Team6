@@ -3,6 +3,7 @@ import { Col, Container, Row, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchExperiences, deleteExperience } from "../redux/actions/index";
 import ExperienceModal from "./ExperienceModal";
+import Valigia from "../assets/valigia.png";
 
 const Esperienza = () => {
   const dispatch = useDispatch();
@@ -114,14 +115,13 @@ const Esperienza = () => {
           </div>
         )}
 
-        <Row className="d-md-none">
-          <h5>Hai altra esperienza?</h5>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam consequuntur velit quae, eius temporibus
-            voluptate! Rerum placeat qui quo ratione labore rem at! Doloremque consequatur sequi iste eum earum.
-            Placeat.
+        <Row className="d-md-none border-top">
+          <img src={Valigia} alt="foto" className="icona-profile mt-3" />
+          <h5 className="text-center">Hai altra esperienza?</h5>
+          <p className="text-center text-black-50">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam consequuntur
           </p>
-          <Button variant="outline-primary" onClick={handleAddClick}>
+          <Button variant="outline-primary" onClick={handleAddClick} className=" px-0 rounded-pill w-100">
             Aggiungi Esperienza
           </Button>
         </Row>

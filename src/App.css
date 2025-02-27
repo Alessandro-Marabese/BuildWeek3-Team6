@@ -554,3 +554,8 @@ footer ul li a p:hover {
   color: #00000086;
   text-decoration: none;
 }
+.icona-profile {
+  height: 50px;
+  width: auto;
+  margin-inline: auto;
+}

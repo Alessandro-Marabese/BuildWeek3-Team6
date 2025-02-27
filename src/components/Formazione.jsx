@@ -1,5 +1,6 @@
 import "../App.css";
 import { Col, Container, Row, Button } from "react-bootstrap";
+import Uni from "../assets/uni.png";
 
 const Formazione = () => {
   const handleAddClick = () => {
@@ -61,14 +62,13 @@ const Formazione = () => {
           </div>
         </div>
 
-        <Row className="d-md-none">
-          <h5>Hai altri titoli di studio?</h5>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam consequuntur velit quae, eius temporibus
-            voluptate! Rerum placeat qui quo ratione labore rem at! Doloremque consequatur sequi iste eum earum.
-            Placeat.
+        <Row className="d-md-none border-top">
+          <img src={Uni} alt="foto" className="icona-profile mt-3" />
+          <h5 className="text-center">Hai altri titoli di studio?</h5>
+          <p className="text-center text-black-50">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam consequuntur
           </p>
-          <Button variant="outline-primary" onClick={handleAddClick}>
+          <Button variant="outline-primary" className=" px-0 rounded-pill" onClick={handleAddClick}>
             Aggiungi titolo di studio
           </Button>
         </Row>
