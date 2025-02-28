@@ -15,6 +15,7 @@ export const IS_LOADING_OFF = "IS_LOADING_OFF";
 export const ADD_POST = "ADD_POST";
 export const UPDATE_EXPERIENCE_IMAGE = "UPDATE_EXPERIENCE_IMAGE";
 export const UPDATE_POST_IMAGE = "UPDATE_POST_IMAGE";
+export const DELETE_POST = "DELETE_POST";
 
 const API_TOKEN =
   "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2JjNTU4YWU3MDMzNzAwMTUzMTZkYjMiLCJpYXQiOjE3NDA0OTI3NzMsImV4cCI6MTc0MTcwMjM3M30.ghEymY3a9sDb5HV-twEe3aU29Z6oNBtkTfwahoV1JtY";
@@ -139,16 +140,13 @@ export const uploadExperienceImage = (userId, expId, imageFile) => async (dispat
     let formData = new FormData();
     formData.append("experience", imageFile);
 
-    const response = await fetch(
-      `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${expId}/picture`,
-      {
-        method: "POST",
-        headers: {
-          Authorization: API_TOKEN,
-        },
-        body: formData,
-      }
-    );
+    const response = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${expId}/picture`, {
+      method: "POST",
+      headers: {
+        Authorization: API_TOKEN,
+      },
+      body: formData,
+    });
 
     if (!response.ok) {
       const errorData = await response.json();
@@ -313,7 +311,27 @@ export const uploadPostImage = (postId, imageFile) => {
         throw new Error("Errore nel caricamento dell'immagine");
       }
     } catch (error) {
-      console.log("errore durante il caricamento dell'immagine del post", error);
+      console.error("errore durante il caricamento dell'immagine del post", error);
+    }
+  };
+};
+
+export const deletePost = (postId) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(`https://striveschool-api.herokuapp.com/api/posts/${postId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: API_TOKEN,
+        },
+      });
+      if (response.ok) {
+        dispatch({ type: DELETE_POST, payload: postId });
+      } else {
+        throw new Error("Cancellazione del post non riuscita");
+      }
+    } catch (error) {
+      console.error("Errore durante l'eliminazione del post", error);
     }
   };
 };

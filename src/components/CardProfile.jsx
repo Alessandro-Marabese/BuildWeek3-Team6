@@ -69,10 +69,7 @@ const CardProfile = () => {
                         <>
                           <div className="camIcon ms-3 d-lg-none">
                             <Image src={camIcon} width={48} className="imgfluid " />
-                            <Link
-                              to="/edit-profile-image"
-                              className="m-0 camText text-link fw-500 text-decoration-none"
-                            >
+                            <Link to="/edit-profile-image" className="m-0 camText text-link fw-500 text-decoration-none">
                               Aggiungi foto
                             </Link>
                           </div>
@@ -88,12 +85,7 @@ const CardProfile = () => {
                 </>
               )}
               <div className="actions-container">
-                <svg
-                  viewBox="0 0 24 24"
-                  data-supported-dps="24x24"
-                  fill="currentColor"
-                  className="icon i24x24 d-lg-none"
-                >
+                <svg viewBox="0 0 24 24" data-supported-dps="24x24" fill="currentColor" className="icon i24x24 d-lg-none">
                   <path d="M23 12l-4.61 7H16l4-6H8a3.92 3.92 0 00-4 3.84V17a4 4 0 00.19 1.24L5.12 21H3l-.73-2.22A6.4 6.4 0 012 16.94 6 6 0 018 11h12l-4-6h2.39z"></path>
                 </svg>
                 <Link to="/edit-profile" className="d-lg-none">
@@ -134,12 +126,7 @@ const CardProfile = () => {
                 </svg>
               </Link>
               <button to="/settings" className="linkArtDeco d-none d-lg-flex m-3 position-absolute top-0 end-0">
-                <svg
-                  viewBox="0 0 16 16"
-                  data-supported-dps="16x16"
-                  fill="currentColor"
-                  className="artdeco-button__icon i16x16"
-                >
+                <svg viewBox="0 0 16 16" data-supported-dps="16x16" fill="currentColor" className="artdeco-button__icon i16x16">
                   <path d="M10 9a2 2 0 11-2-2 2 2 0 012 2zm5-2.5V14H1V6.5A2.5 2.5 0 013.5 4h.75L5 2h6l.75 2h.75A2.5 2.5 0 0115 6.5zM11 9a3 3 0 10-3 3 3 3 0 003-3z"></path>
                 </svg>
               </button>
@@ -186,20 +173,14 @@ const CardProfile = () => {
       )}
 
       <Informazioni />
-      <Activity />
+      <Activity userId={userProfile._id} />
       <Esperienza />
       <Formazione />
       <Competenze />
       <Contatti />
-      {showModalEditProfile && (
-        <ModalEditProfile show={showModalEditProfile} onHide={() => setShowModalEditProfile(false)} />
-      )}
+      {showModalEditProfile && <ModalEditProfile show={showModalEditProfile} onHide={() => setShowModalEditProfile(false)} />}
       {showModalEditProfileImage && (
-        <ModalEditProfileImage
-          show={showModalEditProfileImage}
-          onHide={() => setShowModalEditProfileImage(false)}
-          imgProfile={imgProfile}
-        />
+        <ModalEditProfileImage show={showModalEditProfileImage} onHide={() => setShowModalEditProfileImage(false)} imgProfile={imgProfile} />
       )}
     </>
   );

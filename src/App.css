@@ -245,9 +245,8 @@ body {
 }
 
 .camText {
-  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu,
-    Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Emoji",
-    "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell,
+    "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
   font-size: 0.75rem;
   line-height: 1.25;
   padding-top: 0.25rem;
@@ -651,4 +650,14 @@ footer ul li a p:hover {
   position: absolute;
   left: 46, 5%;
   padding: 0;
+}
+#activity-visualizza-altri-post {
+  --bs-btn-border-radius: initial;
+  color: black;
+  --bs-btn-bg: #ffffff;
+  --bs-btn-border-color: #ffffff;
+  --bs-btn-hover-bg: #f3f3f3;
+  --bs-btn-hover-border-color: #ffffff;
+  --bs-btn-active-bg: #f3f3f3;
+  --bs-btn-active-border-color: #ffffff;
 }

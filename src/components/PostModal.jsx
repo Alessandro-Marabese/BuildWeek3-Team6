@@ -59,7 +59,7 @@ const PostModal = ({ show, onHide }) => {
           <Form.Group className="mb-3">
             <Form.Control
               as="textarea"
-              rows={9}
+              rows={5}
               name="description"
               value={postDescription.description}
               onChange={handleChange}
@@ -67,6 +67,8 @@ const PostModal = ({ show, onHide }) => {
               placeholder="Di cosa vorresti parlare?"
             />
           </Form.Group>
+          <Form.Control type="file" accept="image/*" onChange={handlePostImageChange} />
+          {postImgPreview && <img src={postImgPreview} alt="anteprima immagine post" style={{ width: "100px", marginTop: "10px" }} />}
           <div>
             <Button id="emoji-menu-modal-post" className="ms-2 mb-3 ">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-emoji-smile opacity-75" viewBox="0 0 16 16">
@@ -75,24 +77,24 @@ const PostModal = ({ show, onHide }) => {
               </svg>
             </Button>
           </div>
-          <Form.Control type="file" accept="image/*" onChange={handlePostImageChange} />
-          {postImgPreview && <img src={postImgPreview} alt="anteprima immagine post" style={{ width: "100px", marginTop: "10px" }} />}
-          <a href="#" className="text-black opacity-50 ms-4">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-calendar-event" viewBox="0 0 16 16">
-              <path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z" />
-              <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
-            </svg>
-          </a>
-          <a href="#" className="text-black opacity-50 ms-4">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-filter-circle-fill" viewBox="0 0 16 16">
-              <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16M3.5 5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1M5 8.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m2 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5" />
-            </svg>
-          </a>
-          <a href="#" className="text-black opacity-50 ms-4">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-plus-lg" viewBox="0 0 16 16">
-              <path fillRule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2" />
-            </svg>
-          </a>
+          <div>
+            <a href="#" className="text-black opacity-50 ms-4">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-calendar-event" viewBox="0 0 16 16">
+                <path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z" />
+                <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
+              </svg>
+            </a>
+            <a href="#" className="text-black opacity-50 ms-4">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-filter-circle-fill" viewBox="0 0 16 16">
+                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16M3.5 5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1M5 8.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m2 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5" />
+              </svg>
+            </a>
+            <a href="#" className="text-black opacity-50 ms-4">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-plus-lg" viewBox="0 0 16 16">
+                <path fillRule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2" />
+              </svg>
+            </a>
+          </div>
           <div className=" border-top  mt-3 pt-3  text-end">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-clock me-2" viewBox="0 0 16 16">
               <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z" />

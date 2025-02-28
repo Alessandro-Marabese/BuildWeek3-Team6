@@ -35,9 +35,7 @@ const SuggestedPeopleDesktop = () => {
           </div>
           <div>
             <span className="profile-url">
-              {myProfile && myProfile.username
-                ? `www.linkedin.com/in/${myProfile.username}`
-                : "www.linkedin.com/in/nome-profilo"}
+              {myProfile && myProfile.username ? `www.linkedin.com/in/${myProfile.username}` : "www.linkedin.com/in/nome-profilo"}
             </span>
           </div>
         </div>
@@ -49,8 +47,8 @@ const SuggestedPeopleDesktop = () => {
           {suggestedPeople.slice(20, 20 + visibleCount).map((person) => (
             <div key={person._id} className="person-item">
               <img src={person.image} alt={person.name} />
-              <div className="person-info">
-                <p className="people-name">
+              <div className="person-info mb-1">
+                <p className="people-name mb-0">
                   {person.name} {person.surname}
                 </p>
                 <p className="people-title">{person.title}</p>
@@ -62,13 +60,11 @@ const SuggestedPeopleDesktop = () => {
             </div>
           ))}
         </div>
-        {!hasClickedShowMore &&
-          visibleCount < suggestedPeople.slice(20).length &&
-          visibleCount < 10 && (
-            <button className="show-more-btn" onClick={handleShowMore}>
-              Mostra Altro
-            </button>
-          )}
+        {!hasClickedShowMore && visibleCount < suggestedPeople.slice(20).length && visibleCount < 10 && (
+          <button className="show-more-btn" onClick={handleShowMore}>
+            Mostra Altro
+          </button>
+        )}
       </div>
 
       <div className="suggested-card">
@@ -82,8 +78,8 @@ const SuggestedPeopleDesktop = () => {
         {suggestedPeople.slice(30, 32).map((person) => (
           <div key={person._id} className="person-item">
             <img src={person.image} alt={`${person.name} ${person.surname}`} />
-            <div className="person-info">
-              <p className="people-name">
+            <div className="person-info mb-1">
+              <p className="people-name mb-0">
                 {person.name} {person.surname}
               </p>
               <p className="people-title">{person.title}</p>
@@ -96,14 +92,10 @@ const SuggestedPeopleDesktop = () => {
           <i className="bi bi-key-fill yellow-key"></i>
           <h4>Sblocca elenco completo</h4>
         </div>
-        <p className="premium-subtitle">
-          Scopri gli altri profili visitati spesso insieme al tuo
-        </p>
+        <p className="premium-subtitle">Scopri gli altri profili visitati spesso insieme al tuo</p>
         <button className="premium-button">Prova Premium per 0 EUR</button>
         <p className="premium-description">
-          1 mese gratis con assistenza 24/7. Annulli in qualsiasi momento. Ti
-          invieremo un promemoria 7 giorni prima della fine del periodo di
-          prova.
+          1 mese gratis con assistenza 24/7. Annulli in qualsiasi momento. Ti invieremo un promemoria 7 giorni prima della fine del periodo di prova.
         </p>
 
         {suggestedPeople.slice(32, 34).map((person) => (
