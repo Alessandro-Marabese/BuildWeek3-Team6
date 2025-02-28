@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addComment } from "../redux/actions";
-import { Form } from "react-router";
+import { Form } from "react-bootstrap";
 
 const CommentSection = ({ commentPostId }) => {
   const [isCommentSectionVisible, setIsCommentSectionVisible] = useState(false);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
 
-  const dispatch = useDispatch;
+  const dispatch = useDispatch();
 
   const onSubmit = (e) => {
     e.preventDefault();
