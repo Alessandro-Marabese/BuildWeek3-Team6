@@ -30,6 +30,7 @@ const PostModal = ({ show, onHide }) => {
         dispatch(uploadPostImage(post._id, postImg));
       }
     });
+    onHide();
   };
 
   return (

@@ -7,13 +7,20 @@ const EditPostModal = ({ show, onHide, postToEdit }) => {
   const dispatch = useDispatch();
   const userProfile = useSelector((state) => state.profile.content);
   const [postDescription, setPostDescription] = useState({
-    description: "",
+    createdAt: "",
+    image: "",
+    text: "",
+    updatedAt: "",
+    user: "",
+    username: "",
+    __v: 0,
+    _id: "",
   });
   const [postImg, setPostImg] = useState(null);
   const [postImgPreview, setPostImagePreview] = useState(null);
 
   const handleChange = (e) => {
-    setPostDescription({ [e.target.name]: e.target.value });
+    setPostDescription({ ...postDescription, [e.target.name]: e.target.value });
     console.log(postDescription);
   };
   const handlePostImageChange = (e) => {
@@ -68,7 +75,7 @@ const EditPostModal = ({ show, onHide, postToEdit }) => {
       <Modal.Body>
         <Form onSubmit={onSubmit}>
           <Form.Group className="mb-3">
-            <Form.Control as="textarea" rows={5} name="description" value={postDescription.text} onChange={handleChange} className="border-0" />
+            <Form.Control as="textarea" rows={5} name="text" value={postDescription.text} onChange={handleChange} className="border-0" />
           </Form.Group>
           <Form.Control type="file" accept="image/*" onChange={handlePostImageChange} />
           {postImgPreview && <img src={postImgPreview} alt="anteprima immagine post" style={{ width: "100px", marginTop: "10px" }} />}
