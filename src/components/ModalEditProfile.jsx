@@ -15,12 +15,12 @@ function ModalEditProfile({ show, onHide }) {
 
   return (
     <div className="modal show" style={{ display: "block", position: "initial" }}>
-      <Modal show={show} onHide={onHide} size="lg" centered>
+      <Modal show={show} onHide={onHide} size="lg" centered contentClassName="my-modal-content">
         <Modal.Header closeButton>
           <Modal.Title className="fw-bold">Modifica presentazione</Modal.Title>
         </Modal.Header>
 
-        <Modal.Body style={{ maxHeight: "600px", overflowY: "auto" }}>
+        <Modal.Body className="modalProfile" style={{ height: "500px", overflowY: "auto" }}>
           <Card className="px-3 pt-3 pb-1 shadow-sm">
             <div className="d-flex justify-content-between align-items-center">
               <div>

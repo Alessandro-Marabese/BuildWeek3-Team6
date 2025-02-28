@@ -14,6 +14,8 @@ export const IS_LOADING_ON = "IS_LOADING_ON";
 export const IS_LOADING_OFF = "IS_LOADING_OFF";
 export const ADD_POST = "ADD_POST";
 export const UPDATE_EXPERIENCE_IMAGE = "UPDATE_EXPERIENCE_IMAGE";
+export const FETCH_OTHER_PROFILE_OK = "FETCH_OTHER_PROFILE_OK";
+export const FETCH_OTHER_PROFILE_ERR = "FETCH_OTHER_PROFILE_ERR";
 
 const API_TOKEN =
   "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2JjNTU4YWU3MDMzNzAwMTUzMTZkYjMiLCJpYXQiOjE3NDA0OTI3NzMsImV4cCI6MTc0MTcwMjM3M30.ghEymY3a9sDb5HV-twEe3aU29Z6oNBtkTfwahoV1JtY";
@@ -39,6 +41,33 @@ export const getUserProfile = () => {
       }
     } catch (error) {
       dispatch({ type: FETCH_PROFILE_ERR, payload: error });
+      console.error("Errore nel recupero del profilo:", error);
+    }
+  };
+};
+
+export const getOtherUserProfile = (idUser) => {
+  let myUrl = "https://striveschool-api.herokuapp.com/api/profile/" + idUser;
+
+  return async (dispatch) => {
+    try {
+      let resp = await fetch(myUrl, {
+        method: "GET",
+        headers: {
+          Authorization: API_TOKEN,
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (resp.ok) {
+        let otherProfile = await resp.json();
+        console.log("Altro profilo ricercato:", otherProfile);
+        dispatch({ type: FETCH_OTHER_PROFILE_OK, payload: otherProfile });
+      } else {
+        throw new Error("Errore durante la fetch del profilo");
+      }
+    } catch (error) {
+      dispatch({ type: FETCH_OTHER_PROFILE_ERR, payload: error });
       console.error("Errore nel recupero del profilo:", error);
     }
   };
@@ -138,13 +167,16 @@ export const uploadExperienceImage = (userId, expId, imageFile) => async (dispat
     let formData = new FormData();
     formData.append("experience", imageFile);
 
-    const response = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${expId}/picture`, {
-      method: "POST",
-      headers: {
-        Authorization: API_TOKEN,
-      },
-      body: formData,
-    });
+    const response = await fetch(
+      `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${expId}/picture`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: API_TOKEN,
+        },
+        body: formData,
+      }
+    );
 
     if (!response.ok) {
       const errorData = await response.json();
