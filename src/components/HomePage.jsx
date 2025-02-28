@@ -15,8 +15,6 @@ const HomePage = () => {
 
   const [loadedPosts, setLoadedPosts] = useState(10);
   const [modalShow, setModalShow] = useState(false);
-  const experiences = useSelector((state) => state.experiences.experiences);
-  console.log(experiences);
 
   const handleModalShow = () => setModalShow(true);
   const handleModalClose = () => setModalShow(false);
