@@ -598,6 +598,9 @@ footer ul li a p:hover {
   width: 700px;
   height: 550px;
 }
+.my-modal-content {
+  height: 800px;
+}
 #modal-post-title-btn {
   --bs-btn-bg: #ffffff;
   --bs-btn-border-color: #ffffff;

@@ -1,5 +1,5 @@
 import Card from "react-bootstrap/Card";
-import { Link } from "react-router";
+import { Link, useParams } from "react-router";
 import camIcon from "../assets/camicon.png";
 import { Image } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,21 +9,42 @@ import Esperienza from "./Esperienza";
 import Formazione from "./Formazione";
 import Competenze from "./Competenze";
 import Contatti from "./Contatti";
-import { RECLUTER_VISIBLE } from "../redux/actions";
+import { getOtherUserProfile, RECLUTER_VISIBLE } from "../redux/actions";
 import iconVerified from "../assets/verified.png";
 import ModalEditProfile from "./ModalEditProfile";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import btnNoPhoto from "../assets/btnnophoto.png";
+import btnNoPhotoOther from "../assets/noPhotoOther.png";
 import ModalEditProfileImage from "./ModalEditProfileImage";
 
 const CardProfile = () => {
   const dispatch = useDispatch();
-  const userProfile = useSelector((state) => state.profile.content);
+  const myUserProfile = useSelector((state) => state.profile.content);
+  const otherUserProfile = useSelector((state) => state.profile.otherProfile);
   const recluterVisible = useSelector((state) => state.profile.recluterVisible);
   const [showModalEditProfile, setShowModalEditProfile] = useState(false);
   const [showModalEditProfileImage, setShowModalEditProfileImage] = useState(false);
   const [imgProfile, setImgProfile] = useState(null);
+  const otherUsers = useParams();
+  let userProfile = null;
 
+  console.log(otherUsers);
+
+  useEffect(() => {
+    if (otherUsers.idOther) {
+      dispatch(getOtherUserProfile(otherUsers.idOther));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch]);
+
+  if (otherUsers.idOther) {
+    userProfile = otherUserProfile;
+  } else {
+    userProfile = myUserProfile;
+  }
+
+  console.log(otherUserProfile);
+  console.log(userProfile);
   return (
     <>
       {userProfile && (
@@ -34,14 +55,30 @@ const CardProfile = () => {
             </div>
             <div className="d-flex justify-content-between iconBarProfile">
               {userProfile.image === "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png" ? (
-                <div className="camIcon ms-3">
-                  <>
+                <>
+                  <div className="camIcon ms-3 d-lg-none">
                     <Image src={camIcon} width={48} className="imgfluid" />
-                    <Link to="/edit-profile-image" className="m-0 camText text-link fw-500 text-decoration-none">
-                      Aggiungi foto
-                    </Link>
-                  </>
-                </div>
+                    {!otherUsers.idOther && (
+                      <Link to="/edit-profile-image" className="m-0 camText text-link fw-500 text-decoration-none">
+                        Aggiungi foto
+                      </Link>
+                    )}
+                  </div>
+                  {otherUsers.idOther ? (
+                    <div className="d-none d-lg-flex profileIcon" style={{ zIndex: 1, marginLeft: "15px" }}>
+                      <Image
+                        src={"https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"}
+                        width={160}
+                      />
+                    </div>
+                  ) : (
+                    <div className="d-none d-lg-flex" style={{ zIndex: 1, marginLeft: "15px" }}>
+                      <button className="hide" onClick={() => setShowModalEditProfileImage(true)}>
+                        <Image src={btnNoPhoto} />
+                      </button>
+                    </div>
+                  )}
+                </>
               ) : (
                 <>
                   {Array.isArray(userProfile) ? (
@@ -69,36 +106,54 @@ const CardProfile = () => {
                         <>
                           <div className="camIcon ms-3 d-lg-none">
                             <Image src={camIcon} width={48} className="imgfluid " />
-                            <Link to="/edit-profile-image" className="m-0 camText text-link fw-500 text-decoration-none">
-                              Aggiungi foto
-                            </Link>
+                            {!otherUsers.idOther && (
+                              <Link
+                                to="/edit-profile-image"
+                                className="m-0 camText text-link fw-500 text-decoration-none"
+                              >
+                                Aggiungi foto
+                              </Link>
+                            )}
                           </div>
-                          <div className="d-none d-lg-flex" style={{ zIndex: 1, marginLeft: "15px" }}>
-                            <button className="hide" onClick={() => setShowModalEditProfileImage(true)}>
-                              <Image src={btnNoPhoto} />
-                            </button>
-                          </div>
+                          {otherUsers.idOther ? (
+                            <div className="d-none d-lg-flex" style={{ zIndex: 1, marginLeft: "15px" }}>
+                              <Image src={btnNoPhotoOther} />
+                            </div>
+                          ) : (
+                            <div className="d-none d-lg-flex" style={{ zIndex: 1, marginLeft: "15px" }}>
+                              <button className="hide" onClick={() => setShowModalEditProfileImage(true)}>
+                                <Image src={btnNoPhoto} />
+                              </button>
+                            </div>
+                          )}
                         </>
                       )}
                     </>
                   )}
                 </>
               )}
-              <div className="actions-container">
-                <svg viewBox="0 0 24 24" data-supported-dps="24x24" fill="currentColor" className="icon i24x24 d-lg-none">
-                  <path d="M23 12l-4.61 7H16l4-6H8a3.92 3.92 0 00-4 3.84V17a4 4 0 00.19 1.24L5.12 21H3l-.73-2.22A6.4 6.4 0 012 16.94 6 6 0 018 11h12l-4-6h2.39z"></path>
-                </svg>
-                <Link to="/edit-profile" className="d-lg-none">
-                  <svg viewBox="0 0 24 24" data-supported-dps="24x24" fill="currentColor" className="icon i24x24">
-                    <path d="M21.13 2.86a3 3 0 00-4.17 0l-13 13L2 22l6.19-2L21.13 7a3 3 0 000-4.16zM6.77 18.57l-1.35-1.34L16.64 6 18 7.35z"></path>
+              {!otherUsers.idOther && (
+                <div className="actions-container">
+                  <svg
+                    viewBox="0 0 24 24"
+                    data-supported-dps="24x24"
+                    fill="currentColor"
+                    className="icon i24x24 d-lg-none"
+                  >
+                    <path d="M23 12l-4.61 7H16l4-6H8a3.92 3.92 0 00-4 3.84V17a4 4 0 00.19 1.24L5.12 21H3l-.73-2.22A6.4 6.4 0 012 16.94 6 6 0 018 11h12l-4-6h2.39z"></path>
                   </svg>
-                </Link>
-                <button className="hide d-none d-lg-flex" onClick={() => setShowModalEditProfile(true)}>
-                  <svg viewBox="0 0 24 24" data-supported-dps="24x24" fill="currentColor" className="icon i24x24">
-                    <path d="M21.13 2.86a3 3 0 00-4.17 0l-13 13L2 22l6.19-2L21.13 7a3 3 0 000-4.16zM6.77 18.57l-1.35-1.34L16.64 6 18 7.35z"></path>
-                  </svg>
-                </button>
-              </div>
+                  <Link to="/edit-profile" className="d-lg-none">
+                    <svg viewBox="0 0 24 24" data-supported-dps="24x24" fill="currentColor" className="icon i24x24">
+                      <path d="M21.13 2.86a3 3 0 00-4.17 0l-13 13L2 22l6.19-2L21.13 7a3 3 0 000-4.16zM6.77 18.57l-1.35-1.34L16.64 6 18 7.35z"></path>
+                    </svg>
+                  </Link>
+                  <button className="hide d-none d-lg-flex" onClick={() => setShowModalEditProfile(true)}>
+                    <svg viewBox="0 0 24 24" data-supported-dps="24x24" fill="currentColor" className="icon i24x24">
+                      <path d="M21.13 2.86a3 3 0 00-4.17 0l-13 13L2 22l6.19-2L21.13 7a3 3 0 000-4.16zM6.77 18.57l-1.35-1.34L16.64 6 18 7.35z"></path>
+                    </svg>
+                  </button>
+                </div>
+              )}
             </div>
 
             {userProfile.image !== "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png" && (
@@ -120,22 +175,33 @@ const CardProfile = () => {
             )}
 
             <Card.Body className="d-flex flex-column">
-              <Link to="/settings" className="linkSettings d-lg-none m-3 position-absolute top-0 end-0">
-                <svg viewBox="0 0 16 16" data-supported-dps="16x16" fill="currentColor" className="icon">
-                  <path d="M6 1L3 2.76 4 5.2l-.36.63L1 6.22v3.52l2.55.39.38.66L3 13.22 6 15l1.6-2h.76L10 15l3-1.76-.94-2.43.38-.65L15 9.78V6.26l-2.58-.4-.36-.62 1-2.46L10 1 8.37 3.08h-.71zm2 5a2 2 0 11-2 2 2 2 0 012-2z"></path>
-                </svg>
-              </Link>
-              <button to="/settings" className="linkArtDeco d-none d-lg-flex m-3 position-absolute top-0 end-0">
-                <svg viewBox="0 0 16 16" data-supported-dps="16x16" fill="currentColor" className="artdeco-button__icon i16x16">
-                  <path d="M10 9a2 2 0 11-2-2 2 2 0 012 2zm5-2.5V14H1V6.5A2.5 2.5 0 013.5 4h.75L5 2h6l.75 2h.75A2.5 2.5 0 0115 6.5zM11 9a3 3 0 10-3 3 3 3 0 003-3z"></path>
-                </svg>
-              </button>
+              {!otherUsers.idOther && (
+                <>
+                  <Link to="/settings" className="linkSettings d-lg-none m-3 position-absolute top-0 end-0">
+                    <svg viewBox="0 0 16 16" data-supported-dps="16x16" fill="currentColor" className="icon">
+                      <path d="M6 1L3 2.76 4 5.2l-.36.63L1 6.22v3.52l2.55.39.38.66L3 13.22 6 15l1.6-2h.76L10 15l3-1.76-.94-2.43.38-.65L15 9.78V6.26l-2.58-.4-.36-.62 1-2.46L10 1 8.37 3.08h-.71zm2 5a2 2 0 11-2 2 2 2 0 012-2z"></path>
+                    </svg>
+                  </Link>
+                  <button to="/settings" className="linkArtDeco d-none d-lg-flex m-3 position-absolute top-0 end-0">
+                    <svg
+                      viewBox="0 0 16 16"
+                      data-supported-dps="16x16"
+                      fill="currentColor"
+                      className="artdeco-button__icon i16x16"
+                    >
+                      <path d="M10 9a2 2 0 11-2-2 2 2 0 012 2zm5-2.5V14H1V6.5A2.5 2.5 0 013.5 4h.75L5 2h6l.75 2h.75A2.5 2.5 0 0115 6.5zM11 9a3 3 0 10-3 3 3 3 0 003-3z"></path>
+                    </svg>
+                  </button>
+                </>
+              )}
               <Card.Title className="mb-0 d-h5-lg">
-                {userProfile.name} {userProfile.surname}{" "}
-                <button className="badge-verifica d-none d-lg-inline">
-                  <Image src={iconVerified} width={16} className="me-1" />
-                  Aggiungi badge di verifica
-                </button>
+                {userProfile.name} {userProfile.surname}
+                {!otherUsers.idOther && (
+                  <button className="badge-verifica d-none d-lg-inline">
+                    <Image src={iconVerified} width={16} className="me-1" />
+                    Aggiungi badge di verifica
+                  </button>
+                )}
               </Card.Title>
               <span style={{ lineHeight: "1" }} className="py-lg-1">
                 {userProfile.title}
@@ -144,12 +210,20 @@ const CardProfile = () => {
                 <span className="info body-small position">{userProfile.area}</span>
                 <Link className="body-small fw-500 d-none d-lg-inline info-contact">Informazioni di contatto</Link>
               </div>
-              <div className="d-none d-lg-flex mt-3 mb-2">
-                <button className="roundedAll me-2  btndisp py-1 px-3">Disponibile per</button>
-                <button className="roundedAll me-2  btnaddbet py-1 px-3">Aggiungi sezione del profilo</button>
-                <button className="roundedAll me-2  btnaddbet py-1 px-3">Migliora profilo</button>
-                <button className="roundedAll  btnris py-1 px-3">Risorse</button>
-              </div>
+              {!otherUsers.idOther ? (
+                <div className="d-none d-lg-flex mt-3 mb-2">
+                  <button className="roundedAll me-2  btndisp py-1 px-3">Disponibile per</button>
+                  <button className="roundedAll me-2  btnaddbet py-1 px-3">Aggiungi sezione del profilo</button>
+                  <button className="roundedAll me-2  btnaddbet py-1 px-3">Migliora profilo</button>
+                  <button className="roundedAll  btnris py-1 px-3">Risorse</button>
+                </div>
+              ) : (
+                <div className="d-none d-lg-flex mt-3 mb-2">
+                  <button className="roundedAll me-2  btndisp py-1 px-3">+ Segui</button>
+                  <button className="roundedAll me-2  btnaddbet py-1 px-3">Messaggio</button>
+                  <button className="roundedAll  btnris py-1 px-3">Altro</button>
+                </div>
+              )}
 
               {recluterVisible && (
                 <section className="mt-3 border border-tertiary d-flex justify-content-between d-lg-none">
@@ -178,9 +252,15 @@ const CardProfile = () => {
       <Formazione />
       <Competenze />
       <Contatti />
-      {showModalEditProfile && <ModalEditProfile show={showModalEditProfile} onHide={() => setShowModalEditProfile(false)} />}
+      {showModalEditProfile && (
+        <ModalEditProfile show={showModalEditProfile} onHide={() => setShowModalEditProfile(false)} />
+      )}
       {showModalEditProfileImage && (
-        <ModalEditProfileImage show={showModalEditProfileImage} onHide={() => setShowModalEditProfileImage(false)} imgProfile={imgProfile} />
+        <ModalEditProfileImage
+          show={showModalEditProfileImage}
+          onHide={() => setShowModalEditProfileImage(false)}
+          imgProfile={imgProfile}
+        />
       )}
     </>
   );

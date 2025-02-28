@@ -16,14 +16,30 @@ const MyNavBar = () => {
   useEffect(() => {
     dispatch(getUserProfile());
   }, [dispatch]);
+
   return (
     <>
-      <section id="secondary-navbar" className=" w-100 position-fixed top-0 z-1 d-flex align-items-center px-3 py-2 border-bottom">
+      <section
+        id="secondary-navbar"
+        className=" w-100 position-fixed top-0 z-1 d-flex align-items-center px-3 py-2 border-bottom"
+      >
         <Link to="/profile">
-          <img id="profile-img-sec-navbar" src={userProfile.image} alt="profile-image" className="rounded-circle me-3" />
+          <img
+            id="profile-img-sec-navbar"
+            src={userProfile.image}
+            alt="profile-image"
+            className="rounded-circle me-3"
+          />
         </Link>
         <div className="search-input-div d-flex align-items-center flex-grow-1">
-          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-search p-1 " viewBox="0 0 16 16">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="25"
+            height="25"
+            fill="currentColor"
+            className="bi bi-search p-1 "
+            viewBox="0 0 16 16"
+          >
             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
           </svg>
           <input type="text" name="" id="input-search" placeholder="Cerca" className="w-100 border-0 fw-bold" />
@@ -42,7 +58,10 @@ const MyNavBar = () => {
         </svg>
       </section>
 
-      <Navbar id="primary-navbar" className="position-fixed position-md-sticky z-1 bottom-0 w-100 border-top border-bottom justify-content-around py-md-0">
+      <Navbar
+        id="primary-navbar"
+        className="position-fixed position-md-sticky z-1 bottom-0 w-100 border-top border-bottom justify-content-around py-md-0"
+      >
         <Container className="text-center align-items-center mx-md-0 w-md-100">
           <div className="d-flex align-items-center d-none d-lg-flex">
             <svg
@@ -58,7 +77,14 @@ const MyNavBar = () => {
               <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"></path>
             </svg>
             <div className="search-input-div d-flex align-items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-search p-1 " viewBox="0 0 16 16">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="25"
+                height="25"
+                fill="currentColor"
+                className="bi bi-search p-1 "
+                viewBox="0 0 16 16"
+              >
                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
               </svg>
               <input type="text" name="" id="input-search" placeholder="Cerca" className=" border-0 fw-bold" />
@@ -179,7 +205,12 @@ const MyNavBar = () => {
           <Dropdown show={showDropdown} onToggle={handleToggle} className="d-none d-lg-block">
             <Dropdown.Toggle variant="success" id="dropdown-basic">
               <span>
-                <img id="profile-img-primary-navbar" src={userProfile.image} alt="profile-image" className="rounded-circle" />
+                <img
+                  id="profile-img-primary-navbar"
+                  src={userProfile.image}
+                  alt="profile-image"
+                  className="rounded-circle"
+                />
               </span>
               <span className="d-block text-black opacity-50">
                 Tu
@@ -202,7 +233,13 @@ const MyNavBar = () => {
               <Link to="/profile" className="text-decoration-none" onClick={handleProfileClick}>
                 <Row className="border-bottom mx-1">
                   <Col className="ps-0 col-3">
-                    <img src={userProfile.image} alt="Immagine profilo" height="50" width="50" className="rounded-circle ms-2" />
+                    <img
+                      src={userProfile.image}
+                      alt="Immagine profilo"
+                      height="50"
+                      width="50"
+                      className="rounded-circle ms-2"
+                    />
                   </Col>
                   {userProfile && (
                     <Col className="px-0 col-7">
@@ -379,7 +416,14 @@ const MyNavBar = () => {
                   <div className="mb-5">
                     <a href="#">
                       <h6 className="d-inline-block">Crea una pagina aziendale</h6>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-plus" viewBox="0 0 16 16">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        className="bi bi-plus"
+                        viewBox="0 0 16 16"
+                      >
                         <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
                       </svg>
                     </a>
