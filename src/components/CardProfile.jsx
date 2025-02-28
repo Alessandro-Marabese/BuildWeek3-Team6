@@ -245,7 +245,7 @@ const CardProfile = () => {
 
       <Informazioni />
       <Activity userId={userProfile._id} />
-      <Esperienza />
+      <Esperienza userId={userProfile._id} />
       <Formazione />
       <Competenze />
       <Contatti />

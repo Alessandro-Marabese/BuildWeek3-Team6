@@ -5,9 +5,9 @@ import { fetchExperiences, deleteExperience } from "../redux/actions/index";
 import ExperienceModal from "./ExperienceModal";
 import Valigia from "../assets/valigia.png";
 
-const Esperienza = () => {
+const Esperienza = ({ userId }) => {
   const dispatch = useDispatch();
-  const userId = useSelector((state) => state.profile.content._id);
+  const myUserId = useSelector((state) => state.profile.content._id);
   const { experiences, loading, error } = useSelector((state) => state.experiences);
   const [modalClosed, setModalClosed] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -15,11 +15,19 @@ const Esperienza = () => {
   const [showAllExperiences, setShowAllExperiences] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [showAddExperienceRow, setShowAddExperienceRow] = useState(true);
+  const [isMyProfile, setIsMyProfile] = useState(true);
 
+  console.log(isMyProfile);
   useEffect(() => {
     if (userId) {
       dispatch(fetchExperiences(userId));
     }
+    if (userId !== myUserId) {
+      setIsMyProfile(false);
+    } else {
+      setIsMyProfile(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, userId, modalClosed]);
 
   useEffect(() => {
@@ -60,20 +68,24 @@ const Esperienza = () => {
         <div className="d-flex align-items-center justify-content-between mb-3">
           <h5 className="mb-0">Esperienza</h5>
           {!isMobile && (
-            <svg
-              viewBox="0 0 24 24"
-              data-supported-dps="24x24"
-              fill="currentColor"
-              className="icon i24x24 me-2"
-              style={{ width: "24px", cursor: "pointer" }}
-              onClick={handleAddClick}
-            >
-              <path d="M21 13h-8v8h-2v-8H3v-2h8V3h2v8h8z"></path>
-            </svg>
+            <>
+              {isMyProfile && (
+                <svg
+                  viewBox="0 0 24 24"
+                  data-supported-dps="24x24"
+                  fill="currentColor"
+                  className="icon i24x24 me-2"
+                  style={{ width: "24px", cursor: "pointer" }}
+                  onClick={handleAddClick}
+                >
+                  <path d="M21 13h-8v8h-2v-8H3v-2h8V3h2v8h8z"></path>
+                </svg>
+              )}
+            </>
           )}
         </div>
 
-        {isMobile && !showAddExperienceRow && (
+        {isMobile && !showAddExperienceRow && isMyProfile && (
           <Button
             variant="link"
             className="p-0 text-decoration-none mb-3"
@@ -103,16 +115,18 @@ const Esperienza = () => {
               <p className="text-black-50">{exp.description}</p>
             </div>
             <div className="ms-auto">
-              <svg
-                viewBox="0 0 24 24"
-                data-supported-dps="24x24"
-                fill="currentColor"
-                className="icon i24x24"
-                style={{ width: "24px", cursor: "pointer" }}
-                onClick={() => handleEditClick(exp)}
-              >
-                <path d="M21.13 2.86a3 3 0 00-4.17 0l-13 13L2 22l6.19-2L21.13 7a3 3 0 000-4.16zM6.77 18.57l-1.35-1.34L16.64 6 18 7.35z"></path>
-              </svg>
+              {isMyProfile && (
+                <svg
+                  viewBox="0 0 24 24"
+                  data-supported-dps="24x24"
+                  fill="currentColor"
+                  className="icon i24x24"
+                  style={{ width: "24px", cursor: "pointer" }}
+                  onClick={() => handleEditClick(exp)}
+                >
+                  <path d="M21.13 2.86a3 3 0 00-4.17 0l-13 13L2 22l6.19-2L21.13 7a3 3 0 000-4.16zM6.77 18.57l-1.35-1.34L16.64 6 18 7.35z"></path>
+                </svg>
+              )}
             </div>
           </div>
         ))}
@@ -129,7 +143,7 @@ const Esperienza = () => {
           </div>
         )}
 
-        {showAddExperienceRow && (
+        {showAddExperienceRow && isMyProfile && (
           <Row className="d-md-none border-top px-3 position-relative">
             <img src={Valigia} alt="foto" className="icona-profile mt-3" />
             <h5 className="text-center">Hai altra esperienza?</h5>
