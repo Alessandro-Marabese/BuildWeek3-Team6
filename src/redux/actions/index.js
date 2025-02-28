@@ -298,10 +298,10 @@ export const addPosts = (post) => {
   };
 };
 
-export const fetchComments = (elementId) => {
+export const fetchComments = () => {
   return async (dispatch) => {
     try {
-      const response = await fetch(`https://striveschool-api.herokuapp.com/api/comments/${elementId}`, {
+      const response = await fetch(`https://striveschool-api.herokuapp.com/api/comments/`, {
         method: "GET",
         headers: {
           Authorization: API_TOKEN_COM,
