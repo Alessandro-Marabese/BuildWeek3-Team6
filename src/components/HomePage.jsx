@@ -92,7 +92,7 @@ const HomePage = () => {
                 </Card.Title>
                 <h6>{userProfile.title}</h6>
                 <p className="mb-1">{userProfile.area}</p>
-                <p className="mb-1">{experiences[0].company}</p>
+                {/* <p className="mb-1">{experiences[0].company}</p> */}
               </Link>
             </Card.Body>
           </Card>
