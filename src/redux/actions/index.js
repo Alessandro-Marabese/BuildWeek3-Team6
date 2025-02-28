@@ -14,9 +14,17 @@ export const IS_LOADING_ON = "IS_LOADING_ON";
 export const IS_LOADING_OFF = "IS_LOADING_OFF";
 export const ADD_POST = "ADD_POST";
 export const UPDATE_EXPERIENCE_IMAGE = "UPDATE_EXPERIENCE_IMAGE";
+export const FETCH_COMMENTS_OK = "FETCH_COMMENTS_OK";
+export const FETCH_COMMENTS_ERR = "FETCH_COMMENTS_ERR";
+export const ADD_COMMENT = "ADD_COMMENT";
+export const UPDATE_COMMENT = "UPDATE_COMMENT";
+export const DELETE_COMMENT = "DELETE_COMMENT";
 
 const API_TOKEN =
   "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2JjNTU4YWU3MDMzNzAwMTUzMTZkYjMiLCJpYXQiOjE3NDA0OTI3NzMsImV4cCI6MTc0MTcwMjM3M30.ghEymY3a9sDb5HV-twEe3aU29Z6oNBtkTfwahoV1JtY";
+
+const API_TOKEN_COM =
+  "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2MxNzNmMzVjZDk5MjAwMTUwNTkyY2IiLCJpYXQiOjE3NDA3MzEzNzksImV4cCI6MTc0MTk0MDk3OX0.HAJWhBFTfoTHwFkKdEM2y9d_kZ2IrRuikpBTtQLLhjs";
 
 export const getUserProfile = () => {
   let myUrl = "https://striveschool-api.herokuapp.com/api/profile/me";
@@ -286,6 +294,103 @@ export const addPosts = (post) => {
       }
     } catch (error) {
       console.log("Errore nella la creazione del post", error);
+    }
+  };
+};
+
+export const fetchComments = (elementId) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(`https://striveschool-api.herokuapp.com/api/comments/${elementId}`, {
+        method: "GET",
+        headers: {
+          Authorization: API_TOKEN_COM,
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.ok) {
+        const comments = await response.json();
+        dispatch({ type: FETCH_COMMENTS_OK, payload: comments });
+      } else {
+        throw new Error("Errore durante il fetch dei commenti");
+      }
+    } catch (error) {
+      dispatch({ type: FETCH_COMMENTS_ERR, payload: error.message });
+      console.error("Errore nel fetch dei commenti:", error);
+    }
+  };
+};
+
+export const addComment = (comment) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch("https://striveschool-api.herokuapp.com/api/comments/", {
+        method: "POST",
+        headers: {
+          Authorization: API_TOKEN_COM,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(comment),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Errore durante l'aggiunta del commento");
+      }
+
+      const data = await response.json();
+      dispatch({ type: ADD_COMMENT, payload: data });
+      return data;
+    } catch (error) {
+      console.error("Errore durante l'aggiunta del commento:", error);
+    }
+  };
+};
+
+export const updateComment = (commentId, comment) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(`https://striveschool-api.herokuapp.com/api/comments/${commentId}`, {
+        method: "PUT",
+        headers: {
+          Authorization: API_TOKEN_COM,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(comment),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Errore durante l'aggiornamento del commento");
+      }
+
+      const data = await response.json();
+      dispatch({ type: UPDATE_COMMENT, payload: data });
+    } catch (error) {
+      console.error("Errore durante l'aggiornamento del commento:", error);
+    }
+  };
+};
+
+export const deleteComment = (commentId) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(`https://striveschool-api.herokuapp.com/api/comments/${commentId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: API_TOKEN_COM,
+        },
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Errore durante l'eliminazione del commento");
+      }
+
+      dispatch({ type: DELETE_COMMENT, payload: commentId });
+    } catch (error) {
+      console.error("Errore durante l'eliminazione del commento:", error);
     }
   };
 };

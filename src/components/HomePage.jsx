@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Badge, Button, Card, Col, Container, Row, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { getPosts, getUserProfile } from "../redux/actions";
-import { Link } from "react-router";
+import { getPosts, getUserProfile, fetchComments, addComment, deleteComment } from "../redux/actions";
+import { Link } from "react-router-dom"; // Corretto l'import di Link
 import PostModal from "./PostModal";
 
 const HomePage = () => {
@@ -11,9 +11,11 @@ const HomePage = () => {
   const isLoading = useSelector((state) => state.posts.isLoading);
   const allPostsReverse = useSelector((state) => state.posts.content);
   const allPosts = [...allPostsReverse].reverse();
-
+  const comments = useSelector((state) => state.comments.comments);
+  const [newComment, setNewComment] = useState("");
   const [loadedPosts, setLoadedPosts] = useState(10);
   const [modalShow, setModalShow] = useState(false);
+  const [isCommentSectionVisible, setIsCommentSectionVisible] = useState(false);
 
   const handleModalShow = () => setModalShow(true);
   const handleModalClose = () => setModalShow(false);
@@ -21,11 +23,6 @@ const HomePage = () => {
   const loadOtherPosts = () => {
     setLoadedPosts((loadedPosts) => loadedPosts + 10);
   };
-
-  useEffect(() => {
-    dispatch(getPosts());
-    dispatch(getUserProfile());
-  }, [dispatch]);
 
   const getTimePastDate = (date) => {
     const now = new Date();
@@ -50,10 +47,39 @@ const HomePage = () => {
     }
   };
 
+  useEffect(() => {
+    console.log("Fetching posts and user profile...");
+    dispatch(getPosts());
+    dispatch(getUserProfile());
+  }, [dispatch]);
+
+  useEffect(() => {
+    const postId = "elementId";
+    console.log("Fetching comments for postId:", postId);
+    dispatch(fetchComments(postId));
+  }, [dispatch]);
+
+  const handleAddComment = () => {
+    if (!newComment.trim()) return;
+
+    const comment = {
+      comment: newComment,
+      rate: "5",
+      elementId: "elementId",
+    };
+
+    dispatch(addComment(comment));
+    setNewComment("");
+  };
+
+  const handleDeleteComment = (commentId) => {
+    dispatch(deleteComment(commentId));
+  };
+
   return (
     <Container id="top-margin" className="mx-0 mx-md-auto pt-md-4">
       <Row>
-        <Col id="leftcolhomepage" className="col-12 col-md-4 col-lg-3 d-none d-md-block ">
+        <Col id="leftcolhomepage" className="col-12 col-md-4 col-lg-3 d-none d-md-block">
           <Card className="mb-2">
             <Card.Img variant="top" src={userProfile.image} />
             <Card.Body className="position-relative">
@@ -76,97 +102,21 @@ const HomePage = () => {
               </Link>
             </Card.Body>
           </Card>
-
-          <Card className="d-none d-md-block mb-2">
-            <Card.Body>
-              <div className="d-flex justify-content-between mt-2">
-                <a href="#">
-                  <p>Visitatori del profilo</p>
-                </a>
-                <a href="#">
-                  <p>12</p>
-                </a>
-              </div>
-              <a href="#">
-                <p>Visualizza tutte le analisi</p>
-              </a>
-            </Card.Body>
-          </Card>
-
-          <Card className="d-none d-md-block mb-2">
-            <Card.Body>
-              <a href="#">
-                <p className="opacity-75 mb-1">Fai crescere la tua carriera o il tuo business con Premium</p>
-                <div>
-                  <h6>Prova Premium per 0 EUR</h6>
-                </div>
-              </a>
-            </Card.Body>
-          </Card>
-          <Card className="d-none d-md-block">
-            <Card.Body>
-              <a href="#" className="elementi-salvati text-decoration-none text-black">
-                <div className="d-flex align-items-baseline mb-3">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-bookmark-fill me-2" viewBox="0 0 16 16">
-                    <path d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2" />
-                  </svg>
-                  <h6>Elementi salvati</h6>
-                </div>
-              </a>
-              <a href="#" className="text-decoration-none text-black">
-                <div className="d-flex align-items-baseline mb-3">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-people-fill me-2" viewBox="0 0 16 16">
-                    <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5" />
-                  </svg>
-                  <h6>Gruppi</h6>
-                </div>
-              </a>
-              <a href="#" className="text-decoration-none text-black">
-                <div className="d-flex align-items-baseline">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-calendar-event me-2" viewBox="0 0 16 16">
-                    <path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z" />
-                    <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
-                  </svg>
-                  <h6>Eventi</h6>
-                </div>
-              </a>
-            </Card.Body>
-          </Card>
         </Col>
-        <Col className="col-12 col-md-8 col-lg-5 col-xl-6 ">
+
+        <Col className="col-12 col-md-8 col-lg-5 col-xl-6">
           <Card className="d-none d-md-block">
             <Card.Body>
               <div className="d-flex">
                 <Link to="/profile">
                   <img src={userProfile.image} alt="profile-image" height="50" width="50" className="rounded-circle" />
                 </Link>
-                <Button id="creation-post-button" className="rounded-pill ms-3 flex-grow-1 text-start text-black border-secondary" onClick={handleModalShow}>
+                <Button
+                  id="creation-post-button"
+                  className="rounded-pill ms-3 flex-grow-1 text-start text-black border-secondary"
+                  onClick={handleModalShow}
+                >
                   Crea un post
-                </Button>
-              </div>
-              <div id="div-bottom-post" className="d-flex justify-content-between mt-3 align-items-center">
-                <Button>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-image me-2" viewBox="0 0 16 16">
-                    <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
-                    <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1z" />
-                  </svg>
-                  Contenuti multimediali
-                </Button>
-                <Button>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-calendar-event me-2" viewBox="0 0 16 16">
-                    <path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z" />
-                    <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
-                  </svg>
-                  Evento
-                </Button>
-                <Button>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-postcard me-2" viewBox="0 0 16 16">
-                    <path
-                      fillRule="evenodd"
-                      d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zM1 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1zm7.5.5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0zM2 5.5a.5.5 0 0 1 .5-.5H6a.5.5 0 0 1 0 1H2.5a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5H6a.5.5 0 0 1 0 1H2.5a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5H6a.5.5 0 0 1 0 1H2.5a.5.5 0 0 1-.5-.5M10.5 5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5zM13 8h-2V6h2z"
-                    />
-                  </svg>
-                  Scrivi un articolo
                 </Button>
               </div>
             </Card.Body>
@@ -196,6 +146,7 @@ const HomePage = () => {
                         <p id="date-creation-post" className="d-inline-block mb-0 opacity-50 me-1">
                           {getTimePastDate(singlePost.createdAt)} •
                         </p>
+                        {/* Icona */}
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 16 16"
@@ -212,7 +163,14 @@ const HomePage = () => {
                     </Col>
                     <Col className="col-4 text-end">
                       <Button>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-three-dots " viewBox="0 0 16 16">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          fill="currentColor"
+                          className="bi bi-three-dots"
+                          viewBox="0 0 16 16"
+                        >
                           <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3" />
                         </svg>
                       </Button>
@@ -261,7 +219,9 @@ const HomePage = () => {
                             data-test-reactions-icon-style="consumption"
                             data-test-reactions-icon-size="small"
                           />
-                          <span className="d-inline-block align-middle opacity-50 ms-2">Giuseppe Todino e altre 65 persone</span>
+                          <span className="d-inline-block align-middle opacity-50 ms-2">
+                            Giuseppe Todino e altre 65 persone
+                          </span>
                         </a>
                       </div>
                     </Col>
@@ -281,7 +241,10 @@ const HomePage = () => {
                         </svg>
                         Consiglia
                       </Button>
-                      <Button className="fw-bold p-0">
+                      <Button
+                        className="fw-bold p-0"
+                        onClick={() => setIsCommentSectionVisible(!isCommentSectionVisible)}
+                      >
                         <svg
                           id="Layer_1"
                           data-name="Layer 1"
@@ -295,14 +258,57 @@ const HomePage = () => {
                         </svg>
                         Commenta
                       </Button>
+                      {isCommentSectionVisible && (
+                        <div>
+                          <h2>Commenti</h2>
+                          <ul>
+                            {comments && comments.length > 0 ? (
+                              comments.map((comment) => (
+                                <li key={comment._id}>
+                                  <p>{comment.comment}</p>
+                                  <p>Voto: {comment.rate}</p>
+                                  <Button variant="danger" onClick={() => handleDeleteComment(comment._id)}>
+                                    Elimina
+                                  </Button>
+                                </li>
+                              ))
+                            ) : (
+                              <p>Nessun commento disponibile.</p>
+                            )}
+                          </ul>
+
+                          <div>
+                            <textarea
+                              value={newComment}
+                              onChange={(e) => setNewComment(e.target.value)}
+                              placeholder="Aggiungi un commento..."
+                            />
+                            <button onClick={handleAddComment}>Invia</button>
+                          </div>
+                        </div>
+                      )}
                       <Button className="fw-bold d-none d-md-block p-0">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-repeat me-2" viewBox="0 0 16 16">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          fill="currentColor"
+                          className="bi bi-repeat me-2"
+                          viewBox="0 0 16 16"
+                        >
                           <path d="M11 5.466V4H5a4 4 0 0 0-3.584 5.777.5.5 0 1 1-.896.446A5 5 0 0 1 5 3h6V1.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192m3.81.086a.5.5 0 0 1 .67.225A5 5 0 0 1 11 13H5v1.466a.25.25 0 0 1-.41.192l-2.36-1.966a.25.25 0 0 1 0-.384l2.36-1.966a.25.25 0 0 1 .41.192V12h6a4 4 0 0 0 3.585-5.777.5.5 0 0 1 .225-.67Z" />
                         </svg>
                         Diffondi il post
                       </Button>
                       <Button className="fw-bold d-none d-md-block p-0">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-send-fill me-2" viewBox="0 0 16 16">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          fill="currentColor"
+                          className="bi bi-send-fill me-2"
+                          viewBox="0 0 16 16"
+                        >
                           <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471z" />
                         </svg>
                         Invia
@@ -401,7 +407,14 @@ const HomePage = () => {
               </ul>
               <Button id="vedi-altro-homepage-sidebar" className="ms-1">
                 Vedi altro
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  className="bi bi-caret-down-fill"
+                  viewBox="0 0 16 16"
+                >
                   <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
                 </svg>
               </Button>
