@@ -19,22 +19,18 @@ const SearchResultsPage = () => {
   return (
     <Container className="mt-5">
       <h2 className="search-title">
-        Risultati per: <strong>"{searchQuery}"</strong>
+        Risultati per: <strong>&quot;{searchQuery}&quot;</strong>
       </h2>
 
       {isLoading && (
-        <p className="text-center mt-5">⏳ Caricamento offerte di lavoro...</p>
-      )}
-      {hasError && (
-        <p className="text-danger text-center">
-          Errore nel caricamento: {hasError}
+        <p id="caricamento-offerte" className="text-center ">
+          ⏳ Caricamento offerte di lavoro...
         </p>
       )}
+      {hasError && <p className="text-danger text-center">Errore nel caricamento: {hasError}</p>}
 
       {jobsList.length === 0 ? (
-        <p className="text-center mt-5 text-muted">
-          Nessun risultato trovato per "{searchQuery}".
-        </p>
+        <p className="text-center mt-5 text-muted">Nessun risultato trovato per &quot;{searchQuery}&quot;.</p>
       ) : (
         <Row className="gy-4">
           {jobsList.slice(0, 21).map((job, index) => (
@@ -43,12 +39,7 @@ const SearchResultsPage = () => {
                 <Card.Body>
                   <h5 className="text-dark fw-bold">{job.title}</h5>
                   <p className="text-muted mb-2"> {job.company_name}</p>
-                  <Button
-                    id={`apply-btn-${index}`}
-                    className="apply-btn w-100"
-                    href={job.url}
-                    target="_blank"
-                  >
+                  <Button id={`apply-btn-${index}`} className="apply-btn w-100" href={job.url} target="_blank">
                     Candidati
                   </Button>
                 </Card.Body>
