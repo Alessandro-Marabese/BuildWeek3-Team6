@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { addComment } from "../redux/actions";
+import { addComment, fetchComments } from "../redux/actions";
 import { Form } from "react-bootstrap";
 
 const CommentSection = ({ commentPostId }) => {
@@ -26,6 +26,11 @@ const CommentSection = ({ commentPostId }) => {
   const handleDeleteComment = (id) => {
     setComments(comments.filter((comment) => comment.id !== id));
   };
+
+  useEffect(() => {
+    dispatch(fetchComments(commentPostId));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [commentPostId]);
 
   return (
     <div className="d-flex justify-content-between col">
@@ -96,11 +101,10 @@ const CommentSection = ({ commentPostId }) => {
                   className="form-control mb-2"
                 />
               </Form.Group>
+              <button type="submit" className="btn btn-primary">
+                Invia
+              </button>
             </Form>
-
-            <button type="submit" className="btn btn-primary">
-              Invia
-            </button>
           </div>
         </div>
       )}

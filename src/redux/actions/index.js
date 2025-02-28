@@ -311,6 +311,7 @@ export const fetchComments = (elementId) => {
 
       if (response.ok) {
         const comments = await response.json();
+        console.log(comments);
         dispatch({ type: FETCH_COMMENTS_OK, payload: comments });
       } else {
         throw new Error("Errore durante il fetch dei commenti");
@@ -330,6 +331,7 @@ export const addComment = (newComment, rate, commentPostId) => {
         rate: rate,
         elementId: commentPostId,
       };
+      console.log(NewPostComment);
       const response = await fetch("https://striveschool-api.herokuapp.com/api/comments/", {
         method: "POST",
         headers: {
