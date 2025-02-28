@@ -14,6 +14,8 @@ export const IS_LOADING_ON = "IS_LOADING_ON";
 export const IS_LOADING_OFF = "IS_LOADING_OFF";
 export const ADD_POST = "ADD_POST";
 export const UPDATE_EXPERIENCE_IMAGE = "UPDATE_EXPERIENCE_IMAGE";
+export const FETCH_OTHER_PROFILE_OK = "FETCH_OTHER_PROFILE_OK";
+export const FETCH_OTHER_PROFILE_ERR = "FETCH_OTHER_PROFILE_ERR";
 export const UPDATE_POST_IMAGE = "UPDATE_POST_IMAGE";
 export const DELETE_POST = "DELETE_POST";
 export const UPDATE_POST = "UPDATE_POST";
@@ -42,6 +44,33 @@ export const getUserProfile = () => {
       }
     } catch (error) {
       dispatch({ type: FETCH_PROFILE_ERR, payload: error });
+      console.error("Errore nel recupero del profilo:", error);
+    }
+  };
+};
+
+export const getOtherUserProfile = (idUser) => {
+  let myUrl = "https://striveschool-api.herokuapp.com/api/profile/" + idUser;
+
+  return async (dispatch) => {
+    try {
+      let resp = await fetch(myUrl, {
+        method: "GET",
+        headers: {
+          Authorization: API_TOKEN,
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (resp.ok) {
+        let otherProfile = await resp.json();
+        console.log("Altro profilo ricercato:", otherProfile);
+        dispatch({ type: FETCH_OTHER_PROFILE_OK, payload: otherProfile });
+      } else {
+        throw new Error("Errore durante la fetch del profilo");
+      }
+    } catch (error) {
+      dispatch({ type: FETCH_OTHER_PROFILE_ERR, payload: error });
       console.error("Errore nel recupero del profilo:", error);
     }
   };
@@ -141,13 +170,16 @@ export const uploadExperienceImage = (userId, expId, imageFile) => async (dispat
     let formData = new FormData();
     formData.append("experience", imageFile);
 
-    const response = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${expId}/picture`, {
-      method: "POST",
-      headers: {
-        Authorization: API_TOKEN,
-      },
-      body: formData,
-    });
+    const response = await fetch(
+      `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${expId}/picture`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: API_TOKEN,
+        },
+        body: formData,
+      }
+    );
 
     if (!response.ok) {
       const errorData = await response.json();

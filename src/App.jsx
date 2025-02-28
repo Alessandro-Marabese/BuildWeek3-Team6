@@ -45,6 +45,30 @@ function App() {
             </div>
           }
         />
+        <Route
+          path="/profile/:idOther"
+          element={
+            <div className="container-fluid container-lg px-0">
+              <div className="row">
+                <div className=" col-lg-8 col-12 pe-0">
+                  <div className="profile-card mb-3">
+                    <CardProfile />
+                  </div>
+
+                  <div className="profile-card d-lg-none mb-3">
+                    <div className="suggested-container">
+                      <SuggestedPeople />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="col-lg-4 d-none d-lg-block">
+                  <SuggestedPeopleDesktop />
+                </div>
+              </div>
+            </div>
+          }
+        />
         <Route path="/settings" element={<SettingsPage />} />
         <Route path="/edit-profile-image" element={<EditProfileImage />} />
         <Route path="/edit-profile" element={<EditProfile />} />
