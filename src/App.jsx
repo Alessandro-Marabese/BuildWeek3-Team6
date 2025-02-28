@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom"; // Use BrowserRouter instead of Router
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import HomePage from "./components/HomePage";
 import SettingsPage from "./components/Settings/SettingsPage";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -10,6 +10,7 @@ import MyNavBar from "./components/MyNavBar";
 import EditProfileImage from "./components/EditProfileImage";
 import EditProfile from "./components/EditProfle";
 import JobsPage from "./components/JobsPage";
+import SearchResultsPage from "./components/SearchResultsPage";
 
 function App() {
   const mylocation = useLocation();
@@ -23,6 +24,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/jobs" element={<JobsPage />} />
+        <Route path="/search/:searchQuery" element={<SearchResultsPage />} />
         <Route
           path="/profile"
           element={

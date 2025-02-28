@@ -26,6 +26,11 @@ const jobsReducer = (state = initialJobsState, action) => {
         hasError: action.payload,
         isLoading: false,
       };
+    case "RESET_JOBS":
+      return {
+        ...state,
+        jobsList: [],
+      };
 
     default:
       return state;

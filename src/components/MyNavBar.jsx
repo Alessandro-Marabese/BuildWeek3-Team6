@@ -4,9 +4,13 @@ import { Navbar } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserProfile } from "../redux/actions";
 import { Link } from "react-router";
+import { fetchJobs } from "../redux/actions/jobsActions";
+import { useNavigate } from "react-router-dom";
 
 const MyNavBar = () => {
   const dispatch = useDispatch();
+  const searchTerm = useSelector((state) => state.search.searchTerm);
+  const navigate = useNavigate();
   const userProfile = useSelector((state) => state.profile.content);
 
   const [showDropdown, setShowDropdown] = useState(false);
@@ -95,10 +99,18 @@ const MyNavBar = () => {
               </svg>
               <input
                 type="text"
-                name=""
                 id="input-search"
-                placeholder="Cerca"
-                className=" border-0 fw-bold"
+                placeholder="Cerca lavori..."
+                className="w-100 border-0 fw-bold"
+                value={searchTerm}
+                onChange={(e) =>
+                  dispatch({ type: "SET_SEARCH_TERM", payload: e.target.value })
+                }
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && searchTerm.trim() !== "") {
+                    navigate(`/search/${searchTerm.trim()}`);
+                  }
+                }}
               />
             </div>
           </div>
