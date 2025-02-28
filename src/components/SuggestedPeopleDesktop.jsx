@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import "../style/SuggestedPeopleDesktop.css";
+import { Link } from "react-router";
 
 const SuggestedPeopleDesktop = () => {
   const myProfile = useSelector((state) => state.profile.content);
@@ -35,7 +36,11 @@ const SuggestedPeopleDesktop = () => {
           </div>
           <div>
             <span className="profile-url">
-              {myProfile && myProfile.username ? `www.linkedin.com/in/${myProfile.username}` : "www.linkedin.com/in/nome-profilo"}
+              {myProfile && myProfile.username
+                ? `www.linkedin.com/in/${myProfile.name.toLowerCase()}-${myProfile.surname.toLowerCase()}-${
+                    myProfile._id
+                  }`
+                : "www.linkedin.com/in/nome-profilo"}
             </span>
           </div>
         </div>
@@ -49,7 +54,9 @@ const SuggestedPeopleDesktop = () => {
               <img src={person.image} alt={person.name} />
               <div className="person-info mb-1">
                 <p className="people-name mb-0">
-                  {person.name} {person.surname}
+                  <Link to={`/profile/${person._id}`} className="linkToOther">
+                    {person.name} {person.surname}
+                  </Link>
                 </p>
                 <p className="people-title">{person.title}</p>
               </div>
@@ -95,7 +102,8 @@ const SuggestedPeopleDesktop = () => {
         <p className="premium-subtitle">Scopri gli altri profili visitati spesso insieme al tuo</p>
         <button className="premium-button">Prova Premium per 0 EUR</button>
         <p className="premium-description">
-          1 mese gratis con assistenza 24/7. Annulli in qualsiasi momento. Ti invieremo un promemoria 7 giorni prima della fine del periodo di prova.
+          1 mese gratis con assistenza 24/7. Annulli in qualsiasi momento. Ti invieremo un promemoria 7 giorni prima
+          della fine del periodo di prova.
         </p>
 
         {suggestedPeople.slice(32, 34).map((person) => (
