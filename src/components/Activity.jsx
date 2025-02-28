@@ -3,31 +3,37 @@ import "../App.css";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { deletePost, getPosts } from "../redux/actions";
+import EditPostModal from "./EditPostModal";
 
 const Activity = ({ userId }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getPosts());
   }, [dispatch]);
-  console.log(userId);
+
   const allPosts = useSelector((state) => state.posts.content);
-  console.log(allPosts);
-  console.log(typeof userId);
 
   const filteredPost = allPosts.filter((post) => {
-    console.log(typeof post.user._id);
     return post.user._id === userId;
   });
-  console.log(filteredPost);
+
   const [isButtonVisible, setIsButtonVisible] = useState(true);
 
   const [loadedPosts, setLoadedPosts] = useState(2);
+
+  const [modalShow, setModalShow] = useState(false);
+  const [postToEdit, setPostToEdit] = useState(null);
+
+  const handleModalClose = () => setModalShow(false);
 
   const loadOtherPosts = () => {
     setLoadedPosts(filteredPost.length);
     setIsButtonVisible(false);
   };
-
+  const handleEditPostClick = (post) => {
+    setPostToEdit(post);
+    setModalShow(true);
+  };
   const handleDelete = (postId) => {
     dispatch(deletePost(postId));
   };
@@ -124,7 +130,7 @@ const Activity = ({ userId }) => {
                           </div>
                         </Col>
                         <Col className="col-4 text-end">
-                          <Button>
+                          <Button onClick={() => handleEditPostClick(post)}>
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               width="16"
@@ -254,6 +260,7 @@ const Activity = ({ userId }) => {
               </svg>
             </Button>
           )}
+          <EditPostModal show={modalShow} onHide={handleModalClose} postToEdit={postToEdit} />
         </Row>
       </Container>
     </Col>

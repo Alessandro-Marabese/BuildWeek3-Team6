@@ -16,6 +16,7 @@ export const ADD_POST = "ADD_POST";
 export const UPDATE_EXPERIENCE_IMAGE = "UPDATE_EXPERIENCE_IMAGE";
 export const UPDATE_POST_IMAGE = "UPDATE_POST_IMAGE";
 export const DELETE_POST = "DELETE_POST";
+export const UPDATE_POST = "UPDATE_POST";
 
 const API_TOKEN =
   "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2JjNTU4YWU3MDMzNzAwMTUzMTZkYjMiLCJpYXQiOjE3NDA0OTI3NzMsImV4cCI6MTc0MTcwMjM3M30.ghEymY3a9sDb5HV-twEe3aU29Z6oNBtkTfwahoV1JtY";
@@ -332,6 +333,43 @@ export const deletePost = (postId) => {
       }
     } catch (error) {
       console.error("Errore durante l'eliminazione del post", error);
+    }
+  };
+};
+
+export const updatePost = (postId, post) => {
+  return async (dispatch) => {
+    if (!postId || typeof postId !== "string") {
+      console.error("ID non valido");
+      return;
+    }
+    try {
+      console.log(post);
+      const response = await fetch(`https://striveschool-api.herokuapp.com/api/posts/${postId}`, {
+        method: "PUT",
+        headers: {
+          Authorization: API_TOKEN,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(post),
+      });
+      if (response.ok) {
+        const data = await response.json();
+
+        dispatch({ type: UPDATE_POST, payload: data });
+        console.log(data);
+        return data;
+      } else {
+        const errorMessage = await response.text();
+        try {
+          const jsonError = JSON.parse(errorMessage);
+          throw new Error(jsonError.message || "Errore nell'aggiornamento del post");
+        } catch (parseError) {
+          throw new Error(parseError || "Errore nell'aggiornamento del post");
+        }
+      }
+    } catch (error) {
+      console.error("Errore nell'aggiornamento del post", error);
     }
   };
 };
