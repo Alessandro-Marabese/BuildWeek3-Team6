@@ -28,14 +28,11 @@ const CardProfile = () => {
   const otherUsers = useParams();
   let userProfile = null;
 
-  console.log(otherUsers);
-
   useEffect(() => {
     if (otherUsers.idOther) {
       dispatch(getOtherUserProfile(otherUsers.idOther));
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch]);
+  }, [dispatch, otherUsers.idOther]);
 
   if (otherUsers.idOther) {
     userProfile = otherUserProfile;
@@ -248,7 +245,7 @@ const CardProfile = () => {
 
       <Informazioni />
       <Activity userId={userProfile._id} />
-      <Esperienza />
+      <Esperienza userId={userProfile._id} />
       <Formazione />
       <Competenze />
       <Contatti />
