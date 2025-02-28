@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Badge, Button, Card, Col, Container, Row, Spinner } from "react-bootstrap";
+import { Badge, Button, Card, Col, Container, Placeholder, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getPosts, getUserProfile } from "../redux/actions";
 import { Link } from "react-router";
@@ -192,7 +192,53 @@ const HomePage = () => {
             </Card.Body>
           </Card>
           {isLoading ? (
-            <Spinner className="text-center mt-2" animation="border" variant="primary" />
+            <>
+              <Card className="mt-2">
+                <Card.Body>
+                  <Placeholder as={Card.Title} animation="glow">
+                    <Placeholder xs={6} />
+                    <Placeholder xs={8} />
+                    <Placeholder xs={4} />
+                  </Placeholder>
+                  <Placeholder as={Card.Text} animation="glow">
+                    <Placeholder xs={7} /> <Placeholder xs={4} /> <Placeholder xs={4} /> <Placeholder xs={6} /> <Placeholder xs={8} />
+                  </Placeholder>
+                  <Placeholder.Button variant="primary" xs={2} className="me-1" />
+                  <Placeholder.Button variant="primary" xs={2} className="me-1" />
+                  <Placeholder.Button variant="primary" xs={2} className="me-1" />
+                </Card.Body>
+              </Card>
+              <Card className="mt-2">
+                <Card.Body>
+                  <Placeholder as={Card.Title} animation="glow">
+                    <Placeholder xs={6} />
+                    <Placeholder xs={8} />
+                    <Placeholder xs={4} />
+                  </Placeholder>
+                  <Placeholder as={Card.Text} animation="glow">
+                    <Placeholder xs={7} /> <Placeholder xs={4} /> <Placeholder xs={4} /> <Placeholder xs={6} /> <Placeholder xs={8} />
+                  </Placeholder>
+                  <Placeholder.Button variant="primary" xs={2} className="me-1" />
+                  <Placeholder.Button variant="primary" xs={2} className="me-1" />
+                  <Placeholder.Button variant="primary" xs={2} className="me-1" />
+                </Card.Body>
+              </Card>
+              <Card className="mt-2">
+                <Card.Body>
+                  <Placeholder as={Card.Title} animation="glow">
+                    <Placeholder xs={6} />
+                    <Placeholder xs={8} />
+                    <Placeholder xs={4} />
+                  </Placeholder>
+                  <Placeholder as={Card.Text} animation="glow">
+                    <Placeholder xs={7} /> <Placeholder xs={4} /> <Placeholder xs={4} /> <Placeholder xs={6} /> <Placeholder xs={8} />
+                  </Placeholder>
+                  <Placeholder.Button variant="primary" xs={2} className="me-1" />
+                  <Placeholder.Button variant="primary" xs={2} className="me-1" />
+                  <Placeholder.Button variant="primary" xs={2} className="me-1" />
+                </Card.Body>
+              </Card>
+            </>
           ) : (
             allPosts.slice(0, loadedPosts).map((singlePost) => (
               <Card key={singlePost._id} data={singlePost} className="post-card mt-2">
