@@ -48,7 +48,7 @@ const JobsPage = () => {
             />
             <div className="profile-avatar">
               <Image
-                src={userProfile?.image || "https://via.placeholder.com/150"}
+                src={userProfile?.image || "/default-profile.png"}
                 alt="Profile"
                 roundedCircle
                 width={80}
