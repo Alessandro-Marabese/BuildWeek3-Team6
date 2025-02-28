@@ -17,9 +17,9 @@ const CommentSection = ({ commentPostId }) => {
     }
   };
 
-  const handleDeleteComment = (id) => {
-    setComments(comments.filter((comment) => comment.id !== id));
-  };
+  //   const handleDeleteComment = (id) => {
+  //     setComments(comments.filter((comment) => comment.id !== id));
+  //   };
 
   useEffect(() => {
     dispatch(fetchComments(commentPostId));
@@ -67,18 +67,20 @@ const CommentSection = ({ commentPostId }) => {
 
           <ul>
             {comments.length > 0 ? (
-              comments.map((comment) => (
-                <li key={comment.id} className="d-flex justify-content-between align-items-center mb-2">
-                  <span>{comment.text}</span>
-                  <button
-                    type="button"
-                    className="btn btn-danger btn-sm"
-                    onClick={() => handleDeleteComment(comment.id)}
-                  >
-                    Elimina
-                  </button>
-                </li>
-              ))
+              comments
+                .filter((comment) => comment.elementId === commentPostId)
+                .map((comment) => (
+                  <li key={comment.id} className="d-flex justify-content-between align-items-center mb-2">
+                    <span>{comment.text}</span>
+                    <button
+                      type="button"
+                      className="btn btn-danger btn-sm"
+                      //   onClick={() => handleDeleteComment(comment.id)}
+                    >
+                      Elimina
+                    </button>
+                  </li>
+                ))
             ) : (
               <p>Nessun commento disponibile.</p>
             )}
