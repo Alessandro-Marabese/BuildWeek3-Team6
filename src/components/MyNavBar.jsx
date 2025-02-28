@@ -42,7 +42,13 @@ const MyNavBar = () => {
           >
             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
           </svg>
-          <input type="text" name="" id="input-search" placeholder="Cerca" className="w-100 border-0 fw-bold" />
+          <input
+            type="text"
+            name=""
+            id="input-search"
+            placeholder="Cerca"
+            className="w-100 border-0 fw-bold"
+          />
         </div>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -87,7 +93,13 @@ const MyNavBar = () => {
               >
                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
               </svg>
-              <input type="text" name="" id="input-search" placeholder="Cerca" className=" border-0 fw-bold" />
+              <input
+                type="text"
+                name=""
+                id="input-search"
+                placeholder="Cerca"
+                className=" border-0 fw-bold"
+              />
             </div>
           </div>
 
@@ -124,7 +136,7 @@ const MyNavBar = () => {
             </a>
           </div>
           <div className="me-2 d-none d-lg-block">
-            <a href="#" className="text-decoration-none text-black">
+            <Link to="/jobs" className="text-decoration-none text-black">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 height="25"
@@ -137,7 +149,7 @@ const MyNavBar = () => {
                 <path d="M17 6V5a3 3 0 00-3-3h-4a3 3 0 00-3 3v1H2v4a3 3 0 003 3h14a3 3 0 003-3V6zM9 5a1 1 0 011-1h4a1 1 0 011 1v1H9zm10 9a4 4 0 003-1.38V17a3 3 0 01-3 3H5a3 3 0 01-3-3v-4.38A4 4 0 005 14z"></path>
               </svg>
               <p className="navbarParag mb-0 opacity-50">Lavoro</p>
-            </a>
+            </Link>
           </div>
           <div>
             <a href="#" className="text-decoration-none text-black d-lg-none">
@@ -154,7 +166,10 @@ const MyNavBar = () => {
               </svg>
               <p className="navbarParag mb-0 opacity-50">Pubblica</p>
             </a>
-            <a href="#" className="d-none d-lg-block text-decoration-none text-black">
+            <a
+              href="#"
+              className="d-none d-lg-block text-decoration-none text-black"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -202,7 +217,11 @@ const MyNavBar = () => {
               <p className="navbarParag mb-0 opacity-50">Lavoro</p>
             </a>
           </div>
-          <Dropdown show={showDropdown} onToggle={handleToggle} className="d-none d-lg-block">
+          <Dropdown
+            show={showDropdown}
+            onToggle={handleToggle}
+            className="d-none d-lg-block"
+          >
             <Dropdown.Toggle variant="success" id="dropdown-basic">
               <span>
                 <img
@@ -229,8 +248,15 @@ const MyNavBar = () => {
               </span>
             </Dropdown.Toggle>
 
-            <Dropdown.Menu id="profile-dropdown" className="dropdown-menu-md-end">
-              <Link to="/profile" className="text-decoration-none" onClick={handleProfileClick}>
+            <Dropdown.Menu
+              id="profile-dropdown"
+              className="dropdown-menu-md-end"
+            >
+              <Link
+                to="/profile"
+                className="text-decoration-none"
+                onClick={handleProfileClick}
+              >
                 <Row className="border-bottom mx-1">
                   <Col className="ps-0 col-3">
                     <img
@@ -249,7 +275,9 @@ const MyNavBar = () => {
                       <p className="text-black">{userProfile.title}</p>
                     </Col>
                   )}
-                  <Button className="rounded-pill mb-2 py-1">Visualizza il profilo</Button>
+                  <Button className="rounded-pill mb-2 py-1">
+                    Visualizza il profilo
+                  </Button>
                 </Row>
               </Link>
               <div className="border-bottom mx-1">
@@ -315,7 +343,10 @@ const MyNavBar = () => {
                 </svg>
               </span>
             </Dropdown.Toggle>
-            <Dropdown.Menu id="aziende-dropdown" className="dropdown-menu-md-end">
+            <Dropdown.Menu
+              id="aziende-dropdown"
+              className="dropdown-menu-md-end"
+            >
               <Row>
                 <Col className="col-5 ms-4 mt-4">
                   <h4 className=" mb-5">Le mie app</h4>
@@ -415,7 +446,9 @@ const MyNavBar = () => {
                   </div>
                   <div className="mb-5">
                     <a href="#">
-                      <h6 className="d-inline-block">Crea una pagina aziendale</h6>
+                      <h6 className="d-inline-block">
+                        Crea una pagina aziendale
+                      </h6>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="16"

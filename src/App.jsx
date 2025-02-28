@@ -9,6 +9,7 @@ import SuggestedPeopleDesktop from "./components/SuggestedPeopleDesktop";
 import MyNavBar from "./components/MyNavBar";
 import EditProfileImage from "./components/EditProfileImage";
 import EditProfile from "./components/EditProfle";
+import JobsPage from "./components/JobsPage";
 
 function App() {
   const mylocation = useLocation();
@@ -21,6 +22,7 @@ function App() {
       )}
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/jobs" element={<JobsPage />} />
         <Route
           path="/profile"
           element={
