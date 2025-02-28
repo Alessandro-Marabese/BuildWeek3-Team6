@@ -30,7 +30,7 @@ const CommentSection = ({ commentPostId }) => {
   useEffect(() => {
     dispatch(fetchComments(commentPostId));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [commentPostId]);
+  }, [dispatch, commentPostId]);
 
   return (
     <div className="d-flex justify-content-between col">
