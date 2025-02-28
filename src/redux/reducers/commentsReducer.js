@@ -11,7 +11,7 @@ const commentsReducer = (state = initialState, action) => {
     case FETCH_COMMENTS_OK:
       return {
         ...state,
-        comments: action.payload,
+        comments: [...state.comments, action.payload],
         loading: false,
         error: null,
       };

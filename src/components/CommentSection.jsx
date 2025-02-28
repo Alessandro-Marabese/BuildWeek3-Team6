@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addComment, fetchComments } from "../redux/actions";
 import { Form } from "react-bootstrap";
 
 const CommentSection = ({ commentPostId }) => {
   const [isCommentSectionVisible, setIsCommentSectionVisible] = useState(false);
-  const [comments, setComments] = useState([]);
+  //   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
-
   const dispatch = useDispatch();
+  const comments = useSelector((state) => state.comments.comments);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -16,12 +16,6 @@ const CommentSection = ({ commentPostId }) => {
       dispatch(addComment(newComment, "3", commentPostId));
     }
   };
-
-  //   const handleAddComment = () => {
-  //     if (newComment !== "") {
-  //       dispatch(addComment(newComment, "3", commentPostId));
-  //     }
-  //   };
 
   const handleDeleteComment = (id) => {
     setComments(comments.filter((comment) => comment.id !== id));
@@ -91,6 +85,7 @@ const CommentSection = ({ commentPostId }) => {
           </ul>
 
           <div>
+            <p></p>
             <Form onSubmit={onSubmit}>
               <Form.Group>
                 <Form.Label>testo</Form.Label>
