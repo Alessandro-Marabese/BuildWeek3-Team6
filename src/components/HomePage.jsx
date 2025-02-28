@@ -208,7 +208,7 @@ const HomePage = () => {
                     </Col>
                   </Row>
                   <div>
-                    <CommentSection />
+                    <CommentSection commentPostId={singlePost._id} />
                   </div>
                 </Card.Body>
               </Card>

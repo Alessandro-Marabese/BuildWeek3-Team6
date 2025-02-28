@@ -322,16 +322,21 @@ export const fetchComments = (elementId) => {
   };
 };
 
-export const addComment = (comment) => {
+export const addComment = (newComment, rate, commentPostId) => {
   return async (dispatch) => {
     try {
+      const NewPostComment = {
+        comment: newComment,
+        rate: rate,
+        elementId: commentPostId,
+      };
       const response = await fetch("https://striveschool-api.herokuapp.com/api/comments/", {
         method: "POST",
         headers: {
           Authorization: API_TOKEN_COM,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(comment),
+        body: JSON.stringify(NewPostComment),
       });
 
       if (!response.ok) {
@@ -341,6 +346,7 @@ export const addComment = (comment) => {
 
       const data = await response.json();
       dispatch({ type: ADD_COMMENT, payload: data });
+      console.log(data);
       return data;
     } catch (error) {
       console.error("Errore durante l'aggiunta del commento:", error);

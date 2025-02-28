@@ -1,15 +1,27 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addComment } from "../redux/actions";
+import { Form } from "react-router";
 
-const CommentSection = () => {
+const CommentSection = ({ commentPostId }) => {
   const [isCommentSectionVisible, setIsCommentSectionVisible] = useState(false);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
 
-  const handleAddComment = () => {
-    if (newComment.trim() === "") return;
-    setComments([...comments, { id: Date.now(), text: newComment }]);
-    setNewComment("");
+  const dispatch = useDispatch;
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if (newComment !== "") {
+      dispatch(addComment(newComment, "3", commentPostId));
+    }
   };
+
+  //   const handleAddComment = () => {
+  //     if (newComment !== "") {
+  //       dispatch(addComment(newComment, "3", commentPostId));
+  //     }
+  //   };
 
   const handleDeleteComment = (id) => {
     setComments(comments.filter((comment) => comment.id !== id));
@@ -74,13 +86,19 @@ const CommentSection = () => {
           </ul>
 
           <div>
-            <textarea
-              value={newComment}
-              onChange={(e) => setNewComment(e.target.value)}
-              placeholder="Aggiungi un commento..."
-              className="form-control mb-2"
-            />
-            <button onClick={handleAddComment} className="btn btn-primary">
+            <Form onSubmit={onSubmit}>
+              <Form.Group>
+                <Form.Label>testo</Form.Label>
+                <Form.Control
+                  value={newComment}
+                  onChange={(e) => setNewComment(e.target.value)}
+                  placeholder="Aggiungi un commento..."
+                  className="form-control mb-2"
+                />
+              </Form.Group>
+            </Form>
+
+            <button type="submit" className="btn btn-primary">
               Invia
             </button>
           </div>
